@@ -1475,6 +1475,16 @@
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.9.2.tgz"
   "version" "2.9.2"
 
+"@reduxjs/toolkit@^1.6.0":
+  "integrity" "sha512-eGL50G+Vj5AG5uD0lineb6rRtbs96M8+hxbcwkHpZ8LQcmt0Bm33WyBSnj5AweLkjQ7ZP+KFRDHiLMznljRQ3A=="
+  "resolved" "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-1.6.0.tgz"
+  "version" "1.6.0"
+  dependencies:
+    "immer" "^9.0.1"
+    "redux" "^4.1.0"
+    "redux-thunk" "^2.3.0"
+    "reselect" "^4.0.0"
+
 "@restart/context@^2.1.4":
   "integrity" "sha512-INJYZQJP7g+IoDUh/475NlGiTeMfwTXUEr3tmRneckHIxNolGOW9CTq83S8cxq0CgJwwcMzMJFchxvlwe7Rk8Q=="
   "resolved" "https://registry.npmjs.org/@restart/context/-/context-2.1.4.tgz"
@@ -1760,6 +1770,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/history@*":
+  "integrity" "sha512-MUc6zSmU3tEVnkQ78q0peeEjKWPUADMlC/t++2bI8WnAG2tvYRPIgHG8lWkXwqc8MsUF6Z2MOf+Mh5sazOmhiQ=="
+  "resolved" "https://registry.npmjs.org/@types/history/-/history-4.7.9.tgz"
+  "version" "4.7.9"
+
 "@types/hoist-non-react-statics@^3.3.0":
   "integrity" "sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA=="
   "resolved" "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz"
@@ -1862,7 +1877,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@^7.1.16":
+"@types/react-redux@^7.1.16", "@types/react-redux@^7.1.18":
   "integrity" "sha512-9iwAsPyJ9DLTRH+OFeIrm9cAbIj1i2ANL3sKQFATqnPWRbg+jEFXyZOKHiQK/N86pNRXbb4HRxAxo0SIX1XwzQ=="
   "resolved" "https://registry.npmjs.org/@types/react-redux/-/react-redux-7.1.18.tgz"
   "version" "7.1.18"
@@ -1871,6 +1886,23 @@
     "@types/react" "*"
     "hoist-non-react-statics" "^3.3.0"
     "redux" "^4.0.0"
+
+"@types/react-router-dom@^5.1.8":
+  "integrity" "sha512-03xHyncBzG0PmDmf8pf3rehtjY0NpUj7TIN46FrT5n1ZWHPZvXz32gUyNboJ+xsL8cpg8bQVLcllptcQHvocrw=="
+  "resolved" "https://registry.npmjs.org/@types/react-router-dom/-/react-router-dom-5.1.8.tgz"
+  "version" "5.1.8"
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router@*":
+  "integrity" "sha512-8d7nR/fNSqlTFGHti0R3F9WwIertOaaA1UEB8/jr5l5mDMOs4CidEgvvYMw4ivqrBK+vtVLxyTj2P+Pr/dtgzg=="
+  "resolved" "https://registry.npmjs.org/@types/react-router/-/react-router-5.1.16.tgz"
+  "version" "5.1.16"
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
 
 "@types/react-transition-group@^4.4.1":
   "integrity" "sha512-KibDWL6nshuOJ0fu8ll7QnV/LVTo3PzQ9aCPnRUYPfX7eZohHwLIdNHj7pftanREzHNP4/nJa8oeM73uSiavMQ=="
@@ -1887,6 +1919,13 @@
     "@types/prop-types" "*"
     "@types/scheduler" "*"
     "csstype" "^3.0.2"
+
+"@types/redux@^3.6.0":
+  "integrity" "sha1-8evh5UEVGAcuT9/KXHbhbnTBOZo="
+  "resolved" "https://registry.npmjs.org/@types/redux/-/redux-3.6.0.tgz"
+  "version" "3.6.0"
+  dependencies:
+    "redux" "*"
 
 "@types/resolve@0.0.8":
   "integrity" "sha512-auApPaJf3NPfe18hSoJkp8EbZzer2ISk7o8mCC3M9he/a04+gbMF97NkpD2S8riMGvm4BMRI59/SZQSaLTKpsQ=="
@@ -5874,6 +5913,11 @@
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.1.8.tgz"
   "version" "5.1.8"
 
+"immer@^9.0.1":
+  "integrity" "sha512-2WuIehr2y4lmYz9gaQzetPR2ECniCifk4ORaQbU3g5EalLt+0IVTosEPJ5BoYl/75ky2mivzdRzV8wWgQGOSYQ=="
+  "resolved" "https://registry.npmjs.org/immer/-/immer-9.0.5.tgz"
+  "version" "9.0.5"
+
 "immer@8.0.1":
   "integrity" "sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA=="
   "resolved" "https://registry.npmjs.org/immer/-/immer-8.0.1.tgz"
@@ -9400,7 +9444,7 @@
     "uncontrollable" "^7.2.1"
     "warning" "^4.0.3"
 
-"react-redux@^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0", "react-redux@^7.2.4":
+"react-redux@^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0", "react-redux@^7.2.1", "react-redux@^7.2.4":
   "integrity" "sha512-hOQ5eOSkEJEXdpIKbnRyl04LhaWabkDPV+Ix97wqQX3T3d2NQ8DUblNXXtNMavc7DpswyQM6xfaN4HQDKNY2JA=="
   "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-7.2.4.tgz"
   "version" "7.2.4"
@@ -9522,7 +9566,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^0.14.9 || ^15.3.0 || ^16.0.0", "react@^16.8.3 || ^17", "react@^17.0.2", "react@>= 16", "react@>=0.14.0", "react@>=15", "react@>=15.0.0", "react@>=16.3.0", "react@>=16.3.2", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.2":
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^0.14.9 || ^15.3.0 || ^16.0.0", "react@^16.14.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.2", "react@>= 16", "react@>=0.14.0", "react@>=15", "react@>=15.0.0", "react@>=16.3.0", "react@>=16.3.2", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -9655,7 +9699,12 @@
     "prop-types" "^15.7.2"
     "redux-devtools-instrument" "^1.10.0"
 
-"redux@^3.4.0 || ^4.0.0", "redux@^3.5.2 || ^4.0.0", "redux@^4.0.0", "redux@^4.1.0":
+"redux-thunk@^2.3.0":
+  "integrity" "sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw=="
+  "resolved" "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.3.0.tgz"
+  "version" "2.3.0"
+
+"redux@*", "redux@^3.4.0 || ^4.0.0", "redux@^3.5.2 || ^4.0.0", "redux@^4.0.0", "redux@^4.1.0":
   "integrity" "sha512-uI2dQN43zqLWCt6B/BMGRMY6db7TTY4qeHHfGeKb3EOhmOKjU3KdWvNLJyqaHRksv/ErdNH7cFZWg9jXtewy4g=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-4.1.0.tgz"
   "version" "4.1.0"
@@ -9833,6 +9882,11 @@
   "integrity" "sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8="
   "resolved" "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   "version" "1.0.0"
+
+"reselect@^4.0.0":
+  "integrity" "sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA=="
+  "resolved" "https://registry.npmjs.org/reselect/-/reselect-4.0.0.tgz"
+  "version" "4.0.0"
 
 "resolve-cwd@^2.0.0":
   "integrity" "sha1-AKn3OHVW4nA46uIyyqNypqWbZlo="

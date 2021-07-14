@@ -1,15 +1,11 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 
-const counter = (state: number = 0, action: { type: string }): number => {
-  if (action.type === "INCREMENT") {
-    return state + 1;
-  }
-  if (action.type === "DECREMENT") {
-    return state - 1;
-  }
-  return state;
-};
+import categoriesSlice from "./slices/categories";
 
-const store = createStore(counter);
+const store = configureStore({
+  reducer: {
+    categories: categoriesSlice.reducer,
+  },
+});
 
 export default store;
