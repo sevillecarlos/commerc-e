@@ -26,10 +26,15 @@ const categoriesSlice = createSlice({
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       state.status = "success";
       const categoriesName = action.payload.map(
-        (category: { id: number; name: string }) => {
+        (category: {
+          id: number;
+          name: string;
+          products: [{ image: { url: string } }];
+        }) => {
           return {
             id: category.id,
             name: category.name,
+            image: `http://localhost:1337${category.products[0].image.url}`,
           };
         }
       );
