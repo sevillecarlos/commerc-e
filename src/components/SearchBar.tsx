@@ -9,18 +9,17 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
 
-  //   const goProductListPage = (categoriesName: string) =>
-  //     history.push(`/products/query/${categoriesName}`);
-
   const goSearchProducts = (e: any) => {
     e.preventDefault();
     dispatch(fetchsearchQuery(query));
+    history.push(`/query/${query}`, {
+      query: true,
+    });
   };
 
   const onChangeQuery = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    setQuery(value);
-    console.log(value);
+    setQuery(value.toLowerCase());
   };
 
   return (

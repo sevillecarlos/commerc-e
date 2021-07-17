@@ -5,6 +5,7 @@ const initialState = {
   products: new Array<string[]>(),
   error: null,
   status: "idle",
+  product: new Array<string[]>(),
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -26,6 +27,17 @@ const productsSlice = createSlice({
   reducers: {
     addProducts(state, action) {
       state.products.push(action.payload);
+    },
+    getProduct(state, action) {
+      console.log("get product");
+      const products = state.products.map((v) => Object.assign({}, v));
+      console.log(products);
+      const findProduct = products.filter(
+        (v: any) => v.title.toLowerCase() === action.payload
+      );
+      console.log(action.payload);
+      console.log(findProduct);
+      state.product.push(...findProduct);
     },
   },
   extraReducers: (builder) => {

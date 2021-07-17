@@ -1,32 +1,58 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Button, Image } from "react-bootstrap";
 
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { fetchProducts, productsActions } from "../store/slices/products";
 
+import {
+  fetchsearchQuery,
+  searchQueryActions,
+} from "../store/slices/searchQuery";
+
 import { useHistory } from "react-router-dom";
 
 const ListProducts = (props: { categoryId: string | number }) => {
+  const history: { location: { state: { query: boolean } } } | any =
+    useHistory();
+
+  const isQuery: boolean = history.location.state?.query;
+
+  console.log(history.location.state);
   const dispatch = useDispatch();
 
   const productsStore = useSelector((state: RootStateOrAny) => state.products);
+  const queryStore = useSelector((state: RootStateOrAny) => state.searchQuery);
 
   const { categoryId } = props;
 
   useEffect(() => {
-    dispatch(fetchProducts(categoryId));
+    if (isQuery) {
+      if (queryStore.status === "idle") {
+        dispatch(fetchsearchQuery(categoryId));
+      }
+    } else {
+      if (productsStore.status === "idle") {
+        dispatch(fetchProducts(categoryId));
+      }
+    }
     return () => {
       //   cleanup;
     };
   }, []);
 
+  const products: any = () => (isQuery ? queryStore : productsStore);
+  const requestProducts = products();
+
+  const goProductListPage = (productName: string) =>
+    history.push(`/${categoryId}/${productName}`);
+
   return (
     <div>
-      {productsStore.status === "loading" && <>Loading...</>}
-      {productsStore.status === "success" && (
+      {requestProducts.status === "loading" && <>Loading...</>}
+      {requestProducts.status === "success" && (
         <div>
-          {productsStore.products.map(
+          {requestProducts.products.map(
             (el: {
               id: number;
               title: string;
@@ -46,9 +72,9 @@ const ListProducts = (props: { categoryId: string | number }) => {
                     <Card.Text>{el.description}</Card.Text>
                     <Card.Text>{el.price}</Card.Text>
                     <Button
-                      // onClick={() =>
-                      //   goProductListPage(el.name.toLocaleLowerCase())
-                      // }
+                      onClick={() =>
+                        goProductListPage(el.title.toLocaleLowerCase())
+                      }
                       variant="primary"
                     >
                       Check

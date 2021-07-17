@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { removeRepeatElements } from "../../helper/removeRepeatElements";
 
 const initialState = {
-  searchQuery: new Array<string[]>(),
+  products: new Array<string[]>(),
   error: null,
   status: "idle",
 };
 
 export const fetchsearchQuery = createAsyncThunk(
   "searchQuery/fetchsearchQuery",
-  async (query: string) => {
+  async (query: any) => {
     const res = await fetch("http://localhost:1337/categories");
     const data = await res.json();
     return data;
@@ -19,11 +20,12 @@ const searchQuerySlice = createSlice({
   initialState,
   reducers: {
     addsearchQuery(state, action) {
-      state.searchQuery.push(action.payload);
+      state.products.push(action.payload);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchsearchQuery.fulfilled, (state, action) => {
+      state.products = [];
       state.status = "success";
       const { meta, payload } = action;
 
@@ -31,13 +33,16 @@ const searchQuerySlice = createSlice({
         return category.products;
       });
 
-      const searchQuery = categories.filter(
-        (product: { title: string; description: string }) =>
-          product.title.includes(meta.arg) ||
-          product.description.includes(meta.arg)
-      );
-      
-      console.log(searchQuery);
+      const searchQuery = categories
+        .filter((product: { title: string; description: string }) => {
+          return (
+            product.title.toLowerCase().indexOf(meta.arg) > -1 ||
+            product.description.toLowerCase().indexOf(meta.arg) > -1
+          );
+        })
+        .sort((a: { id: number }, b: { id: number }) => a.id - b.id);
+
+      state.products.push(...removeRepeatElements(searchQuery));
     });
     builder.addCase(fetchsearchQuery.pending, (state) => {
       state.status = "loading";

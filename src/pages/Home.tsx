@@ -4,7 +4,8 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { fetchCategories } from "../store/slices/categories";
 
 import { useHistory } from "react-router-dom";
-import SearchBar from '../components/SearchBar'
+
+import SearchBar from "../components/SearchBar";
 
 import "./style/Home.css";
 
@@ -23,11 +24,14 @@ const Home = () => {
   }, [dispatch]);
 
   const goProductListPage = (categoriesName: string) =>
-    history.push(`/products/${categoriesName}`);
+    history.push(`/products/${categoriesName}`, {
+      query: false,
+    });
+    console.log(categoriesStore.status);
 
   return (
     <div className="home">
-      <SearchBar/>
+      <SearchBar />
       {categoriesStore.status === "reject" && <>Fetch Reject</>}
       {categoriesStore.status === "loading" && <div>...Loading </div>}
       {categoriesStore.status === "success" && (
@@ -36,7 +40,11 @@ const Home = () => {
             (el: { id: number; name: string; image: string }) => {
               return (
                 <Card key={el.id} style={{ width: "50rem" }}>
-                  <Card.Img style={{width:'100px'}} variant="top" src={el.image} />
+                  <Card.Img
+                    style={{ width: "100px" }}
+                    variant="top"
+                    src={el.image}
+                  />
                   <Card.Body>
                     <Card.Title>{el.name}</Card.Title>
                     <Card.Text>Description</Card.Text>

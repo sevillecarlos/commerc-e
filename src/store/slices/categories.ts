@@ -3,7 +3,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   categories: new Array<string[]>(),
   error: null,
+  data: new Array<string[]>(),
   status: "idle",
+  productsCategories: new Array<string[]>(),
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -21,10 +23,18 @@ const categoriesSlice = createSlice({
     addCategories(state, action) {
       state.categories.push(action.payload);
     },
+    listCategoryProducts(state, action) {
+      const categories = state.data.map((value: string[]) =>
+        Object.assign({}, value)
+      );
+      const products = categories.filter((el) => el);
+      //state.productsCategories.push(...products);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       state.status = "success";
+      state.data.push(...action.payload);
       const categoriesName = action.payload.map(
         (category: {
           id: number;
@@ -39,6 +49,7 @@ const categoriesSlice = createSlice({
         }
       );
       state.categories.push(...categoriesName);
+      const products = state.categories.map((x) => x);
     });
     builder.addCase(fetchCategories.pending, (state) => {
       state.status = "loading";
