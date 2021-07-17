@@ -1,22 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { urlParser } from "../helper/urlParser";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 import { fetchProducts, productsActions } from "../store/slices/products";
 import { Card, Button } from "react-bootstrap";
+import { MdShoppingCart } from "react-icons/md";
+
+import { useHistory } from "react-router-dom";
+
+import { cartActions } from "../store/slices/cart";
 
 const ViewProduct = (props: { categoryId: string }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { categoryId } = props;
 
+  const [cart, setCart] = useState(Array<string>());
   const urlData = urlParser(categoryId);
-
-  console.log(urlData);
 
   const product = useSelector((state: RootStateOrAny) => state.products);
 
-  console.log();
   useEffect(() => {
     dispatch(fetchProducts(urlData[0]));
     console.log("algo");
@@ -26,8 +30,29 @@ const ViewProduct = (props: { categoryId: string }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (cart.length !== 0) {
+      dispatch(cartActions.addCart(cart));
+    }
+
+    return () => {
+      // cleanup
+    };
+  }, [cart, dispatch]);
+
+  const addCart = (product: any) => {
+    setCart([...cart, product]);
+  };
+
+  const goToCart = () => history.push("/cart");
+
   return (
     <div>
+      <MdShoppingCart
+        onClick={goToCart}
+        style={{ width: "150px", height: "150px" }}
+      />
+      <p>{cart.length}</p>
       {product.product.map(
         (el: {
           id: number;
@@ -48,9 +73,14 @@ const ViewProduct = (props: { categoryId: string }) => {
                 <Card.Text>{el.description}</Card.Text>
                 <Card.Text>{el.price}</Card.Text>
                 <Button
-                  // onClick={() =>
-                  //   goProductListPage(el.title.toLocaleLowerCase())
-                  // }
+                  onClick={() =>
+                    addCart({
+                      id: el.id,
+                      name: el.title,
+                      price: el.price,
+                      image: `http://localhost:1337${el.image.url}`,
+                    })
+                  }
                   variant="primary"
                 >
                   Add to Cart

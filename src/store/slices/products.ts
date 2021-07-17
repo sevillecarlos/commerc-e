@@ -29,14 +29,11 @@ const productsSlice = createSlice({
       state.products.push(action.payload);
     },
     getProduct(state, action) {
-      console.log("get product");
+      state.product = [];
       const products = state.products.map((v) => Object.assign({}, v));
-      console.log(products);
       const findProduct = products.filter(
         (v: any) => v.title.toLowerCase() === action.payload
       );
-      console.log(action.payload);
-      console.log(findProduct);
       state.product.push(...findProduct);
     },
   },
