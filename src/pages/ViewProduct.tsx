@@ -5,14 +5,12 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 import { fetchProducts, productsActions } from "../store/slices/products";
 import { Card, Button } from "react-bootstrap";
-import { MdShoppingCart } from "react-icons/md";
 
 import { useHistory } from "react-router-dom";
 
 import { cartActions } from "../store/slices/cart";
 
 const ViewProduct = (props: { categoryId: string }) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { categoryId } = props;
 
@@ -23,7 +21,6 @@ const ViewProduct = (props: { categoryId: string }) => {
 
   useEffect(() => {
     dispatch(fetchProducts(urlData[0]));
-    console.log("algo");
     dispatch(productsActions.getProduct(urlData[1]));
     return () => {
       // cleanup
@@ -41,18 +38,11 @@ const ViewProduct = (props: { categoryId: string }) => {
   }, [cart, dispatch]);
 
   const addCart = (product: any) => {
-    setCart([...cart, product]);
+    setCart(product);
   };
-
-  const goToCart = () => history.push("/cart");
 
   return (
     <div>
-      <MdShoppingCart
-        onClick={goToCart}
-        style={{ width: "150px", height: "150px" }}
-      />
-      <p>{cart.length}</p>
       {product.product.map(
         (el: {
           id: number;

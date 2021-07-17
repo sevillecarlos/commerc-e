@@ -32,7 +32,9 @@ const SearchBar = () => {
           aria-label="Search"
           onChange={(e) => onChangeQuery(e)}
         />
-        <Button variant="outline-success">Search</Button>
+        <Button type="submit" variant="outline-success">
+          Search
+        </Button>
       </Form>
     </div>
   );

@@ -8,12 +8,12 @@ const Cart = () => {
     (state: RootStateOrAny) => state.cart.cartProducts
   );
 
-  console.log();
+  console.log(cartProducts);
   return (
     <div>
       {" "}
       {cartProducts.length !== 0 &&
-        cartProducts[0].map(
+        cartProducts.map(
           (
             el: { id: number; name: string; image: string; price: number },
             i: number
