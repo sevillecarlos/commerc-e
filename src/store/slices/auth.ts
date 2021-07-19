@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import jwt_decode from "jwt-decode";
 
 const initialState = {
-  user: {},
+  user: "",
   error: null,
   status: "idle",
 };
@@ -17,7 +18,8 @@ export const fetchSignIn = createAsyncThunk(
       body: JSON.stringify(signInForm),
     });
     const data = await res.json();
-    return data;
+    localStorage.setItem("$@token", data.token);
+    return data.token;
   }
 );
 
@@ -39,10 +41,15 @@ export const fetchSignUp = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    removeUser(state) {
+      state.user = "";
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchSignIn.fulfilled, (state, action) => {
       state.status = "success";
+      console.log(action.payload);
       state.user = action.payload;
     });
     builder.addCase(fetchSignIn.pending, (state) => {

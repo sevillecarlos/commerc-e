@@ -12,8 +12,12 @@ import { useHistory } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import Watch from "../components/NavBarWatch";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
+import { authActions } from "../store/slices/auth";
+import jwt_decode from "jwt-decode";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+
   const cartProducts = useSelector((state: RootStateOrAny) => state.cart);
   const authUser = useSelector((state: RootStateOrAny) => state.auth.user);
 
@@ -36,26 +40,25 @@ const NavBar = () => {
   }, [cartProducts.cartProducts]);
 
   useEffect(() => {
-    setUser(authUser.user);
-    setToken(authUser.token);
-
-    if (authUser.user) localStorage.setItem("authToken", authUser.token);
+    const token: any = localStorage.getItem("$@token");
+    if (token) {
+      const decodedUser: any = jwt_decode(token);
+      setUser(decodedUser);
+      setToken(token);
+    } else {
+      setUser(undefined);
+      setToken("");
+    }
     return () => {
       // cleanup
     };
-  }, [authUser.user, authUser.token]);
+  }, [authUser]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) setToken(token);
-    return () => {
-      // cleanup
-    };
-  }, []);
+  console.log(authUser);
 
   const logOut = () => {
-    localStorage.removeItem("authToken");
-    setToken("");
+    localStorage.removeItem("$@token");
+    dispatch(authActions.removeUser());
   };
 
   const history = useHistory();
@@ -70,13 +73,12 @@ const NavBar = () => {
           navbarScroll
         >
           <Watch />
-          <Nav>
-            <MdShoppingCart
-              onClick={goToCart}
-              style={{ width: "50px", height: "150px" }}
-            />
-            <h1>{cartValues ? cartValues.length : ""}</h1>
-          </Nav>
+          <Nav.Link href="http://localhost:3000/cart">
+            <div>
+              {/* <h1>{cartValues ? cartValues.length : ""}</h1> */}
+              <MdShoppingCart style={{ width: "50px", height: "150px" }} />
+            </div>
+          </Nav.Link>
           <SearchBar />
 
           {token ? (
