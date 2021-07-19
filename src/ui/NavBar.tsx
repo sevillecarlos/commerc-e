@@ -48,7 +48,7 @@ const NavBar = () => {
           </NavDropdown> */}
         </Nav>
         <SearchBar />
-        <Nav.Link href="#">Sign In</Nav.Link>
+        <Nav.Link href="http://localhost:3000/authentication">Sign In</Nav.Link>
       </Navbar.Collapse>
     </Navbar>
   );

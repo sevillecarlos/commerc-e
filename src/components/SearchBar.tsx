@@ -24,13 +24,13 @@ const SearchBar = () => {
 
   return (
     <div>
-      <Form className="d-flex" onSubmit={(e) => goSearchProducts(e)}>
+      <Form className="d-flex" onSubmit={goSearchProducts}>
         <FormControl
+          id="search"
           type="search"
           placeholder="Search"
-          className="mr-2"
           aria-label="Search"
-          onChange={(e) => onChangeQuery(e)}
+          onChange={onChangeQuery}
         />
         <Button type="submit" variant="outline-success">
           Search
