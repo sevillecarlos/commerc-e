@@ -75,15 +75,16 @@ const NavBar = () => {
               onClick={goToCart}
               style={{ width: "50px", height: "150px" }}
             />
-            <h1>{cartValues.length}</h1>
+            <h1>{cartValues ? cartValues.length : ""}</h1>
           </Nav>
           <SearchBar />
 
           {token ? (
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action4">
-                <h1>Hi, {user?.first_name}</h1>
-              </NavDropdown.Item>
+            <NavDropdown
+              title={<h1>Hi, {user?.first_name}</h1>}
+              id="navbarScrollingDropdown"
+            >
+              <NavDropdown.Item href="#action4"></NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">
                 <Button onClick={logOut}>Log Out</Button>

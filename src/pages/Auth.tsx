@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
-import { fetchSignIn } from "../store/slices/auth";
+import { fetchSignIn, fetchSignUp } from "../store/slices/auth";
 import { useDispatch } from "react-redux";
 
 const Auth = () => {
@@ -30,21 +30,11 @@ const Auth = () => {
 
   const signIn = async (e: any) => {
     e.preventDefault();
-    dispatch(fetchSignIn(signInForm));    
+    dispatch(fetchSignIn(signInForm));
   };
   const signUp = async (e: any) => {
     e.preventDefault();
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/users/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(signUpForm),
-    });
-
-    const data = await res.json();
-
-    console.log(data);
+    dispatch(fetchSignUp(signUpForm));
   };
   return (
     <div>
