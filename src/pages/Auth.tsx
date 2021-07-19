@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
+import { fetchSignIn } from "../store/slices/auth";
+import { useDispatch } from "react-redux";
 
 const Auth = () => {
+  const dispatch = useDispatch();
+
   const [signInForm, setSignInForm] = useState({
     email: "",
     password: "",
@@ -26,19 +30,8 @@ const Auth = () => {
 
   const signIn = async (e: any) => {
     e.preventDefault();
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/session/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(signInForm),
-    });
-
-    const data = await res.json();
-
-    console.log(data);
+    dispatch(fetchSignIn(signInForm));    
   };
-  console.log(signUpForm);
   const signUp = async (e: any) => {
     e.preventDefault();
     const res = await fetch(`http://127.0.0.1:5000/api/v1/users/`, {
@@ -65,24 +58,22 @@ const Auth = () => {
           <Form onSubmit={signIn}>
             <Form.Group
               className="mb-3"
-              controlId="formBasicEmail"
+              controlId="formBasicEmailSignIn"
               onSubmit={signIn}
             >
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 name="email"
-                id="email"
                 type="email"
                 placeholder="Enter email"
                 onChange={changeSignInForm}
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="formBasicPasswordSignIn">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 name="password"
-                id="password"
                 onChange={changeSignInForm}
                 type="password"
                 placeholder="Password"
@@ -96,42 +87,38 @@ const Auth = () => {
         </Tab>
         <Tab eventKey="sign-up" title="Sign Up">
           <Form onSubmit={signUp}>
-            <Form.Group className="mb-3" controlId="formBasicFirstName">
+            <Form.Group className="mb-3" controlId="formBasicFirstNameSignUp">
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 name="first_name"
-                id="firstName"
                 type="text"
                 onChange={changeSignUpForm}
                 placeholder="Enter First Name"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicLastName">
+            <Form.Group className="mb-3" controlId="formBasicLastNameSignUp">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 name="last_name"
-                id="lastName"
                 type="text"
                 placeholder="Enter Last Name"
                 onChange={changeSignUpForm}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="formBasicEmailSignUp">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 name="email"
-                id="email"
                 type="email"
                 placeholder="Enter email"
                 onChange={changeSignUpForm}
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="formBasicPasswordSignUp">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 name="password"
-                id="password"
                 type="password"
                 onChange={changeSignUpForm}
                 placeholder="Password"

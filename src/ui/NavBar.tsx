@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
   NavDropdown,
@@ -10,18 +11,57 @@ import { MdShoppingCart } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import Watch from "../components/NavBarWatch";
-import { Badge } from "react-bootstrap";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 const NavBar = () => {
   const cartProducts = useSelector((state: RootStateOrAny) => state.cart);
-  console.log(cartProducts);
+  const authUser = useSelector((state: RootStateOrAny) => state.auth.user);
+
   const goToCart = () => history.push("/cart");
+
+  interface User {
+    first_name: string;
+  }
+
+  const [cartValues, setCartValues] = useState([]);
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const localCartProducta: any = localStorage.getItem("cart");
+    setCartValues(JSON.parse(localCartProducta));
+    return () => {
+      // cleanup;
+    };
+  }, [cartProducts.cartProducts]);
+
+  useEffect(() => {
+    setUser(authUser.user);
+    setToken(authUser.token);
+
+    if (authUser.user) localStorage.setItem("authToken", authUser.token);
+    return () => {
+      // cleanup
+    };
+  }, [authUser.user, authUser.token]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) setToken(token);
+    return () => {
+      // cleanup
+    };
+  }, []);
+
+  const logOut = () => {
+    localStorage.removeItem("authToken");
+    setToken("");
+  };
 
   const history = useHistory();
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+      <Navbar.Brand href="http://localhost:3000/">Navbar scroll</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse id="navbarScroll">
         <Nav
@@ -35,20 +75,26 @@ const NavBar = () => {
               onClick={goToCart}
               style={{ width: "50px", height: "150px" }}
             />
-            <h1>{cartProducts.cartProducts.length}</h1>
+            <h1>{cartValues.length}</h1>
           </Nav>
+          <SearchBar />
 
-          {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
-            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action5">
-              Something else here
-            </NavDropdown.Item>
-          </NavDropdown> */}
+          {token ? (
+            <NavDropdown title="Link" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="#action4">
+                <h1>Hi, {user?.first_name}</h1>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action5">
+                <Button onClick={logOut}>Log Out</Button>
+              </NavDropdown.Item>
+            </NavDropdown>
+          ) : (
+            <Nav.Link href="http://localhost:3000/authentication">
+              Sign In
+            </Nav.Link>
+          )}
         </Nav>
-        <SearchBar />
-        <Nav.Link href="http://localhost:3000/authentication">Sign In</Nav.Link>
       </Navbar.Collapse>
     </Navbar>
   );

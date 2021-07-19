@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 
 import { cartActions } from "../store/slices/cart";
 
+
 const ViewProduct = (props: { categoryId: string }) => {
   const dispatch = useDispatch();
   const { categoryId } = props;
@@ -39,6 +40,13 @@ const ViewProduct = (props: { categoryId: string }) => {
 
   const addCart = (product: any) => {
     setCart(product);
+    let localCart: any = product;
+    const products: any = localStorage.getItem("cart");
+    console.log(products);
+    const allProduct = products
+      ? [...JSON.parse(products), localCart]
+      : [localCart];
+    localStorage.setItem("cart", JSON.stringify(allProduct));
   };
 
   return (

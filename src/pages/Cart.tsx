@@ -4,11 +4,13 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { Card, Button } from "react-bootstrap";
 
 const Cart = () => {
-  const cartProducts = useSelector(
-    (state: RootStateOrAny) => state.cart.cartProducts
-  );
+  // const cartProducts = useSelector(
+  //   (state: RootStateOrAny) => state.cart.cartProducts
+  // );
 
-  console.log(cartProducts);
+  const cartValues:any = localStorage.getItem("cart");
+  const cartProducts:any = JSON.parse(cartValues);
+  // console.log(cartProducts);
   return (
     <div>
       {" "}
