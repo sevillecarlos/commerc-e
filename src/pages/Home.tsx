@@ -5,8 +5,6 @@ import { fetchCategories } from "../store/slices/categories";
 
 import { useHistory } from "react-router-dom";
 
-import SearchBar from "../components/SearchBar";
-
 import "./style/Home.css";
 
 const Home = () => {
@@ -27,11 +25,11 @@ const Home = () => {
     history.push(`/products/${categoriesName}`, {
       query: false,
     });
-    console.log(categoriesStore.status);
+  console.log(categoriesStore.status);
 
   return (
     <div className="home">
-      <SearchBar />
+      
       {categoriesStore.status === "reject" && <>Fetch Reject</>}
       {categoriesStore.status === "loading" && <div>...Loading </div>}
       {categoriesStore.status === "success" && (
