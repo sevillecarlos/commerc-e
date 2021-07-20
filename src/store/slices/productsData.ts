@@ -39,6 +39,7 @@ const productsDataSlice = createSlice({
       );
       state.categories.push(...categories);
     },
+
     getCategoriesProducts(state, action) {
       const productsData = action.payload;
       const productsCategories = productsData.data.filter(
@@ -47,6 +48,7 @@ const productsDataSlice = createSlice({
       const products = productsCategories[0]?.products;
       state.productsCategories = products;
     },
+
     getProductsByQuery(state, action) {
       const productsData = action.payload;
       const categories = productsData.data.flatMap(
@@ -54,16 +56,17 @@ const productsDataSlice = createSlice({
           return category.products;
         }
       );
-
+      console.log(productsData);
       const searchQuery = categories
         .filter((product: { title: string; description: string }) => {
           return (
-            product.title.toLowerCase().indexOf(productsData.query) > -1 ||
-            product.description.toLowerCase().indexOf(productsData.query) > -1
+            product.title.toLowerCase().indexOf(productsData.id) > -1 ||
+            product.description.toLowerCase().indexOf(productsData.id) > -1
           );
         })
         .sort((a: { id: number }, b: { id: number }) => a.id - b.id);
 
+      console.log(removeRepeatElements(searchQuery));
       state.queryProducts = removeRepeatElements(searchQuery);
     },
   },

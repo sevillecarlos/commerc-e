@@ -9,8 +9,6 @@ import './style/SearchBar.css'
 
 const SearchBar = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-
   const productsDataStore = useSelector(
     (state: RootStateOrAny) => state.productsData
   );
@@ -19,21 +17,9 @@ const SearchBar = () => {
 
   const goSearchProducts = (e: any) => {
     e.preventDefault();
-    dispatch(
-      productsDataActions.getProductsByQuery({
-        data: productsDataStore.data,
-        query: query,
-      })
-    );
-    history.push(`/query/${query}`);
+    
+    history.push(`/search/query/${query}`);
   };
-
-  useEffect(() => {
-    return () => {
-      dispatch(fetchProducts());
-      // cleanup
-    };
-  }, [dispatch]);
 
   const onChangeQuery = (e: { target: { value: string } }) => {
     const { value } = e.target;
