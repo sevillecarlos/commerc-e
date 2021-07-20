@@ -5,6 +5,10 @@ import { fetchCategories } from "../store/slices/categories";
 
 import { useHistory } from "react-router-dom";
 
+import SearchBar from "../components/SearchBar";
+
+import "./style/Home.css";
+
 const Home = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -13,8 +17,6 @@ const Home = () => {
     (state: RootStateOrAny) => state.categories
   );
 
-  console.log(categoriesStore);
-
   useEffect(() => {
     if (categoriesStore.status === "idle") {
       dispatch(fetchCategories());
@@ -22,18 +24,27 @@ const Home = () => {
   }, [dispatch]);
 
   const goProductListPage = (categoriesName: string) =>
-    history.push(`/products/${categoriesName}`);
+    history.push(`/products/${categoriesName}`, {
+      query: false,
+    });
+    console.log(categoriesStore.status);
 
   return (
     <div className="home">
+      <SearchBar />
+      {categoriesStore.status === "reject" && <>Fetch Reject</>}
       {categoriesStore.status === "loading" && <div>...Loading </div>}
       {categoriesStore.status === "success" && (
         <>
           {categoriesStore.categories.map(
-            (el: { id: number; name: string }) => {
+            (el: { id: number; name: string; image: string }) => {
               return (
                 <Card key={el.id} style={{ width: "50rem" }}>
-                  <Card.Img variant="top" src="holder.js/100px180" />
+                  <Card.Img
+                    style={{ width: "100px" }}
+                    variant="top"
+                    src={el.image}
+                  />
                   <Card.Body>
                     <Card.Title>{el.name}</Card.Title>
                     <Card.Text>Description</Card.Text>
