@@ -3,56 +3,56 @@ import PropTypes from "prop-types";
 import { Card, Button, Image } from "react-bootstrap";
 
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { fetchProducts, productsActions } from "../store/slices/products";
-
 import {
-  fetchsearchQuery,
-  searchQueryActions,
-} from "../store/slices/searchQuery";
-
-import { useHistory } from "react-router-dom";
+  fetchProducts,
+  productsDataActions,
+} from "../store/slices/productsData";
 
 const ListProducts = (props: { categoryId: string | number }) => {
-  const history: { location: { state: { query: boolean } } } | any =
-    useHistory();
-
-  const isQuery: boolean = history.location.state?.query;
-
-  console.log(history.location.state);
+  console.log(props.categoryId);
   const dispatch = useDispatch();
 
-  const productsStore = useSelector((state: RootStateOrAny) => state.products);
-  const queryStore = useSelector((state: RootStateOrAny) => state.searchQuery);
+  const productsDataStore = useSelector(
+    (state: RootStateOrAny) => state.productsData
+  );
 
   const { categoryId } = props;
 
   useEffect(() => {
-    if (isQuery) {
-      if (queryStore.status === "idle") {
-        dispatch(fetchsearchQuery(categoryId));
-      }
-    } else {
-      if (productsStore.status === "idle") {
-        dispatch(fetchProducts(categoryId));
-      }
+    if (productsDataStore.status === "idle") {
+      dispatch(fetchProducts());
     }
     return () => {
       //   cleanup;
     };
-  }, []);
+  }, [dispatch, productsDataStore.status]);
 
-  const products: any = () => (isQuery ? queryStore : productsStore);
-  const requestProducts = products();
+  useEffect(() => {
+    dispatch(
+      productsDataActions.getCategoriesProducts({
+        data: productsDataStore.data,
+        id: categoryId,
+      })
+    );
+    return () => {
+      // cleanup
+    };
+  }, [productsDataStore.data, dispatch, categoryId]);
 
-  const goProductListPage = (productName: string) =>
-    history.push(`/${categoryId}/${productName}`);
+  // const products: any = () => (isQuery ? queryStore : productsStore);
+  const requestProducts = productsDataStore;
+
+  // const goProductListPage = (productName: string) =>
+  //   history.push(`/${categoryId}/${productName}`);
+
+  console.log(requestProducts.productsCategories);
 
   return (
     <div>
       {requestProducts.status === "loading" && <>Loading...</>}
       {requestProducts.status === "success" && (
         <div>
-          {requestProducts.products.map(
+          {requestProducts.productsCategories?.map(
             (el: {
               id: number;
               title: string;
@@ -72,10 +72,10 @@ const ListProducts = (props: { categoryId: string | number }) => {
                     <Card.Text>{el.description}</Card.Text>
                     <Card.Text>{el.price}</Card.Text>
                     <Button
-                      onClick={() =>
-                        goProductListPage(el.title.toLocaleLowerCase())
-                      }
-                      variant="primary"
+                    // onClick={() =>
+                    //   goProductListPage(el.title.toLocaleLowerCase())
+                    // }
+                    // variant="primary"
                     >
                       Check
                     </Button>

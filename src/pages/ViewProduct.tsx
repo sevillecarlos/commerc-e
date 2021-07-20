@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { urlParser } from "../helper/urlParser";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
-import { fetchProducts, productsActions } from "../store/slices/products";
 import { Card, Button } from "react-bootstrap";
 
 import { useHistory } from "react-router-dom";
@@ -15,43 +14,43 @@ const ViewProduct = (props: { categoryId: string }) => {
   const dispatch = useDispatch();
   const { categoryId } = props;
 
-  const [cart, setCart] = useState(Array<string>());
-  const urlData = urlParser(categoryId);
+  // const [cart, setCart] = useState(Array<string>());
+  // const urlData = urlParser(categoryId);
 
-  const product = useSelector((state: RootStateOrAny) => state.products);
+  // const product = useSelector((state: RootStateOrAny) => state.products);
 
-  useEffect(() => {
-    dispatch(fetchProducts(urlData[0]));
-    dispatch(productsActions.getProduct(urlData[1]));
-    return () => {
-      // cleanup
-    };
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchProducts(urlData[0]));
+  //   dispatch(productsActions.getProduct(urlData[1]));
+  //   return () => {
+  //     // cleanup
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    if (cart.length !== 0) {
-      dispatch(cartActions.addCart(cart));
-    }
+  // useEffect(() => {
+  //   if (cart.length !== 0) {
+  //     dispatch(cartActions.addCart(cart));
+  //   }
 
-    return () => {
-      // cleanup
-    };
-  }, [cart, dispatch]);
+  //   return () => {
+  //     // cleanup
+  //   };
+  // }, [cart, dispatch]);
 
-  const addCart = (product: any) => {
-    setCart(product);
-    let localCart: any = product;
-    const products: any = localStorage.getItem("cart");
-    console.log(products);
-    const allProduct = products
-      ? [...JSON.parse(products), localCart]
-      : [localCart];
-    localStorage.setItem("cart", JSON.stringify(allProduct));
-  };
+  // const addCart = (product: any) => {
+  //   setCart(product);
+  //   let localCart: any = product;
+  //   const products: any = localStorage.getItem("cart");
+  //   console.log(products);
+  //   const allProduct = products
+  //     ? [...JSON.parse(products), localCart]
+  //     : [localCart];
+  //   localStorage.setItem("cart", JSON.stringify(allProduct));
+  // };
 
   return (
     <div>
-      {product.product.map(
+      {/* {product.product.map(
         (el: {
           id: number;
           title: string;
@@ -87,7 +86,7 @@ const ViewProduct = (props: { categoryId: string }) => {
             </Card>
           );
         }
-      )}
+      )} */}
     </div>
   );
 };

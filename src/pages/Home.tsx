@@ -1,40 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { fetchCategories } from "../store/slices/categories";
+import { fetchProducts } from "../store/slices/productsData";
 
 import { useHistory } from "react-router-dom";
-
+import { productsDataActions } from "../store/slices/productsData";
 import "./style/Home.css";
 
 const Home = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const categoriesStore = useSelector(
-    (state: RootStateOrAny) => state.categories
+  const productsDataStore = useSelector(
+    (state: RootStateOrAny) => state.productsData
   );
 
   useEffect(() => {
-    if (categoriesStore.status === "idle") {
-      dispatch(fetchCategories());
+    if (productsDataStore.status === "idle") {
+      dispatch(fetchProducts());
     }
-  }, [dispatch]);
+  }, [dispatch, productsDataStore.status]);
 
-  const goProductListPage = (categoriesName: string) =>
-    history.push(`/products/${categoriesName}`, {
-      query: false,
-    });
-  console.log(categoriesStore.status);
+  console.log(productsDataStore.data);
+
+  useEffect(() => {
+    dispatch(productsDataActions.getCategories(productsDataStore.data));
+    return () => {
+      // cleanup
+    };
+  }, [productsDataStore.data, dispatch]);
+
+  const goProductListPage = (productsDataName: string) =>
+    history.push(`/products/${productsDataName}`);
 
   return (
     <div className="home">
-      
-      {categoriesStore.status === "reject" && <>Fetch Reject</>}
-      {categoriesStore.status === "loading" && <div>...Loading </div>}
-      {categoriesStore.status === "success" && (
+      {productsDataStore.status === "reject" && <>Fetch Reject</>}
+      {productsDataStore.status === "loading" && <div>...Loading </div>}
+      {productsDataStore.status === "success" && (
         <>
-          {categoriesStore.categories.map(
+          {productsDataStore.categories.map(
             (el: { id: number; name: string; image: string }) => {
               return (
                 <Card key={el.id} style={{ width: "50rem" }}>
@@ -47,9 +52,10 @@ const Home = () => {
                     <Card.Title>{el.name}</Card.Title>
                     <Card.Text>Description</Card.Text>
                     <Button
-                      onClick={() =>
-                        goProductListPage(el.name.toLocaleLowerCase())
-                      }
+                      // onClick={() =>
+                      //   goProductListPage(el.name.toLocaleLowerCase())
+                      // }
+                      href={`http://localhost:3000/products/${el.name.toLocaleLowerCase()}`}
                       variant="primary"
                     >
                       Check
