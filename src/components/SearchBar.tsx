@@ -5,6 +5,7 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { fetchProducts } from "../store/slices/productsData";
 
 import { productsDataActions } from "../store/slices/productsData";
+import './style/SearchBar.css'
 
 const SearchBar = () => {
   const history = useHistory();
@@ -40,7 +41,7 @@ const SearchBar = () => {
   };
   console.log(productsDataStore.queryProducts);
   return (
-    <div>
+    <div className="search-bar">
       <Form className="d-flex" onSubmit={goSearchProducts}>
         <FormControl
           id="search"

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Card, Button, Image } from "react-bootstrap";
+import { Card, Button, Container, Row, Col } from "react-bootstrap";
 
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import {
   fetchProducts,
   productsDataActions,
 } from "../store/slices/productsData";
+import "./style/ListProducts.css";
 
 const ListProducts = (props: { categoryId: string | number }) => {
   console.log(props.categoryId);
@@ -48,43 +49,49 @@ const ListProducts = (props: { categoryId: string | number }) => {
   console.log(requestProducts.productsCategories);
 
   return (
-    <div>
+    <div className="products-list">
       {requestProducts.status === "loading" && <>Loading...</>}
       {requestProducts.status === "success" && (
-        <div>
-          {requestProducts.productsCategories?.map(
-            (el: {
-              id: number;
-              title: string;
-              description: string;
-              image: { id: number; url: string };
-              price: number;
-            }) => {
-              return (
-                <Card key={el.id} style={{ width: "50rem" }}>
-                  <Card.Img
-                    style={{ width: "100px" }}
-                    variant="top"
-                    src={`http://localhost:1337${el.image.url}`}
-                  />
-                  <Card.Body>
-                    <Card.Title>{el.title}</Card.Title>
-                    <Card.Text>{el.description}</Card.Text>
-                    <Card.Text>{el.price}</Card.Text>
-                    <Button
-                    // onClick={() =>
-                    //   goProductListPage(el.title.toLocaleLowerCase())
-                    // }
-                    // variant="primary"
+        <Container>
+          <Row>
+            {requestProducts.productsCategories?.map(
+              (el: {
+                id: number;
+                title: string;
+                description: string;
+                image: { id: number; url: string };
+                price: number;
+              }) => {
+                return (
+                    <Card
+                      className="products-card"
+                      key={el.id}
+                      style={{ width: "25%" }}
                     >
-                      Check
-                    </Button>
-                  </Card.Body>
-                </Card>
-              );
-            }
-          )}
-        </div>
+                      <Card.Img
+                        style={{ width: "100px", margin: "auto" }}
+                        variant="top"
+                        src={`http://localhost:1337${el.image.url}`}
+                      />
+                      <Card.Body>
+                        <Card.Title>{el.title}</Card.Title>
+                        <Card.Text>{el.description}</Card.Text>
+                        <Card.Text>{el.price}</Card.Text>
+                        <Button
+                        // onClick={() =>
+                        //   goProductListPage(el.title.toLocaleLowerCase())
+                        // }
+                        // variant="primary"
+                        >
+                          Check
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                );
+              }
+            )}
+          </Row>
+        </Container>
       )}{" "}
     </div>
   );

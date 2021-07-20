@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import "./style/NavBarWatch.css"
 const Watch = () => {
   const [timeInfo, setTimeInfo] = useState("");
   const [dateInfo, setDateInfo] = useState("");
@@ -22,7 +22,7 @@ const Watch = () => {
   };
 
   return (
-    <div>
+    <div className="date-time">
       <h5>{timeInfo}</h5>
       <h5>{dateInfo}</h5>
     </div>
