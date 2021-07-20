@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import { Card, Button, Container, Row, Col } from "react-bootstrap";
 
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import productsDataSlice, {
+import {
   fetchProducts,
   productsDataActions,
 } from "../store/slices/productsData";
+import { useHistory } from "react-router-dom";
 import "./style/ListProducts.css";
 
 const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
-  console.log(props.categoryId);
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const productsDataStore = useSelector(
@@ -19,7 +21,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
 
   const { categoryId } = props;
 
-  console.log(categoryId.id)
+  console.log(categoryId.id);
 
   useEffect(() => {
     if (productsDataStore.status === "idle") {
@@ -51,13 +53,23 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
     };
   }, [productsDataStore.data, dispatch, categoryId]);
 
-  // const products: any = () => (isQuery ? queryStore : productsStore);
+  const getCategorieOfProduct = (productName: string) => {
+    const productsData: string[] = productsDataStore.data;
+    const refName = productName?.toLowerCase();
+    console.log(productsData);
+
+    const categoryName: any = productsData.filter((v: any) => {
+      const checkProductName = v.products.some(
+        (v: any) => v.title.toLowerCase() === refName
+      );
+      return checkProductName && v;
+    });
+    const [category] = categoryName;
+    const { slug } = category;
+    history.push(`/${slug}/${refName}`);
+  };
+
   const requestProducts = productsDataStore;
-
-  // const goProductListPage = (productName: string) =>
-  //   history.push(`/${categoryId}/${productName}`);
-
-  console.log(requestProducts.queryProducts);
 
   return (
     <div className="products-list">
@@ -91,12 +103,13 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
                       <Card.Text>{el.description}</Card.Text>
                       <Card.Text>{el.price}</Card.Text>
                       <Button
-                      // onClick={() =>
-                      //   goProductListPage(el.title.toLocaleLowerCase())
-                      // }
-                      // variant="primary"
+                        onClick={() => getCategorieOfProduct(el.title)}
+                        // onClick={() =>
+                        //   goProductListPage(el.title.toLocaleLowerCase())
+                        // }
+                        // variant="primary"
                       >
-                        Check
+                        Select
                       </Button>
                     </Card.Body>
                   </Card>

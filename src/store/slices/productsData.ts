@@ -37,7 +37,7 @@ const productsDataSlice = createSlice({
           };
         }
       );
-      state.categories.push(...categories);
+      state.categories = categories;
     },
 
     getCategoriesProducts(state, action) {
@@ -56,7 +56,6 @@ const productsDataSlice = createSlice({
           return category.products;
         }
       );
-      console.log(productsData);
       const searchQuery = categories
         .filter((product: { title: string; description: string }) => {
           return (
