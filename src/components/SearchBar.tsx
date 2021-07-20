@@ -1,27 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, FormControl } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { fetchsearchQuery } from "../store/slices/searchQuery";
+import { fetchProducts } from "../store/slices/productsData";
+
+import { productsDataActions } from "../store/slices/productsData";
 
 const SearchBar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const productsDataStore = useSelector(
+    (state: RootStateOrAny) => state.productsData
+  );
+
   const [query, setQuery] = useState("");
 
   const goSearchProducts = (e: any) => {
     e.preventDefault();
-    dispatch(fetchsearchQuery(query));
-    history.push(`/query/${query}`, {
-      query: true,
-    });
+    dispatch(
+      productsDataActions.getProductsByQuery({
+        data: productsDataStore.data,
+        query: query,
+      })
+    );
+    history.push(`/query/${query}`);
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(fetchProducts());
+      // cleanup
+    };
+  }, [dispatch]);
 
   const onChangeQuery = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setQuery(value.toLowerCase());
   };
-
+  console.log(productsDataStore.queryProducts);
   return (
     <div>
       <Form className="d-flex" onSubmit={goSearchProducts}>
