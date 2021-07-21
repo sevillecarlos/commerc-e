@@ -7,6 +7,7 @@ import {
   fetchProducts,
   productsDataActions,
 } from "../store/slices/productsData";
+
 import { useHistory } from "react-router-dom";
 import "./style/ListProducts.css";
 
@@ -56,8 +57,6 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
   const getCategorieOfProduct = (productName: string) => {
     const productsData: string[] = productsDataStore.data;
     const refName = productName?.toLowerCase();
-    console.log(productsData);
-
     const categoryName: any = productsData.filter((v: any) => {
       const checkProductName = v.products.some(
         (v: any) => v.title.toLowerCase() === refName
@@ -101,14 +100,8 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
                     <Card.Body>
                       <Card.Title>{el.title}</Card.Title>
                       <Card.Text>{el.description}</Card.Text>
-                      <Card.Text>{el.price}</Card.Text>
-                      <Button
-                        onClick={() => getCategorieOfProduct(el.title)}
-                        // onClick={() =>
-                        //   goProductListPage(el.title.toLocaleLowerCase())
-                        // }
-                        // variant="primary"
-                      >
+                      <Card.Text>${el.price}</Card.Text>
+                      <Button onClick={() => getCategorieOfProduct(el.title)}>
                         Select
                       </Button>
                     </Card.Body>

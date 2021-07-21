@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { urlParser } from "../helper/urlParser";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 import { Card, Button } from "react-bootstrap";
@@ -9,48 +8,90 @@ import { useHistory } from "react-router-dom";
 
 import { cartActions } from "../store/slices/cart";
 
+import {
+  fetchProducts,
+  productsDataActions,
+} from "../store/slices/productsData";
 
-const ViewProduct = (props: { categoryId: string }) => {
+const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
   const dispatch = useDispatch();
   const { categoryId } = props;
 
-  // const [cart, setCart] = useState(Array<string>());
-  // const urlData = urlParser(categoryId);
+  const productsDataStore = useSelector(
+    (state: RootStateOrAny) => state.productsData
+  );
 
-  // const product = useSelector((state: RootStateOrAny) => state.products);
+  const [productsQuantity, setProductsQuantity] = useState(1);
 
-  // useEffect(() => {
-  //   dispatch(fetchProducts(urlData[0]));
-  //   dispatch(productsActions.getProduct(urlData[1]));
-  //   return () => {
-  //     // cleanup
-  //   };
-  // }, []);
+  useEffect(() => {
+    if (productsDataStore.status === "idle") {
+      dispatch(fetchProducts());
+    }
+    return () => {
+      //   cleanup;
+    };
+  }, [dispatch, productsDataStore.status]);
 
-  // useEffect(() => {
-  //   if (cart.length !== 0) {
-  //     dispatch(cartActions.addCart(cart));
-  //   }
+  useEffect(() => {
+    dispatch(
+      productsDataActions.getProduct({
+        data: productsDataStore.data,
+        id: categoryId.id,
+        type: categoryId.type,
+      })
+    );
+    return () => {
+      // cleanup
+    };
+  }, [productsDataStore.data, dispatch, categoryId]);
 
-  //   return () => {
-  //     // cleanup
-  //   };
-  // }, [cart, dispatch]);
+  const [cart, setCart] = useState(Array<string>());
 
-  // const addCart = (product: any) => {
-  //   setCart(product);
-  //   let localCart: any = product;
-  //   const products: any = localStorage.getItem("cart");
-  //   console.log(products);
-  //   const allProduct = products
-  //     ? [...JSON.parse(products), localCart]
-  //     : [localCart];
-  //   localStorage.setItem("cart", JSON.stringify(allProduct));
-  // };
+  useEffect(() => {
+    if (cart.length !== 0) {
+      dispatch(cartActions.addCart(cart));
+    }
+
+    return () => {
+      // cleanup
+    };
+  }, [cart, dispatch]);
+
+  const addCart = (product: any) => {
+    setCart(product);
+    let localCart: any = product;
+    const products: any = localStorage.getItem("cart");
+
+    const cartProducts = JSON.parse(products)?.map((x: any) => x);
+    const d = cartProducts?.map((v: any) =>
+      v.name === product.name
+        ? {
+            id: v.id,
+            name: v.title,
+            price: v.price,
+            image: `http://localhost:1337${v.image.url}`,
+            quantity: (v.quantity += 1),
+          }
+        : v
+    );
+
+    console.log(d);
+    console.log(products);
+    console.log(localCart);
+
+    const allProducts = products
+      ? [...JSON.parse(products), localCart]
+      : [localCart];
+
+    const allProduct = d ? d : allProducts;
+
+    localStorage.setItem("cart", JSON.stringify(allProduct));
+  };
 
   return (
     <div>
-      {/* {product.product.map(
+      {productsDataStore.status === "loading" && <>Loading...</>}
+      {productsDataStore.product?.map(
         (el: {
           id: number;
           title: string;
@@ -68,7 +109,7 @@ const ViewProduct = (props: { categoryId: string }) => {
               <Card.Body>
                 <Card.Title>{el.title}</Card.Title>
                 <Card.Text>{el.description}</Card.Text>
-                <Card.Text>{el.price}</Card.Text>
+                <Card.Text>${el.price}</Card.Text>
                 <Button
                   onClick={() =>
                     addCart({
@@ -76,6 +117,7 @@ const ViewProduct = (props: { categoryId: string }) => {
                       name: el.title,
                       price: el.price,
                       image: `http://localhost:1337${el.image.url}`,
+                      quantity: 1,
                     })
                   }
                   variant="primary"
@@ -86,7 +128,7 @@ const ViewProduct = (props: { categoryId: string }) => {
             </Card>
           );
         }
-      )} */}
+      )}
     </div>
   );
 };

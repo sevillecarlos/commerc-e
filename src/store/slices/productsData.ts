@@ -8,6 +8,7 @@ const initialState = {
   status: "idle",
   productsCategories: new Array<string[]>(),
   queryProducts: new Array<string[]>(),
+  product: new Array<string[]>(),
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -67,6 +68,16 @@ const productsDataSlice = createSlice({
 
       console.log(removeRepeatElements(searchQuery));
       state.queryProducts = removeRepeatElements(searchQuery);
+    },
+    getProduct(state, action) {
+      const productsData = action.payload;
+      const findCategory = productsData.data.filter(
+        (v: any) => v.slug === productsData.type
+      );
+      const findProducts = findCategory[0]?.products.filter(
+        (v: any) => v.title.toLowerCase() === productsData.id
+      );
+      state.product = findProducts;
     },
   },
   extraReducers: (builder) => {
