@@ -63,27 +63,24 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
     const products: any = localStorage.getItem("cart");
 
     const cartProducts = JSON.parse(products)?.map((x: any) => x);
-    const d = cartProducts?.map((v: any) =>
+    const exist = cartProducts?.some((v: any) => v.name === product.name);
+    const addProductQuantity = cartProducts?.map((v: any) =>
       v.name === product.name
         ? {
             id: v.id,
-            name: v.title,
+            name: v.name,
             price: v.price,
-            image: `http://localhost:1337${v.image.url}`,
+            image: v.image,
             quantity: (v.quantity += 1),
           }
         : v
     );
-
-    console.log(d);
-    console.log(products);
-    console.log(localCart);
-
-    const allProducts = products
-      ? [...JSON.parse(products), localCart]
+    console.log(exist);
+    const allProduct = products
+      ? exist
+        ? [...addProductQuantity]
+        : [...JSON.parse(products), localCart]
       : [localCart];
-
-    const allProduct = d ? d : allProducts;
 
     localStorage.setItem("cart", JSON.stringify(allProduct));
   };
