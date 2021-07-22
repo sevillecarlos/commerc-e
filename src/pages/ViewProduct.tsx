@@ -4,8 +4,6 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 import { Card, Button } from "react-bootstrap";
 
-import { useHistory } from "react-router-dom";
-
 import { cartActions } from "../store/slices/cart";
 
 import {
@@ -20,8 +18,6 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
   const productsDataStore = useSelector(
     (state: RootStateOrAny) => state.productsData
   );
-
-  const [productsQuantity, setProductsQuantity] = useState(1);
 
   useEffect(() => {
     if (productsDataStore.status === "idle") {

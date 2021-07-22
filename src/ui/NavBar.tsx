@@ -24,8 +24,6 @@ const NavBar = () => {
   const cartProducts = useSelector((state: RootStateOrAny) => state.cart);
   const authUser = useSelector((state: RootStateOrAny) => state.auth.user);
 
-  const goToCart = () => history.push("/cart");
-
   interface User {
     first_name: string;
   }
@@ -57,12 +55,12 @@ const NavBar = () => {
     };
   }, [authUser]);
 
-  console.log(authUser);
-
   const logOut = () => {
     localStorage.removeItem("$@token");
     dispatch(authActions.removeUser());
   };
+
+  console.log(cartProducts);
 
   const history = useHistory();
   return (
@@ -92,7 +90,10 @@ const NavBar = () => {
               </NavDropdown.Item>
             </NavDropdown>
           ) : (
-            <Nav.Link className='sign-in-link' href="http://localhost:3000/authentication">
+            <Nav.Link
+              className="sign-in-link"
+              href="http://localhost:3000/authentication"
+            >
               Sign In
             </Nav.Link>
           )}
@@ -100,8 +101,9 @@ const NavBar = () => {
         <Nav.Link href="http://localhost:3000/cart">
           <div>
             <MdShoppingCart className="shop-cart" />
-            <span id='lblCartCount' className="products-cart">{cartValues ? cartValues.length : ""}</span>
-
+            <span id="lblCartCount" className="products-cart">
+              {cartValues ? cartValues.length : ""}
+            </span>
           </div>
         </Nav.Link>
       </Navbar.Collapse>
