@@ -34,6 +34,7 @@ export const fetchSignUp = createAsyncThunk(
       body: JSON.stringify(signUpForm),
     });
     const data = await res.json();
+    localStorage.setItem("$@token", data.token);
     return data;
   }
 );
@@ -49,7 +50,6 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchSignIn.fulfilled, (state, action) => {
       state.status = "success";
-      console.log(action.payload);
       state.user = action.payload;
     });
     builder.addCase(fetchSignIn.pending, (state) => {

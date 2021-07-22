@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Table from "react-bootstrap/Table";
-import { addNumberArray } from "../helper/addNumberArrayFixed2";
 
 const CostTotalTable = (props: { productsQuantity: any }) => {
   const { productsQuantity } = props;
@@ -16,13 +15,13 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
   }, [productsQuantity]);
 
   useEffect(() => {
-    const prices = costTable.reduce((acc: any, curr: any) => {
-      acc?.push(curr.price);
-      return acc;
-    }, []);
-
-    const total = addNumberArray(prices);
-    setTotatCost(Number(total));
+    let total = 0;
+    costTable.map((v: any) => {
+      total += v.price;
+      return 0;
+    });
+    const totalCost = Number(total?.toFixed(2));
+    setTotatCost(totalCost);
     return () => {
       //   cleanup
     };
