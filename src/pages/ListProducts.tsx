@@ -22,8 +22,6 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
 
   const { categoryId } = props;
 
-  console.log(categoryId.id);
-
   useEffect(() => {
     if (productsDataStore.status === "idle") {
       dispatch(fetchProducts());

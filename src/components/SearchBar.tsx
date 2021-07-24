@@ -25,7 +25,6 @@ const SearchBar = () => {
     const { value } = e.target;
     setQuery(value.toLowerCase());
   };
-  console.log(productsDataStore.queryProducts);
   return (
     <div className="search-bar">
       <Form className="d-flex" onSubmit={goSearchProducts}>

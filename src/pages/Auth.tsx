@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
@@ -7,7 +7,7 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 const Auth = () => {
   const dispatch = useDispatch();
-  const authUser = useSelector((state: RootStateOrAny) => state.auth.user);
+  const authUser = useSelector((state: RootStateOrAny) => state.auth);
 
   const [signInForm, setSignInForm] = useState({
     email: "",
@@ -37,6 +37,13 @@ const Auth = () => {
     e.preventDefault();
     dispatch(fetchSignUp(signUpForm));
   };
+
+  useEffect(() => {
+    if (authUser.userCredentials) {
+      console.log(authUser.userCredentials)
+      dispatch(fetchSignIn(authUser.userCredentials));
+    }
+  }, [authUser.userCredentials,dispatch]);
 
   const tokenExist = localStorage.getItem("$@token");
 

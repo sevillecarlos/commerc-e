@@ -14,6 +14,7 @@ import Watch from "../components/NavBarWatch";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { authActions } from "../store/slices/auth";
 import jwt_decode from "jwt-decode";
+import { fetchCredit } from "../store/slices/auth";
 import logo from "../assets/img/commerc-e-logo.png";
 import "./style/NavBar.css";
 
@@ -21,17 +22,18 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   const cartProducts = useSelector((state: RootStateOrAny) => state.cart);
-  const authUser = useSelector((state: RootStateOrAny) => state.auth.user);
+  const authUser = useSelector((state: RootStateOrAny) => state.auth);
 
   interface User {
     first_name: string;
-    first_time: boolean;
+    id: number;
   }
 
   const [cartValues, setCartValues] = useState([]);
   const [user, setUser] = useState<User | undefined>(undefined);
   const [token, setToken] = useState("");
   const [showModelCredit, setShowModelCredit] = useState(false);
+  const [credit, setCredit] = useState(0);
 
   useEffect(() => {
     const localCartProducta: any = localStorage.getItem("cart");
@@ -45,6 +47,8 @@ const NavBar = () => {
     const token: any = localStorage.getItem("$@token");
     if (token) {
       const decodedUser: any = jwt_decode(token);
+      console.log(decodedUser);
+      dispatch(fetchCredit(decodedUser.id));
       setUser(decodedUser);
       setToken(token);
     } else {
@@ -54,22 +58,20 @@ const NavBar = () => {
     return () => {
       // cleanup
     };
-  }, [authUser]);
+  }, [authUser.user, dispatch]);
 
   useEffect(() => {
-    if (user?.first_time) {
-      setShowModelCredit(true);
-      const item:any = localStorage.getItem("@$token")
-      const d:any = jwt_decode(item)
-
-
-
-    }
+    setShowModelCredit(authUser.firstTime);
     return () => {
       // cleanup
     };
-  }, [user]);
+  }, [authUser.firstTime]);
 
+  useEffect(() => {
+    if (authUser.userCredit) {
+      setCredit(authUser.userCredit.amount);
+    }
+  }, [authUser.userCredit]);
 
   const logOut = () => {
     localStorage.removeItem("$@token");
@@ -84,9 +86,7 @@ const NavBar = () => {
         <Modal.Header closeButton>
           <Modal.Title>Congrats</Modal.Title>
         </Modal.Header>
-        <Modal.Body>You Receive 100$ credit
-
-        </Modal.Body>
+        <Modal.Body>You Receive 100$ credit</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -115,7 +115,7 @@ const NavBar = () => {
                 title={<h1>Hi, {user?.first_name}</h1>}
                 id="navbarScrollingDropdown"
               >
-                <NavDropdown.Item href="#action4"></NavDropdown.Item>
+                <NavDropdown.Item href="#action4">${credit}</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action5">
                   <Button onClick={logOut}>Log Out</Button>
