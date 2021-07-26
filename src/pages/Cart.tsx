@@ -13,6 +13,8 @@ const Cart = () => {
   const [cartProducts, setCartProducts] = useState<any>([]);
   const costTable = [] as any;
 
+
+
   useEffect(() => {
     const token: any = localStorage.getItem("$@token");
     if (token) setToken(token);
@@ -50,6 +52,7 @@ const Cart = () => {
   const getQuatity = (el: any) => {
     return productsQuantity[el.name] ?? el.quantity;
   };
+
 
   const getPrice = (price: number, quantity: number, name: string) => {
     const pricePerQuantity = (price * quantity).toFixed(2);
@@ -111,9 +114,7 @@ const Cart = () => {
               );
             }
           )}{" "}
-          {token ? (
-            <Button href="">Checkout</Button>
-          ) : (
+          {!token && (
             <Button href="http://localhost:3000/authentication">
               Sign In first for checkout
             </Button>

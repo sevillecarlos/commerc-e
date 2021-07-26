@@ -8,14 +8,16 @@ import {
   Image,
 } from "react-bootstrap";
 import { MdShoppingCart } from "react-icons/md";
-import { useHistory } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import Watch from "../components/NavBarWatch";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { authActions } from "../store/slices/auth";
 import jwt_decode from "jwt-decode";
-import { fetchCredit } from "../store/slices/auth";
+import { fetchCredit } from "../store/slices/transaction";
 import logo from "../assets/img/commerc-e-logo.png";
+import roullete from "../assets/img/roullete.png";
+import lip from "../assets/img/lip.png";
+
 import "./style/NavBar.css";
 
 const NavBar = () => {
@@ -23,6 +25,7 @@ const NavBar = () => {
 
   const cartProducts = useSelector((state: RootStateOrAny) => state.cart);
   const authUser = useSelector((state: RootStateOrAny) => state.auth);
+  const authCredit = useSelector((state: RootStateOrAny) => state.transaction);
 
   interface User {
     first_name: string;
@@ -68,10 +71,10 @@ const NavBar = () => {
   }, [authUser.firstTime]);
 
   useEffect(() => {
-    if (authUser.userCredit) {
-      setCredit(authUser.userCredit.amount);
+    if (authCredit.userCredit) {
+      setCredit(authCredit.userCredit.amount);
     }
-  }, [authUser.userCredit]);
+  }, [authCredit.userCredit]);
 
   const logOut = () => {
     localStorage.removeItem("$@token");
@@ -96,9 +99,22 @@ const NavBar = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Navbar className="nav-bar" expand="lg">
-        <Navbar.Brand href="http://localhost:3000/">
-          <Image src={logo} style={{ width: "200px" }} alt="Logo Commerc-e" />
+      <Navbar sticky="top" className="nav-bar ml-auto" expand="lg">
+        <Navbar.Brand className="nav-bar-brand" href="http://localhost:3000/">
+          <div className="logo-container">
+            <Image
+              src={roullete}
+              style={{ width: "100px" }}
+              className="logo-img"
+              alt="Logo Commerc-e"
+            />
+            <Image
+              src={lip}
+              style={{ width: "100px" }}
+              className="logo-img-lip"
+              alt="Logo Commerc-e"
+            />
+          </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -115,11 +131,15 @@ const NavBar = () => {
                 title={<h1>Hi, {user?.first_name}</h1>}
                 id="navbarScrollingDropdown"
               >
-                <NavDropdown.Item href="#action4">${credit}</NavDropdown.Item>
+                <Nav>Credit: ${credit}</Nav>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  <Button onClick={logOut}>Log Out</Button>
+                <NavDropdown.Item href="/checkout/records">
+                  Checkout Record
                 </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <Nav>
+                  <Button onClick={logOut}>Log Out</Button>
+                </Nav>
               </NavDropdown>
             ) : (
               <Nav.Link
@@ -133,8 +153,8 @@ const NavBar = () => {
           <Nav.Link href="http://localhost:3000/cart">
             <div>
               <MdShoppingCart className="shop-cart" />
-              <span id="lblCartCount" className="products-cart">
-                {cartValues ? cartValues.length : ""}
+              <span id="cart-counter" className="products-cart">
+                {cartValues ? cartValues.length : 0}
               </span>
             </div>
           </Nav.Link>

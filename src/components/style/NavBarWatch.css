@@ -1,8 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap");
 .date-time {
-  color: #b3b3b3;
+  color: #000000;
   padding: 15px;
 }
 .date-time h5 {
   font-weight: bold;
-  border-bottom:5px solid rgba(158, 48, 48, 0.397)
+  font-family: "Nunito", sans-serif;
+  border-radius: 20px;
+  padding: 3px;
+  text-align: center;
 }

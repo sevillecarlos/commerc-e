@@ -1,15 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap");
+
 .nav-bar {
-  background-color: #3a0ca3;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  background: transparent;
+  border-radius: 100px;
+  margin-top: 5px;
+  box-shadow: 0px 5px 16px 12px rgba(0, 0, 0, 0.74);
+  -webkit-box-shadow: 0px 5px 16px 12px rgba(0, 0, 0, 0.74);
+  -moz-box-shadow: 0px 5px 16px 12px rgba(0, 0, 0, 0.74);
 }
+
+.nav-bar-brand {
+  padding: 10px;
+}
+
 .sign-in-link {
   font-size: 20px;
-  padding: 10px;
-  margin: auto;
-  border: 3px solid black;
-  border-radius: 15px;
-  background-color: rgb(58, 55, 224);
+  margin-top: 20px;
+  font-family: "Nunito", sans-serif !important;
+  color: black !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  height: 50px;
+}
+.logo-container{
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.logo-img{
+  animation: rotation 50s infinite linear;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.logo-img-lip{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
 }
 .products-cart {
   padding-left: 9px;
@@ -18,10 +50,11 @@
   -moz-border-radius: 9px;
   border-radius: 9px;
 }
-#lblCartCount {
+#cart-counter {
   font-size: 12px;
-  background: #ff0000;
+  background: #030303;
   color: #fff;
+  font-weight: bold;
   padding: 0 5px;
   vertical-align: top;
   margin-left: -10px;
@@ -29,5 +62,15 @@
 .shop-cart {
   width: 50px;
   height: 50px;
-  color: #5588aa;
+  padding: 5px;
+  color: #000000;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }

@@ -10,8 +10,6 @@ function App() {
       style={{
         width: "90%",
         margin: "auto",
-        boxShadow: "1px 4px 13px 2px #000000",
-        borderRadius:'20px'
       }}
     >
       <Provider store={store}>

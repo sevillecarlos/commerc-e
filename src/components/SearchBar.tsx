@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, FormControl } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { fetchProducts } from "../store/slices/productsData";
-
-import { productsDataActions } from "../store/slices/productsData";
-import './style/SearchBar.css'
+import { useSelector, RootStateOrAny } from "react-redux";
+import {MdSearch} from 'react-icons/md'
+import "./style/SearchBar.css";
 
 const SearchBar = () => {
   const history = useHistory();
@@ -17,7 +15,7 @@ const SearchBar = () => {
 
   const goSearchProducts = (e: any) => {
     e.preventDefault();
-    
+
     history.push(`/search/query/${query}`);
   };
 
@@ -30,13 +28,14 @@ const SearchBar = () => {
       <Form className="d-flex" onSubmit={goSearchProducts}>
         <FormControl
           id="search"
+          className="form-input-search"
           type="search"
           placeholder="Search"
           aria-label="Search"
           onChange={onChangeQuery}
         />
-        <Button type="submit" variant="outline-success">
-          Search
+        <Button className="search-btn" type="submit">
+          <MdSearch size={25}/>
         </Button>
       </Form>
     </div>

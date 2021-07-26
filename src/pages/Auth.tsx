@@ -10,7 +10,7 @@ const Auth = () => {
   const authUser = useSelector((state: RootStateOrAny) => state.auth);
 
   const [signInForm, setSignInForm] = useState({
-    email: "",
+    user: "",
     password: "",
   });
 
@@ -67,7 +67,7 @@ const Auth = () => {
               >
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
-                  name="email"
+                  name="user"
                   type="email"
                   placeholder="Enter email"
                   onChange={changeSignInForm}

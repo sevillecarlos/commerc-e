@@ -6,7 +6,6 @@ const initialState = {
   status: "idle",
   firstTime: false,
   userCredentials: undefined,
-  userCredit: undefined,
 };
 
 export const fetchSignIn = createAsyncThunk(
@@ -20,6 +19,7 @@ export const fetchSignIn = createAsyncThunk(
       body: JSON.stringify(signInForm),
     });
     const data = await res.json();
+    console.log(data);
     localStorage.setItem("$@token", data.token);
     return data.token;
   }
@@ -40,14 +40,7 @@ export const fetchSignUp = createAsyncThunk(
   }
 );
 
-export const fetchCredit = createAsyncThunk(
-  "auth/fetchCredit",
-  async (idUser: any) => {
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/credits/${idUser}`);
-    const data = await res.json();
-    return data;
-  }
-);
+
 
 const authSlice = createSlice({
   name: "auth",
@@ -76,16 +69,6 @@ const authSlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(fetchSignUp.rejected, (state) => {
-      state.status = "reject";
-    });
-    builder.addCase(fetchCredit.fulfilled, (state, action) => {
-      state.status = "success";
-      state.userCredit = action.payload;
-    });
-    builder.addCase(fetchCredit.pending, (state) => {
-      state.status = "loading";
-    });
-    builder.addCase(fetchCredit.rejected, (state) => {
       state.status = "reject";
     });
   },
