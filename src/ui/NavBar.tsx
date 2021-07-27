@@ -14,7 +14,6 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { authActions } from "../store/slices/auth";
 import jwt_decode from "jwt-decode";
 import { fetchCredit } from "../store/slices/transaction";
-import logo from "../assets/img/commerc-e-logo.png";
 import roullete from "../assets/img/roullete.png";
 import lip from "../assets/img/lip.png";
 
@@ -27,13 +26,8 @@ const NavBar = () => {
   const authUser = useSelector((state: RootStateOrAny) => state.auth);
   const authCredit = useSelector((state: RootStateOrAny) => state.transaction);
 
-  interface User {
-    first_name: string;
-    id: number;
-  }
-
   const [cartValues, setCartValues] = useState([]);
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<any>({});
   const [token, setToken] = useState("");
   const [showModelCredit, setShowModelCredit] = useState(false);
   const [credit, setCredit] = useState(0);
@@ -83,6 +77,10 @@ const NavBar = () => {
 
   const handleClose = () => setShowModelCredit(false);
 
+  const getFirstName = (name: string) => {
+    return name.split(" ").shift();
+  };
+
   return (
     <>
       <Modal show={showModelCredit} onHide={handleClose}>
@@ -128,18 +126,26 @@ const NavBar = () => {
 
             {token ? (
               <NavDropdown
-                title={<h1>Hi, {user?.first_name}</h1>}
+
+                title={
+                  <h1 className="title-dropdown">
+                    Hi, {getFirstName(user?.first_name)}
+                  </h1>
+                }
                 id="navbarScrollingDropdown"
+                className="dropdown-user"
+                
+                
               >
-                <Nav>Credit: ${credit}</Nav>
+                <NavDropdown.ItemText> Credit: ${credit}</NavDropdown.ItemText>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/checkout/records">
                   Checkout Record
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <Nav>
-                  <Button onClick={logOut}>Log Out</Button>
-                </Nav>
+                <NavDropdown.ItemText >
+                  <Button className="log-out-btn" onClick={logOut}>Log Out</Button>
+                </NavDropdown.ItemText>
               </NavDropdown>
             ) : (
               <Nav.Link

@@ -4,6 +4,8 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { postCreditUser, postUserReceipts } from "../store/slices/transaction";
 import { Table, Button, Modal } from "react-bootstrap";
 import { codeGenerator } from "../helper/codeGenerator";
+import "./style/CostTotalTable.css";
+import { MdAttachMoney } from "react-icons/md";
 
 const CostTotalTable = (props: { productsQuantity: any }) => {
   const dispatch = useDispatch();
@@ -14,7 +16,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
 
-  console.log(userSession.userReceipt)
+  console.log(userSession.userReceipt);
 
   useEffect(() => {
     setCostTable(productsQuantity);
@@ -39,7 +41,6 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
   const handleClose = () => setShow(false);
   const handleClose2 = () => setShow2(false);
 
-  console.log(userSession.userCredit);
   const checkOut = () => {
     const debitCredit: any = userSession.userCredit.amount - totatCost;
     console.log(debitCredit);
@@ -67,7 +68,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
   };
 
   return (
-    <div>
+    <div className="cost-total-table">
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Error CheckOut</Modal.Title>
@@ -96,7 +97,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Table striped bordered hover size="sm">
+      <Table borderless className="total-cost-table">
         <thead>
           <tr>
             <th>Product</th>
@@ -114,7 +115,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
               </tr>
             );
           })}
-          <tr>
+          <tr style={{ borderTop: "3px solid black", borderRadius: "15px" }}>
             <td>Total</td>
             <td></td>
             <td>${totatCost}</td>
@@ -122,7 +123,9 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
         </tbody>
       </Table>
 
-      <Button onClick={checkOut}>Checkout</Button>
+      <Button className="checkout-btn" onClick={checkOut}>
+        Checkout <MdAttachMoney size={20}/>
+      </Button>
     </div>
   );
 };

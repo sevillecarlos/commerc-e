@@ -5,6 +5,8 @@ import { fetchProducts } from "../store/slices/productsData";
 
 import { useHistory } from "react-router-dom";
 import { productsDataActions } from "../store/slices/productsData";
+import { MdKeyboardArrowRight } from "react-icons/md";
+
 import "./style/Home.css";
 
 const Home = () => {
@@ -28,8 +30,8 @@ const Home = () => {
     };
   }, [productsDataStore.data, dispatch]);
 
-  const goProductListPage = (productsDataName: string) =>
-    history.push(`/products/${productsDataName}`);
+  const goToCategory = (categoryName: string) =>
+    history.push(`/products/${categoryName.toLocaleLowerCase()}`);
 
   return (
     <div className="home">
@@ -45,24 +47,19 @@ const Home = () => {
                   key={el.id}
                   style={{ width: "100%" }}
                 >
-                  
                   <Card.Img
-                    style={{ width: "200px", margin:"auto" }}
+                    style={{ width: "200px", margin: "auto" }}
                     variant="top"
                     src={el.image}
                   />
                   <Card.Body>
-                    <Card.Title>{el.name}</Card.Title>
-                    <Card.Text>Description</Card.Text>
+                    <Card.Title className="category-name">{el.name}</Card.Title>
+                    <Card.Text className="category-desc">Description</Card.Text>
                     <Button
-                    className="button-categories"
-                      // onClick={() =>
-                      //   goProductListPage(el.name.toLocaleLowerCase())
-                      // }
-                      href={`http://localhost:3000/products/${el.name.toLocaleLowerCase()}`}
-                      variant="primary"
+                      className="button-categories"
+                      onClick={() => goToCategory(el.name)}
                     >
-                      Check
+                      Take a watch <MdKeyboardArrowRight size={25} />
                     </Button>
                   </Card.Body>
                 </Card>

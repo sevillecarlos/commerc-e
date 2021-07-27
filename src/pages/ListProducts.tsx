@@ -10,6 +10,7 @@ import {
 
 import { useHistory } from "react-router-dom";
 import "./style/ListProducts.css";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
   const history = useHistory();
@@ -73,7 +74,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
       {requestProducts.status === "loading" && <>Loading...</>}
       {requestProducts.status === "success" && (
         <Container>
-          <Row>
+          <Row style={{ marginLeft: "10%" }}>
             {requestProducts[
               categoryId.type ? "queryProducts" : "productsCategories"
             ]?.map(
@@ -88,7 +89,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
                   <Card
                     className="products-card"
                     key={el.id}
-                    style={{ width: "25%" }}
+                    style={{ width: "20rem" }}
                   >
                     <Card.Img
                       style={{ width: "100px", margin: "auto" }}
@@ -96,13 +97,20 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
                       src={`http://localhost:1337${el.image.url}`}
                     />
                     <Card.Body>
-                      <Card.Title>{el.title}</Card.Title>
+                      <Card.Title className="product-name">
+                        {el.title}
+                      </Card.Title>
                       <Card.Text>{el.description}</Card.Text>
                       <Card.Text>${el.price}</Card.Text>
-                      <Button onClick={() => getCategorieOfProduct(el.title)}>
-                        Select
-                      </Button>
                     </Card.Body>
+                    <Card.Footer className="product-card-footer">
+                      <Button
+                        className="view-product"
+                        onClick={() => getCategorieOfProduct(el.title)}
+                      >
+                        View Product <MdKeyboardArrowRight size={20} />
+                      </Button>
+                    </Card.Footer>
                   </Card>
                 );
               }

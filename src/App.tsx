@@ -10,6 +10,7 @@ function App() {
       style={{
         width: "90%",
         margin: "auto",
+        
       }}
     >
       <Provider store={store}>

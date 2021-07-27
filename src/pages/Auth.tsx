@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab } from "react-bootstrap";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Image } from "react-bootstrap";
 import { fetchSignIn, fetchSignUp } from "../store/slices/auth";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
+import logo from "../assets/img/commerc-e-logo.png";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdWhatshot } from "react-icons/md";
+import "./style/Auth.css";
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -40,25 +44,44 @@ const Auth = () => {
 
   useEffect(() => {
     if (authUser.userCredentials) {
-      console.log(authUser.userCredentials)
+      console.log(authUser.userCredentials);
       dispatch(fetchSignIn(authUser.userCredentials));
     }
-  }, [authUser.userCredentials,dispatch]);
+  }, [authUser.userCredentials, dispatch]);
 
   const tokenExist = localStorage.getItem("$@token");
 
+  const authTabHeader = (title: string) => {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <h5 style={{ fontSize: "25px" }}>{title}</h5>
+        <Image
+          src={logo}
+          style={{ width: "120px" }}
+          className="logo-auth"
+          alt="Logo Commerc-e"
+        />
+      </div>
+    );
+  };
+
   return (
-    <div>
+    <div className="auth">
       {tokenExist ? (
-        <p>Already login</p>
+        <div className="auth-msg">
+          <h1>
+            You are already Sign In <MdWhatshot />
+          </h1>
+        </div>
       ) : (
         <Tabs
           defaultActiveKey="sign-in"
-          transition={false}
           id="noanim-tab-example"
-          className="mb-3"
+          className="mb-3 tabs-auth"
+          variant="pills"
         >
-          <Tab eventKey="sign-in" title="Sign In">
+          <Tab className="tab-auth" eventKey="sign-in" title="Sign In">
+            {authTabHeader("Log In")}
             <Form onSubmit={signIn}>
               <Form.Group
                 className="mb-3"
@@ -69,6 +92,7 @@ const Auth = () => {
                 <Form.Control
                   name="user"
                   type="email"
+                  className="input-auth"
                   placeholder="Enter email"
                   onChange={changeSignInForm}
                 />
@@ -78,24 +102,27 @@ const Auth = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   name="password"
+                  className="input-auth"
                   onChange={changeSignInForm}
                   type="password"
                   placeholder="Password"
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit">
-                Submit
+              <Button className="auth-btn" type="submit">
+                Log In <MdKeyboardArrowRight size={25} />
               </Button>
             </Form>
           </Tab>
-          <Tab eventKey="sign-up" title="Sign Up">
+          <Tab className="tab-auth" eventKey="sign-up" title="Sign Up">
+            {authTabHeader("Register")}
             <Form onSubmit={signUp}>
               <Form.Group className="mb-3" controlId="formBasicFirstNameSignUp">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   name="first_name"
                   type="text"
+                  className="input-auth"
                   onChange={changeSignUpForm}
                   placeholder="Enter First Name"
                 />
@@ -104,6 +131,7 @@ const Auth = () => {
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   name="last_name"
+                  className="input-auth"
                   type="text"
                   placeholder="Enter Last Name"
                   onChange={changeSignUpForm}
@@ -113,6 +141,7 @@ const Auth = () => {
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
                   name="email"
+                  className="input-auth"
                   type="email"
                   placeholder="Enter email"
                   onChange={changeSignUpForm}
@@ -123,6 +152,7 @@ const Auth = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   name="password"
+                  className="input-auth"
                   type="password"
                   onChange={changeSignUpForm}
                   placeholder="Password"
@@ -137,8 +167,8 @@ const Auth = () => {
               onChange={changeSignUpForm}
             />
           </Form.Group> */}
-              <Button variant="primary" type="submit">
-                Submit
+              <Button className="auth-btn" type="submit">
+                Register <MdKeyboardArrowRight size={25} />
               </Button>
             </Form>
           </Tab>

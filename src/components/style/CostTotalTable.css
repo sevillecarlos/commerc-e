@@ -1,0 +1,30 @@
+.cost-total-table{
+    text-align: center;
+}
+
+table {
+  background-color: rgba(0, 0, 0, 0.062);
+  border-radius: 20px;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  font-size: 20px;
+}
+
+.checkout-btn{
+    text-align: center !important;
+    border-radius: 20px !important;
+    color: rgb(240, 240, 240) !important;
+    box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+    -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    transition: background-color 0.5s;
+    background-color: black !important;
+    border-color: transparent !important;
+    margin: auto;
+    width: 50%;
+}
+
+.checkout-btn:hover {
+    color: black !important;
+    background-color: rgb(240, 240, 240) !important;
+  }
