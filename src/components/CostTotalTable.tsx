@@ -6,13 +6,15 @@ import { Table, Button, Modal } from "react-bootstrap";
 import { codeGenerator } from "../helper/codeGenerator";
 import "./style/CostTotalTable.css";
 import { MdAttachMoney } from "react-icons/md";
+import { MdPersonPin } from "react-icons/md";
 
 const CostTotalTable = (props: { productsQuantity: any }) => {
   const dispatch = useDispatch();
-  const userSession = useSelector((state: RootStateOrAny) => state.auth);
+  const userSession = useSelector((state: RootStateOrAny) => state.transaction);
   const { productsQuantity } = props;
   const [costTable, setCostTable] = useState<any>([]);
   const [totatCost, setTotatCost] = useState(0);
+  const [token, setToken] = useState("");
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
 
@@ -37,6 +39,14 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
       //   cleanup
     };
   }, [costTable]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("$@token");
+    if (token) {
+      setToken(token);
+    }
+    return () => {};
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleClose2 = () => setShow2(false);
@@ -70,7 +80,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
   return (
     <div className="cost-total-table">
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title>Error CheckOut</Modal.Title>
         </Modal.Header>
         <Modal.Body>You dont enough credit to checkout ${totatCost}</Modal.Body>
@@ -78,22 +88,16 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
         </Modal.Footer>
       </Modal>
       <Modal show={show2} onHide={handleClose2}>
-        <Modal.Header closeButton>
-          <Modal.Title>Congrats to your new sale</Modal.Title>
+        <Modal.Header >
+          <Modal.Title>Congratulation</Modal.Title>
         </Modal.Header>
-        <Modal.Body>:)</Modal.Body>
+        <Modal.Body>Thank you for the sale</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose2}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose2}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
@@ -122,10 +126,15 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
           </tr>
         </tbody>
       </Table>
-
-      <Button className="checkout-btn" onClick={checkOut}>
-        Checkout <MdAttachMoney size={20}/>
-      </Button>
+      {token ? (
+        <Button className="checkout-btn" onClick={checkOut}>
+          Checkout <MdAttachMoney size={20} />
+        </Button>
+      ) : (
+        <Button className="checkout-btn" href="/authentication">
+          Sign In first to checkout <MdPersonPin size={20} />
+        </Button>
+      )}
     </div>
   );
 };

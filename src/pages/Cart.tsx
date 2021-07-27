@@ -145,9 +145,3 @@ const Cart = () => {
 Cart.propTypes = {};
 
 export default Cart;
-
-// {!token && (
-//   <Button href="http://localhost:3000/authentication">
-//     Sign In first for checkout
-//   </Button>
-// )}

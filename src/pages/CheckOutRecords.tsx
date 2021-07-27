@@ -6,6 +6,7 @@ import { fetchReceipts } from "../store/slices/transaction";
 import { Table, Button } from "react-bootstrap";
 
 import { formatDate } from "../helper/formatDate";
+import './style/CheckOutRecord.css'
 
 const CheckOutRecords = () => {
   const dispatch = useDispatch();
@@ -44,8 +45,8 @@ const CheckOutRecords = () => {
   }, [receiptRecords]);
 
   return (
-    <div>
-      <Table striped bordered hover size="sm">
+    <div className="checkout-record">
+      <Table className="table-checkout-record" borderless size="sm">
         <thead>
           <tr>
             <th>Purchase Date</th>
@@ -63,9 +64,9 @@ const CheckOutRecords = () => {
               </tr>
             );
           })}
-          <tr>
+          <tr style={{borderTop:'3px solid black'}}>
+          <td>Grand Total</td>
             <td></td>
-            <td>Grand Total</td>
             <td>${grandTotal}</td>
           </tr>
         </tbody>
