@@ -8,14 +8,14 @@ function App() {
   return (
     <div
       style={{
-        width: "90%",
+        width: "75%",
         margin: "auto",
-        
       }}
     >
       <Provider store={store}>
         <Routes />
       </Provider>
+
     </div>
   );
 }

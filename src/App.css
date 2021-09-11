@@ -2,3 +2,24 @@
   width: 5%;
   margin: auto;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: 25px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 50px;
+}

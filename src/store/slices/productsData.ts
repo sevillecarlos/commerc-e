@@ -66,7 +66,6 @@ const productsDataSlice = createSlice({
         })
         .sort((a: { id: number }, b: { id: number }) => a.id - b.id);
 
-      console.log(removeRepeatElements(searchQuery));
       state.queryProducts = removeRepeatElements(searchQuery);
     },
     getProduct(state, action) {

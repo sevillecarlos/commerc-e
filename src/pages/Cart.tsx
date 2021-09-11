@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { cartActions } from "../store/slices/cart";
 import { MdRemoveShoppingCart } from "react-icons/md";
-
+import { MdShoppingCart } from "react-icons/md";
 import CostTotalTable from "../components/CostTotalTable";
 import "./style/Cart.css";
 
@@ -102,7 +102,9 @@ const Cart = () => {
                         src={el.image}
                       />
                       <Card.Body>
-                        <Card.Title className="product-title">{el.name}</Card.Title>
+                        <Card.Title className="product-title">
+                          {el.name}
+                        </Card.Title>
                         <Card.Text>
                           ${getPrice(el.price, getQuatity(el), el.name)}
                         </Card.Text>
@@ -135,7 +137,9 @@ const Cart = () => {
             </Col>
           </Row>
         ) : (
-          <h1>Nothing the cart</h1>
+          <div className='empty-cart-msg'>
+            <h1>The cart is empty <MdShoppingCart/></h1>
+          </div>
         )}
       </Container>
     </div>
