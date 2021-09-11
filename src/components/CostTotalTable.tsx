@@ -7,6 +7,11 @@ import { codeGenerator } from "../helper/codeGenerator";
 import "./style/CostTotalTable.css";
 import { MdAttachMoney } from "react-icons/md";
 import { MdPersonPin } from "react-icons/md";
+import { BiErrorAlt } from "react-icons/bi";
+import { BiDonateHeart } from "react-icons/bi";
+import { cartActions } from "../store/slices/cart";
+
+import MsgModal from "../ui/MsgModal";
 
 const CostTotalTable = (props: { productsQuantity: any }) => {
   const dispatch = useDispatch();
@@ -56,8 +61,11 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
     console.log(debitCredit);
     if (debitCredit < 0) {
       setShow(true);
+      setTimeout(() => {
+        setShow(false);
+      }, 2000);
     } else {
-      console.log(userSession);
+      setShow2(true);
       dispatch(
         postCreditUser({
           user_id: userSession.userCredit.user_id,
@@ -72,35 +80,34 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
           user_id: userSession.userCredit.user_id,
         })
       );
-      setShow2(true);
       localStorage.setItem("cart", JSON.stringify([]));
+
+      setTimeout(() => {
+        dispatch(cartActions.clearCart());
+        setShow2(false);
+      }, 2000);
     }
   };
 
   return (
     <div className="cost-total-table">
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header >
-          <Modal.Title>Error CheckOut</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>You dont enough credit to checkout ${totatCost}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={show2} onHide={handleClose2}>
-        <Modal.Header >
-          <Modal.Title>Congratulation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Thank you for the sale</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose2}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <MsgModal
+        show={show}
+        handleClose={handleClose}
+        title="Error CheckOut"
+        msg={`You dont enough credit to checkout  $${totatCost}`}
+        color="rgba(48, 6, 6, 0.95)"
+        icon={<BiErrorAlt />}
+      />
+      <MsgModal
+        show={show2}
+        handleClose={handleClose2}
+        title="Thank You for you sale. "
+        msg=""
+        color="rgba(0, 0, 0, 0.95)"
+        icon={<BiDonateHeart />}
+      />
+
       <Table borderless className="total-cost-table">
         <thead>
           <tr>
@@ -119,7 +126,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
               </tr>
             );
           })}
-          <tr style={{ borderTop: "3px solid black", borderRadius: "15px" }}>
+          <tr className="total-row">
             <td>Total</td>
             <td></td>
             <td>${totatCost}</td>

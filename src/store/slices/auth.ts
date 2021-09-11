@@ -40,8 +40,6 @@ export const fetchSignUp = createAsyncThunk(
   }
 );
 
-
-
 const authSlice = createSlice({
   name: "auth",
   initialState,

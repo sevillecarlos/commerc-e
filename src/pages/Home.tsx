@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { fetchProducts } from "../store/slices/productsData";
 
 import { useHistory } from "react-router-dom";
 import { productsDataActions } from "../store/slices/productsData";
@@ -17,11 +16,7 @@ const Home = () => {
     (state: RootStateOrAny) => state.productsData
   );
 
-  useEffect(() => {
-    if (productsDataStore.status === "idle") {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, productsDataStore.status]);
+
 
   useEffect(() => {
     dispatch(productsDataActions.getCategories(productsDataStore.data));

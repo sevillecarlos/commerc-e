@@ -1,0 +1,36 @@
+.dialog-msg-modal {
+  background-color: transparent !important;
+}
+.content-msg-modal {
+  border: none !important;
+  border-radius: 20px !important;
+  color: white !important;
+  font-size: 20px !important;
+  text-align: center;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+}
+
+.with-msg {
+  background-color: rgba(48, 6, 6, 0.95) !important;
+}
+.without-msg {
+    background-color:transparent !important;
+  }
+  
+.backdrop-msg-modal {
+  background-color: transparent !important;
+}
+
+.modal-header-msg-modal {
+  font-size: 20px !important;
+  border-radius: 50px !important;
+  color: white !important;
+  border: none !important;
+}
+
+.title-header-msg-modal {
+  font-size: 20px !important;
+  margin: auto !important;
+}

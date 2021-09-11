@@ -10,32 +10,21 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import { cartActions } from "../store/slices/cart";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { MdShoppingCart } from "react-icons/md";
+import { cartActions } from "../store/slices/cart";
 import CostTotalTable from "../components/CostTotalTable";
 import "./style/Cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const [token, setToken] = useState("");
+
+  const cartProducts = useSelector((state: RootStateOrAny) => state.cart);
   const [productsQuantity, setProductsQuantity] = useState<any | undefined>({});
-  const [cartProducts, setCartProducts] = useState<any>([]);
   const costTable = [] as any;
 
   useEffect(() => {
-    const token: any = localStorage.getItem("$@token");
-    if (token) setToken(token);
-    return () => {
-      // cleanup
-    };
-  }, []);
-
-  useEffect(() => {
-    const cartValues: any = localStorage.getItem("cart");
-    if (cartValues) {
-      setCartProducts(JSON.parse(cartValues));
-    }
+    dispatch(cartActions.getCartProducts());
     return () => {
       // cleanup
     };
@@ -51,11 +40,9 @@ const Cart = () => {
   };
 
   const removeProductCart = (id: number) => {
-    const itemCart: any = localStorage.getItem("cart");
-    const parseItemCart = JSON.parse(itemCart);
-    const newCart = parseItemCart.filter((v: any) => v.id !== id);
-    dispatch(cartActions.addCart(newCart));
-    setCartProducts(newCart);
+    const newCart = cartProducts.cart.filter((v: any) => v.id !== id);
+    console.log(newCart);
+    dispatch(cartActions.addCartProducts(newCart));
     localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
@@ -76,10 +63,10 @@ const Cart = () => {
     <div className="cart">
       <Container>
         {" "}
-        {cartProducts.length !== 0 ? (
+        {cartProducts.cart?.length !== 0 ? (
           <Row>
             <Col>
-              {cartProducts.map(
+              {cartProducts.cart?.map(
                 (
                   el: {
                     id: number;
@@ -137,8 +124,10 @@ const Cart = () => {
             </Col>
           </Row>
         ) : (
-          <div className='empty-cart-msg'>
-            <h1>The cart is empty <MdShoppingCart/></h1>
+          <div className="empty-cart-msg">
+            <h1>
+              The cart is empty <MdShoppingCart />
+            </h1>
           </div>
         )}
       </Container>

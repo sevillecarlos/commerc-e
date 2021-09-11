@@ -7,11 +7,12 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
-import { MdShoppingCart } from "react-icons/md";
+import { FaShoppingCart } from "react-icons/fa";
 import SearchBar from "../components/SearchBar";
 import Watch from "../components/NavBarWatch";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { authActions } from "../store/slices/auth";
+import { cartActions } from "../store/slices/cart";
 import jwt_decode from "jwt-decode";
 import { fetchCredit } from "../store/slices/transaction";
 import roullete from "../assets/img/roullete.png";
@@ -26,19 +27,9 @@ const NavBar = () => {
   const authUser = useSelector((state: RootStateOrAny) => state.auth);
   const authCredit = useSelector((state: RootStateOrAny) => state.transaction);
 
-  const [cartValues, setCartValues] = useState([]);
   const [user, setUser] = useState<any>({});
   const [token, setToken] = useState("");
   const [showModelCredit, setShowModelCredit] = useState(false);
-  const [credit, setCredit] = useState(0);
-
-  useEffect(() => {
-    const localCartProducta: any = localStorage.getItem("cart");
-    setCartValues(JSON.parse(localCartProducta));
-    return () => {
-      // cleanup;
-    };
-  }, [cartProducts.cartProducts]);
 
   useEffect(() => {
     const token: any = localStorage.getItem("$@token");
@@ -65,14 +56,13 @@ const NavBar = () => {
   }, [authUser.firstTime]);
 
   useEffect(() => {
-    if (authCredit.userCredit) {
-      setCredit(authCredit.userCredit.amount);
-    }
-  }, [authCredit.userCredit]);
+    dispatch(cartActions.getCartProducts());
+  }, []);
 
   const logOut = () => {
-    localStorage.removeItem("$@token");
     dispatch(authActions.removeUser());
+
+    localStorage.removeItem("$@token");
   };
 
   const handleClose = () => setShowModelCredit(false);
@@ -126,7 +116,6 @@ const NavBar = () => {
 
             {token ? (
               <NavDropdown
-
                 title={
                   <h1 className="title-dropdown">
                     Hi, {getFirstName(user?.first_name)}
@@ -134,17 +123,20 @@ const NavBar = () => {
                 }
                 id="navbarScrollingDropdown"
                 className="dropdown-user"
-                
-                
               >
-                <NavDropdown.ItemText> Credit: ${credit}</NavDropdown.ItemText>
+                <NavDropdown.ItemText>
+                  {" "}
+                  Credit: ${authCredit?.userCredit?.amount}
+                </NavDropdown.ItemText>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/checkout/records">
                   Checkout Record
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.ItemText >
-                  <Button className="log-out-btn" onClick={logOut}>Log Out</Button>
+                <NavDropdown.ItemText>
+                  <Button className="log-out-btn" onClick={logOut}>
+                    Log Out
+                  </Button>
                 </NavDropdown.ItemText>
               </NavDropdown>
             ) : (
@@ -158,9 +150,9 @@ const NavBar = () => {
           </Nav>
           <Nav.Link href="http://localhost:3000/cart">
             <div>
-              <MdShoppingCart className="shop-cart" />
+              <FaShoppingCart className="shop-cart" />
               <span id="cart-counter" className="products-cart">
-                {cartValues ? cartValues.length : 0}
+                {cartProducts.cart ? cartProducts.cart.length : 0}
               </span>
             </div>
           </Nav.Link>

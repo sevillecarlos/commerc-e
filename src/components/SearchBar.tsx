@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Form, Button, FormControl } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { useSelector, RootStateOrAny } from "react-redux";
+import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
 import { MdSearch } from "react-icons/md";
+import { fetchProducts } from "../store/slices/productsData";
 import "./style/SearchBar.css";
 
 const SearchBar = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const productsDataStore = useSelector(
     (state: RootStateOrAny) => state.productsData
@@ -13,6 +15,12 @@ const SearchBar = () => {
 
   const [query, setQuery] = useState("");
   const [closeSuggestions, setCloseSuggestions] = useState(true);
+
+  useEffect(() => {
+    if (productsDataStore.status === "idle") {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, productsDataStore.status]);
 
   const goSearchProducts = (e?: any) => {
     e?.preventDefault();
@@ -32,6 +40,8 @@ const SearchBar = () => {
       }
     );
 
+    console.log(allProducts);
+
     const searchProducts = allProducts
       .map(
         (v: any) =>
@@ -50,27 +60,25 @@ const SearchBar = () => {
     history.push(`/search/query/${outerText}`);
   };
 
-  console.log(query);
   const querySearch = autoCompleteSearch();
 
   return (
     <div className="search-bar">
-      <div className='search-input'>
-      <Form className="d-flex" autoComplete="off" onSubmit={goSearchProducts} >
-        <FormControl
-          id="search"
-          className="form-input-search"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          onChange={onChangeQuery}
-          value={query}
-        />
-        <Button className="search-btn" type="submit">
-          <MdSearch size={25} />
-        </Button>
-      </Form>
-
+      <div className="search-input">
+        <Form className="d-flex" autoComplete="off" onSubmit={goSearchProducts}>
+          <FormControl
+            id="search"
+            className="form-input-search"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={onChangeQuery}
+            value={query}
+          />
+          <Button className="search-btn" type="submit">
+            <MdSearch size={25} />
+          </Button>
+        </Form>
       </div>
       <div>
         {!closeSuggestions && query !== "" && (

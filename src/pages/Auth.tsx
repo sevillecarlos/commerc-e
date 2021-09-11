@@ -44,7 +44,6 @@ const Auth = () => {
 
   useEffect(() => {
     if (authUser.userCredentials) {
-      console.log(authUser.userCredentials);
       dispatch(fetchSignIn(authUser.userCredentials));
     }
   }, [authUser.userCredentials, dispatch]);
