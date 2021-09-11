@@ -7,9 +7,11 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import logo from "../assets/img/commerc-e-logo.png";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdWhatshot } from "react-icons/md";
+import { useHistory } from "react-router";
 import "./style/Auth.css";
 
 const Auth = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const authUser = useSelector((state: RootStateOrAny) => state.auth);
 
@@ -25,6 +27,8 @@ const Auth = () => {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(true);
+  const [showPassword2, setShowPassword2] = useState(true);
   const changeSignInForm = (e: any) => {
     setSignInForm({ ...signInForm, [e.target.name]: e.target.value });
   };
@@ -47,6 +51,12 @@ const Auth = () => {
       dispatch(fetchSignIn(authUser.userCredentials));
     }
   }, [authUser.userCredentials, dispatch]);
+
+  useEffect(() => {
+    if (authUser.user) {
+      history.push("/");
+    }
+  }, [authUser.user, history]);
 
   const tokenExist = localStorage.getItem("$@token");
 
@@ -91,6 +101,7 @@ const Auth = () => {
                 <Form.Control
                   name="user"
                   type="email"
+                  required
                   className="input-auth"
                   placeholder="Enter email"
                   onChange={changeSignInForm}
@@ -102,12 +113,22 @@ const Auth = () => {
                 <Form.Control
                   name="password"
                   className="input-auth"
+                  required
                   onChange={changeSignInForm}
-                  type="password"
+                  type={showPassword ? "password" : "text"}
                   placeholder="Password"
                 />
               </Form.Group>
-
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Show Password"
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </Form.Group>
+              <div className="error-msg-container">
+                <span className="error-msg">{authUser.errorSignIn}</span>
+              </div>
               <Button className="auth-btn" type="submit">
                 Log In <MdKeyboardArrowRight size={25} />
               </Button>
@@ -121,9 +142,10 @@ const Auth = () => {
                 <Form.Control
                   name="first_name"
                   type="text"
+                  required
                   className="input-auth"
                   onChange={changeSignUpForm}
-                  placeholder="Enter First Name"
+                  placeholder="Enter first name"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicLastNameSignUp">
@@ -132,7 +154,8 @@ const Auth = () => {
                   name="last_name"
                   className="input-auth"
                   type="text"
-                  placeholder="Enter Last Name"
+                  required
+                  placeholder="Enter last name"
                   onChange={changeSignUpForm}
                 />
               </Form.Group>
@@ -142,6 +165,7 @@ const Auth = () => {
                   name="email"
                   className="input-auth"
                   type="email"
+                  required
                   placeholder="Enter email"
                   onChange={changeSignUpForm}
                 />
@@ -152,20 +176,22 @@ const Auth = () => {
                 <Form.Control
                   name="password"
                   className="input-auth"
-                  type="password"
+                  type={`${showPassword2 ? "password" : "text"}`}
+                  required
                   onChange={changeSignUpForm}
                   placeholder="Password"
                 />
               </Form.Group>
-              {/* <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              name="confirmPassword"
-              type="password"
-              placeholder="Password"
-              onChange={changeSignUpForm}
-            />
-          </Form.Group> */}
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Show Password"
+                  onClick={() => setShowPassword2(!showPassword2)}
+                />
+              </Form.Group>
+              <div className="error-msg-container">
+                <span className="error-msg">{authUser.errorSignUp}</span>
+              </div>
               <Button className="auth-btn" type="submit">
                 Register <MdKeyboardArrowRight size={25} />
               </Button>

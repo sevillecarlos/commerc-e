@@ -25,6 +25,7 @@ const SearchBar = () => {
   const goSearchProducts = (e?: any) => {
     e?.preventDefault();
     history.push(`/search/query/${query}`);
+    setCloseSuggestions(true);
   };
 
   const onChangeQuery = (e: { target: { value: string } }) => {
@@ -39,8 +40,6 @@ const SearchBar = () => {
         return category.products;
       }
     );
-
-    console.log(allProducts);
 
     const searchProducts = allProducts
       .map(

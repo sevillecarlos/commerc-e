@@ -15,9 +15,7 @@ const Home = () => {
   const productsDataStore = useSelector(
     (state: RootStateOrAny) => state.productsData
   );
-
-
-
+  
   useEffect(() => {
     dispatch(productsDataActions.getCategories(productsDataStore.data));
     return () => {

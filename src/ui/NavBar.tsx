@@ -30,23 +30,27 @@ const NavBar = () => {
   const [user, setUser] = useState<any>({});
   const [token, setToken] = useState("");
   const [showModelCredit, setShowModelCredit] = useState(false);
+  const [removeUser, setRemoveUser] = useState(false);
+
+  const logOut = () => {
+    dispatch(authActions.removeUser());
+    setRemoveUser(true);
+  };
+
+  const handleClose = () => setShowModelCredit(false);
+
+  const getFirstName = (name: string) => {
+    return name.split(" ").shift();
+  };
 
   useEffect(() => {
-    const token: any = localStorage.getItem("$@token");
-    if (token) {
-      const decodedUser: any = jwt_decode(token);
-      console.log(decodedUser);
-      dispatch(fetchCredit(decodedUser.id));
-      setUser(decodedUser);
-      setToken(token);
-    } else {
+    if (removeUser) {
       setUser(undefined);
       setToken("");
+      setRemoveUser(false);
+      localStorage.removeItem("$@token");
     }
-    return () => {
-      // cleanup
-    };
-  }, [authUser.user, dispatch]);
+  }, [removeUser]);
 
   useEffect(() => {
     setShowModelCredit(authUser.firstTime);
@@ -57,19 +61,20 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(cartActions.getCartProducts());
-  }, []);
+  }, [dispatch]);
 
-  const logOut = () => {
-    dispatch(authActions.removeUser());
-
-    localStorage.removeItem("$@token");
-  };
-
-  const handleClose = () => setShowModelCredit(false);
-
-  const getFirstName = (name: string) => {
-    return name.split(" ").shift();
-  };
+  useEffect(() => {
+    const token: any = localStorage.getItem("$@token");
+    if (token) {
+      const decodedUser: any = jwt_decode(token);
+      dispatch(fetchCredit(decodedUser.id));
+      setUser(decodedUser);
+      setToken(token);
+    }
+    return () => {
+      // cleanup
+    };
+  }, [authUser.user, dispatch]);
 
   return (
     <>

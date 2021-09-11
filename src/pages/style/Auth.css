@@ -35,8 +35,7 @@
 }
 
 .auth-btn:hover {
-  color: black !important;
-  background-color: rgb(240, 240, 240) !important;
+  background-color: rgb(20, 19, 19) !important;
 }
 
 .auth-msg {
@@ -51,4 +50,10 @@
 .auth-msg h1{
     font-size: 50px;
     text-align: center;
+}
+.error-msg{
+  color: red;
+}
+.error-msg-container{
+  padding: 5px;
 }

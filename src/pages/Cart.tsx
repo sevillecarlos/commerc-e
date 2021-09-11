@@ -28,7 +28,7 @@ const Cart = () => {
     return () => {
       // cleanup
     };
-  }, []);
+  }, [dispatch]);
 
   const onChangeQuantity = (e: any) => {
     const { value, name } = e.target;
@@ -41,9 +41,8 @@ const Cart = () => {
 
   const removeProductCart = (id: number) => {
     const newCart = cartProducts.cart.filter((v: any) => v.id !== id);
-    console.log(newCart);
     dispatch(cartActions.addCartProducts(newCart));
-    localStorage.setItem("cart", JSON.stringify(newCart));
+
   };
 
   const getQuatity = (el: any) => {

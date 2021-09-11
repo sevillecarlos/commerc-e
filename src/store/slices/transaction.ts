@@ -12,7 +12,6 @@ export const fetchCredit = createAsyncThunk(
   async (idUser: any) => {
     const res = await fetch(`http://127.0.0.1:5000/api/v1/credits/${idUser}`);
     const data = await res.json();
-    console.log(data);
     return data;
   }
 );
@@ -35,10 +34,8 @@ export const postCreditUser = createAsyncThunk(
 export const fetchReceipts = createAsyncThunk(
   "auth/fetchReceipts",
   async (userId: any) => {
-    console.log(userId);
     const res = await fetch(`http://127.0.0.1:5000/api/v1/receipts/${userId}`);
     const data = await res.json();
-    console.log(data);
     return data;
   }
 );

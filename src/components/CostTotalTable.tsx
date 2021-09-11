@@ -23,7 +23,6 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
 
-  console.log(userSession.userReceipt);
 
   useEffect(() => {
     setCostTable(productsQuantity);
@@ -58,7 +57,6 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
 
   const checkOut = () => {
     const debitCredit: any = userSession.userCredit.amount - totatCost;
-    console.log(debitCredit);
     if (debitCredit < 0) {
       setShow(true);
       setTimeout(() => {
@@ -80,7 +78,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
           user_id: userSession.userCredit.user_id,
         })
       );
-      localStorage.setItem("cart", JSON.stringify([]));
+      localStorage.remove("cart");
 
       setTimeout(() => {
         dispatch(cartActions.clearCart());
