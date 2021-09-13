@@ -68,6 +68,9 @@
   padding: 5px;
   color: #000000;
 }
+.shop-cart:hover {
+  color: #312d2d;
+}
 
 .log-out-btn{
   background-color: black !important;

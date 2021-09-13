@@ -34,7 +34,7 @@ const Cart = () => {
     const { value, name } = e.target;
     setProductsQuantity((prevState: any) => {
       if (prevState) {
-        return { ...prevState, [name]: value };
+        return { ...prevState, [name]: Math.max(1, value) };
       }
     });
   };
@@ -42,7 +42,6 @@ const Cart = () => {
   const removeProductCart = (id: number) => {
     const newCart = cartProducts.cart.filter((v: any) => v.id !== id);
     dispatch(cartActions.addCartProducts(newCart));
-
   };
 
   const getQuatity = (el: any) => {
@@ -80,7 +79,6 @@ const Cart = () => {
                     <Card
                       className="cart-product"
                       key={i}
-                      style={{ width: "45rem" }}
                     >
                       <Card.Img
                         style={{ width: "120px", margin: "auto" }}
@@ -95,16 +93,19 @@ const Cart = () => {
                           ${getPrice(el.price, getQuatity(el), el.name)}
                         </Card.Text>
                       </Card.Body>
-                      <InputGroup className="mb-3">
-                        <InputGroup.Text>Quantity</InputGroup.Text>
+                      <InputGroup className="quantity-product">
+                        <InputGroup.Text style={{ borderRadius: "20px" }}>
+                          Quantity
+                        </InputGroup.Text>
                         <FormControl
                           value={getQuatity(el)}
                           min="1"
-                          max="5"
+                          step="1"
                           name={el.name}
                           onChange={onChangeQuantity}
                           type="number"
                           aria-label="quantity"
+                          className="quantity-product-view"
                         />
                       </InputGroup>
                       <Button

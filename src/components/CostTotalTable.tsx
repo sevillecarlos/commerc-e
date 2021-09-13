@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { postCreditUser, postUserReceipts } from "../store/slices/transaction";
+import {
+  authActions,
+  postCreditUser,
+  postUserReceipts,
+} from "../store/slices/transaction";
 import { Table, Button, Modal } from "react-bootstrap";
 import { codeGenerator } from "../helper/codeGenerator";
 import "./style/CostTotalTable.css";
@@ -16,13 +20,13 @@ import MsgModal from "../ui/MsgModal";
 const CostTotalTable = (props: { productsQuantity: any }) => {
   const dispatch = useDispatch();
   const userSession = useSelector((state: RootStateOrAny) => state.transaction);
+  const authUser = useSelector((state: RootStateOrAny) => state.auth);
+
   const { productsQuantity } = props;
   const [costTable, setCostTable] = useState<any>([]);
   const [totatCost, setTotatCost] = useState(0);
-  const [token, setToken] = useState("");
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
-
 
   useEffect(() => {
     setCostTable(productsQuantity);
@@ -44,13 +48,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
     };
   }, [costTable]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("$@token");
-    if (token) {
-      setToken(token);
-    }
-    return () => {};
-  }, []);
+
 
   const handleClose = () => setShow(false);
   const handleClose2 = () => setShow2(false);
@@ -73,12 +71,13 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
       const uniqueCode = codeGenerator(12);
       dispatch(
         postUserReceipts({
+          articles: costTable,
           code: uniqueCode,
           total: totatCost,
           user_id: userSession.userCredit.user_id,
         })
       );
-      localStorage.remove("cart");
+      localStorage.removeItem("cart");
 
       setTimeout(() => {
         dispatch(cartActions.clearCart());
@@ -96,14 +95,16 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
         msg={`You dont enough credit to checkout  $${totatCost}`}
         color="rgba(48, 6, 6, 0.95)"
         icon={<BiErrorAlt />}
+        error={true}
       />
       <MsgModal
         show={show2}
         handleClose={handleClose2}
-        title="Thank You for you sale. "
+        title="Thanks for your purchase"
         msg=""
         color="rgba(0, 0, 0, 0.95)"
         icon={<BiDonateHeart />}
+        error={false}
       />
 
       <Table borderless className="total-cost-table">
@@ -131,7 +132,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
           </tr>
         </tbody>
       </Table>
-      {token ? (
+      {authUser.token ? (
         <Button className="checkout-btn" onClick={checkOut}>
           Checkout <MdAttachMoney size={20} />
         </Button>

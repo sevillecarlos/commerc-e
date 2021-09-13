@@ -17,7 +17,7 @@ table {
   -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   cursor: pointer;
-  transition: background-color 0.5s;
+  transition: background-color 0.2s;
   background-color: black !important;
   border-color: transparent !important;
   margin: auto;

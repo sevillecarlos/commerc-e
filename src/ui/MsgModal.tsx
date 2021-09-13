@@ -7,11 +7,12 @@ const MsgModal = (props: {
   show: boolean;
   handleClose: Function;
   title: string;
-  msg: string;
+  msg: any;
   color: string;
   icon: any;
+  error:boolean
 }) => {
-  const { show, handleClose, msg, title, color, icon } = props;
+  const { show, handleClose, msg, title, color, icon, error } = props;
 
   return (
     <div>
@@ -19,7 +20,9 @@ const MsgModal = (props: {
         backdropClassName="backdrop-msg-modal"
         contentClassName={`content-msg-modal ${
           msg ? "with-msg" : "without-msg"
-        } `}
+        } ${
+         error ? "error" : "msg"
+        }`}
         dialogClassName="dialog-msg-modal"
         show={show}
         onHide={handleClose}
@@ -42,8 +45,9 @@ MsgModal.propTypes = {
   show: PropTypes.bool,
   handleClose: PropTypes.func,
   title: PropTypes.string,
-  msg: PropTypes.string,
+  msg: PropTypes.any,
   color: PropTypes.string,
+  error: PropTypes.bool
 };
 
 export default MsgModal;

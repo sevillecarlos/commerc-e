@@ -1,6 +1,42 @@
-.checkout-record{
-    margin-top: 15px;
-    padding: 20px;
-    width: 60%;
-    margin: auto;
+.checkout-record {
+  margin-top: 15px;
+  padding: 20px;
+  width: 60%;
+  margin: auto;
+}
+.table-checkout-record {
+  background-color: transparent !important;
+}
+.table-checkout-record td,
+th {
+  padding: 15px !important;
+}
+.total-row-checkout-record {
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  border-radius: 20px !important;
+  font-weight: bold;
+}
+.empty-checkout-record {
+  padding: 50px;
+  width: 100%;
+  text-align: center;
+  border-radius: 20px !important;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+}
+.empty-checkout-record h1 {
+  font-size: 50px;
+  text-align: center;
+}
+.checkout-record-code {
+  cursor: pointer;
+  border-radius: 50px;
+  background-color: black;
+  text-align: center;
+  padding: 5px;
+  width: 80%;
+  color: white;
 }

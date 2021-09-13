@@ -53,10 +53,10 @@ const Auth = () => {
   }, [authUser.userCredentials, dispatch]);
 
   useEffect(() => {
-    if (authUser.user) {
+    if (authUser.token) {
       history.push("/");
     }
-  }, [authUser.user, history]);
+  }, [authUser.token, history]);
 
   const tokenExist = localStorage.getItem("$@token");
 
@@ -88,8 +88,9 @@ const Auth = () => {
           id="noanim-tab-example"
           className="mb-3 tabs-auth"
           variant="pills"
+          active="csa"
         >
-          <Tab className="tab-auth" eventKey="sign-in" title="Sign In">
+          <Tab className="tab-auth" eventKey="sign-in" tabClassName='tab-title-auth' title="Sign In">
             {authTabHeader("Log In")}
             <Form onSubmit={signIn}>
               <Form.Group
@@ -134,7 +135,7 @@ const Auth = () => {
               </Button>
             </Form>
           </Tab>
-          <Tab className="tab-auth" eventKey="sign-up" title="Sign Up">
+          <Tab className="tab-auth" eventKey="sign-up"  tabClassName='tab-title-auth'title="Sign Up">
             {authTabHeader("Register")}
             <Form onSubmit={signUp}>
               <Form.Group className="mb-3" controlId="formBasicFirstNameSignUp">

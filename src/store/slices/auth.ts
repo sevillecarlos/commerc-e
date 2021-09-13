@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: "",
+  token: '',
   errorSignIn: "",
   errorSignUp: "",
   status: "idle",
@@ -52,7 +52,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     removeUser(state) {
-      state.user = "";
+      state.token = '';
+    },
+    getToken(state) {
+      const authToken:any = localStorage.getItem("$@token");
+      state.token = authToken;
     },
   },
   extraReducers: (builder) => {
@@ -63,7 +67,7 @@ const authSlice = createSlice({
         localStorage.setItem("$@token", token);
         state.errorSignIn = error;
 
-        state.user = action.payload;
+        state.token = action.payload;
       } else {
         state.errorSignIn = error;
       }
@@ -81,7 +85,7 @@ const authSlice = createSlice({
         const { email } = error;
         state.errorSignUp = "Email " + email[0];
       } else {
-        state.userCredentials =  action.payload;
+        state.userCredentials = action.payload;
       }
     });
     builder.addCase(fetchSignUp.pending, (state) => {

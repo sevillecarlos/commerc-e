@@ -70,6 +70,7 @@ const SearchBar = () => {
             className="form-input-search"
             type="search"
             placeholder="Search"
+            required
             aria-label="Search"
             onChange={onChangeQuery}
             value={query}

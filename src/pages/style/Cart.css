@@ -8,6 +8,7 @@
   -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   padding: 15px;
+
   margin-bottom: 20px;
   text-align: center;
   font-size: 20px;
@@ -19,7 +20,7 @@
   width: 40%;
   margin: auto;
   border-radius: 20px !important;
-  transition: 0.5s background-color;
+  transition: 0.2s background-color;
 }
 .cart-remove-btn:hover {
   background-color: rgb(87, 16, 16) !important;
@@ -36,4 +37,10 @@
   box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+}
+
+.quantity-product {
+  width: 60% !important;
+  margin: auto;
+  padding: 10px;
 }

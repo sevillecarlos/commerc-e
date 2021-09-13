@@ -14,7 +14,7 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { authActions } from "../store/slices/auth";
 import { cartActions } from "../store/slices/cart";
 import jwt_decode from "jwt-decode";
-import { fetchCredit } from "../store/slices/transaction";
+import { getCredit } from "../store/slices/transaction";
 import roullete from "../assets/img/roullete.png";
 import lip from "../assets/img/lip.png";
 
@@ -28,8 +28,6 @@ const NavBar = () => {
   const authCredit = useSelector((state: RootStateOrAny) => state.transaction);
 
   const [user, setUser] = useState<any>({});
-  const [token, setToken] = useState("");
-  const [showModelCredit, setShowModelCredit] = useState(false);
   const [removeUser, setRemoveUser] = useState(false);
 
   const logOut = () => {
@@ -37,61 +35,38 @@ const NavBar = () => {
     setRemoveUser(true);
   };
 
-  const handleClose = () => setShowModelCredit(false);
-
   const getFirstName = (name: string) => {
-    return name.split(" ").shift();
+    return name?.split(" ").shift();
   };
 
   useEffect(() => {
     if (removeUser) {
       setUser(undefined);
-      setToken("");
       setRemoveUser(false);
       localStorage.removeItem("$@token");
     }
   }, [removeUser]);
 
   useEffect(() => {
-    setShowModelCredit(authUser.firstTime);
-    return () => {
-      // cleanup
-    };
-  }, [authUser.firstTime]);
-
-  useEffect(() => {
     dispatch(cartActions.getCartProducts());
+    dispatch(authActions.getToken());
   }, [dispatch]);
 
   useEffect(() => {
-    const token: any = localStorage.getItem("$@token");
-    if (token) {
-      const decodedUser: any = jwt_decode(token);
-      dispatch(fetchCredit(decodedUser.id));
+    if (authUser.token) {
+      const authToken: any = localStorage.getItem("$@token");
+      const decodedUser: any = jwt_decode(authToken);
+      dispatch(getCredit(decodedUser.id));
       setUser(decodedUser);
-      setToken(token);
     }
     return () => {
       // cleanup
     };
-  }, [authUser.user, dispatch]);
+  }, [authUser.token, dispatch]);
+
 
   return (
     <>
-      <Modal show={showModelCredit} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Congrats</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>You Receive 100$ credit</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
       <Navbar sticky="top" className="nav-bar ml-auto" expand="lg">
         <Navbar.Brand className="nav-bar-brand" href="http://localhost:3000/">
           <div className="logo-container">
@@ -119,7 +94,7 @@ const NavBar = () => {
             <Watch />
             <SearchBar />
 
-            {token ? (
+            {authUser.token ? (
               <NavDropdown
                 title={
                   <h1 className="title-dropdown">

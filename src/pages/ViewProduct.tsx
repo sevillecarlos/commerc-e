@@ -95,7 +95,7 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
 
   const onChangeQuantity = (e: any) => {
     const { value } = e.target;
-    setProductQuantity(value);
+    setProductQuantity(Math.max(1, value));
   };
 
   const getPriceQuantity = (price: number, quantity: number) => {
@@ -111,6 +111,7 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
         title={"The product was added to the cart "}
         icon={<FaCartPlus />}
         color="rgba(0, 0, 0, 0.911)"
+        error={false}
       />
       {productsDataStore.status === "loading" && <>Loading...</>}
       {productsDataStore.product?.map(
@@ -122,20 +123,12 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
           price: number;
         }) => {
           return (
-            <Card
-              className="view-product-card"
-              key={el.id}
-              style={{ width: "80rem" }}
-            >
+            <Card className="view-product-card" key={el.id}>
               <Container>
                 <Row>
                   <Col sm={8}>
                     <Card.Img
-                      style={{
-                        width: "450px",
-                        padding: "20px",
-                        margin: "auto 25% ",
-                      }}
+                      className="card-image-product"
                       variant="top"
                       src={`http://localhost:1337${el.image.url}`}
                     />
@@ -154,13 +147,22 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
                           value={productQuantity}
                           className="quantity-product-view"
                           name="input-product"
+                          min="1"
+                          step="1"
                           onChange={onChangeQuantity}
                           type="number"
                           aria-label="quantity"
                         />
                       </InputGroup>
                       <Card.Text>
-                        ${getPriceQuantity(el.price, productQuantity)}
+                        Price: <strong>${el.price}</strong>
+                      </Card.Text>
+                      <Card.Text>
+                        Total Price: $
+                        <strong>
+                          {" "}
+                          {getPriceQuantity(el.price, productQuantity)}
+                        </strong>
                       </Card.Text>
                     </Card.Body>
 

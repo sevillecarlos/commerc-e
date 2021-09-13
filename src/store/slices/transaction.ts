@@ -5,10 +5,11 @@ const initialState = {
   status: "idle",
   userCredit: undefined,
   userReceipt: undefined,
+  receiptArticles:  Array<string[]>()
 };
 
-export const fetchCredit = createAsyncThunk(
-  "auth/fetchCredit",
+export const getCredit = createAsyncThunk(
+  "auth/getCredit",
   async (idUser: any) => {
     const res = await fetch(`http://127.0.0.1:5000/api/v1/credits/${idUser}`);
     const data = await res.json();
@@ -31,10 +32,21 @@ export const postCreditUser = createAsyncThunk(
   }
 );
 
-export const fetchReceipts = createAsyncThunk(
-  "auth/fetchReceipts",
+export const getReceipts = createAsyncThunk(
+  "auth/getReceipts",
   async (userId: any) => {
     const res = await fetch(`http://127.0.0.1:5000/api/v1/receipts/${userId}`);
+    const data = await res.json();
+    return data;
+  }
+);
+
+export const getReceiptArticles = createAsyncThunk(
+  "auth/getReceiptArticles",
+  async (receiptId: any) => {
+    const res = await fetch(
+      `http://127.0.0.1:5000/api/v1/articles/${receiptId}`
+    );
     const data = await res.json();
     return data;
   }
@@ -60,14 +72,14 @@ const transactionSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCredit.fulfilled, (state, action) => {
+    builder.addCase(getCredit.fulfilled, (state, action) => {
       state.status = "success";
       state.userCredit = action.payload;
     });
-    builder.addCase(fetchCredit.pending, (state) => {
+    builder.addCase(getCredit.pending, (state) => {
       state.status = "loading";
     });
-    builder.addCase(fetchCredit.rejected, (state) => {
+    builder.addCase(getCredit.rejected, (state) => {
       state.status = "reject";
     });
     builder.addCase(postCreditUser.fulfilled, (state, action) => {
@@ -80,16 +92,30 @@ const transactionSlice = createSlice({
     builder.addCase(postCreditUser.rejected, (state) => {
       state.status = "reject";
     });
-    builder.addCase(fetchReceipts.fulfilled, (state, action) => {
+
+    
+    builder.addCase(getReceipts.fulfilled, (state, action) => {
       state.status = "success";
       state.userReceipt = action.payload;
     });
-    builder.addCase(fetchReceipts.pending, (state) => {
+    builder.addCase(getReceipts.pending, (state) => {
       state.status = "loading";
     });
-    builder.addCase(fetchReceipts.rejected, (state) => {
+    builder.addCase(getReceipts.rejected, (state) => {
       state.status = "reject";
     });
+
+    builder.addCase(getReceiptArticles.fulfilled, (state, action) => {
+      state.status = "success";
+      state.receiptArticles = action.payload;
+    });
+    builder.addCase(getReceiptArticles.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(getReceiptArticles.rejected, (state) => {
+      state.status = "reject";
+    });
+
     builder.addCase(postUserReceipts.fulfilled, (state, action) => {
       state.status = "success";
       state.userReceipt = action.payload;
