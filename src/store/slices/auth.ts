@@ -13,7 +13,7 @@ export const fetchSignIn = createAsyncThunk(
   "auth/fetchSignIn",
   async (signInForm: any) => {
     try {
-      const res = await fetch(`http://127.0.0.1:5000/api/v1/session`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export const fetchSignUp = createAsyncThunk(
   "auth/fetchSignUp",
   async (signUpForm: any) => {
     try {
-      const res = await fetch(`http://127.0.0.1:5000/api/v1/users`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import { Card, Button, Container, Row, Image } from "react-bootstrap";
 import { MdCancel } from "react-icons/md";
 
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
@@ -75,7 +75,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
       {requestProducts.status === "loading" && <>Loading...</>}
       {requestProducts.status === "success" && (
         <Container>
-          <Row style={{ marginLeft: "10%" }}>
+          <Row className='view-product-row'>
             {requestProducts[
               categoryId.type ? "queryProducts" : "productsCategories"
             ]?.length !== 0 ? (
@@ -90,29 +90,24 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
                   price: number;
                 }) => {
                   return (
-                    <Card
-                      className="products-card"
-                      key={el.id}
-                      style={{ width: "20rem" }}
-                    >
-                      <Card.Img
-                        style={{ width: "100px", margin: "auto" }}
-                        variant="top"
-                        src={`http://localhost:1337${el.image.url}`}
+                    <Card className="products-card" key={el.id}>
+                      <Image
+                        className="product-image"
+                        src={`${process.env.REACT_APP_CMS_URL}${el.image.url}`}
                       />
                       <Card.Body>
                         <Card.Title className="product-name">
                           {el.title}
                         </Card.Title>
                         <Card.Text>{el.description}</Card.Text>
-                        <Card.Text>${el.price}</Card.Text>
                       </Card.Body>
                       <Card.Footer className="product-card-footer">
+                        <Card.Text>${el.price}</Card.Text>
                         <Button
                           className="view-product"
                           onClick={() => getCategorieOfProduct(el.title)}
                         >
-                          View Product <MdKeyboardArrowRight size={20} />
+                          View Product <MdKeyboardArrowRight className="arrow-icon" />
                         </Button>
                       </Card.Footer>
                     </Card>
@@ -120,8 +115,10 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
                 }
               )
             ) : (
-              <div className='search-not-found-msg'>
-                <span>Sorry, nothing match your search <MdCancel /></span>
+              <div className="search-not-found-msg">
+                <span>
+                  Sorry, nothing match your search <MdCancel />
+                </span>
               </div>
             )}
           </Row>
@@ -132,7 +129,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
 };
 
 ListProducts.propTypes = {
-  categoryId: PropTypes.string.isRequired,
+  categoryId: PropTypes.object.isRequired,
 };
 
 export default ListProducts;

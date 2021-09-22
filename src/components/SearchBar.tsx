@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, FormControl } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, RootStateOrAny, useDispatch } from "react-redux";
@@ -76,11 +76,10 @@ const SearchBar = () => {
             value={query}
           />
           <Button className="search-btn" type="submit">
-            <MdSearch size={25} />
+            <MdSearch  />
           </Button>
         </Form>
-      </div>
-      <div>
+
         {!closeSuggestions && query !== "" && (
           <div className="autocomplete-lists">
             <ul className="autocomplete-item">

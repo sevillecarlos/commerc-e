@@ -6,16 +6,10 @@ import "./App.css";
 
 function App() {
   return (
-    <div
-      style={{
-        width: "60%",
-        margin: "auto",
-      }}
-    >
+    <div className="app">
       <Provider store={store}>
         <Routes />
       </Provider>
-
     </div>
   );
 }

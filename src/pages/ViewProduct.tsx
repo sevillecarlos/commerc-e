@@ -4,13 +4,12 @@ import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 import {
   Card,
-  Button,
   InputGroup,
   FormControl,
   Container,
   Row,
-  Image,
   Col,
+  Image,
 } from "react-bootstrap";
 
 import { useHistory } from "react-router";
@@ -113,6 +112,7 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
         color="rgba(0, 0, 0, 0.911)"
         error={false}
       />
+      {/* need to fix the strict mode */}
       {productsDataStore.status === "loading" && <>Loading...</>}
       {productsDataStore.product?.map(
         (el: {
@@ -127,11 +127,12 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
               <Container>
                 <Row>
                   <Col sm={8}>
-                    <Card.Img
-                      className="card-image-product"
-                      variant="top"
-                      src={`http://localhost:1337${el.image.url}`}
-                    />
+                    <div className="view-product-image-container">
+                      <Image
+                        className="card-image-product"
+                        src={`${process.env.REACT_APP_CMS_URL}${el.image.url}`}
+                      />
+                    </div>
                   </Col>
                   <Col sm={4}>
                     <Card.Body className="card-body-product">
@@ -139,7 +140,7 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
                         {el.title}
                       </Card.Title>
                       <Card.Text>{el.description}</Card.Text>
-                      <InputGroup className="mb-3">
+                      <InputGroup className="form-input-quantity">
                         <InputGroup.Text style={{ borderRadius: "20px" }}>
                           Quantity
                         </InputGroup.Text>
@@ -172,13 +173,13 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
                           id: el.id,
                           name: el.title,
                           price: el.price,
-                          image: `http://localhost:1337${el.image.url}`,
+                          image: `${process.env.REACT_APP_CMS_URL}${el.image.url}`,
                           quantity: productQuantity,
                         })
                       }
                       className="view-product-card-footer"
                     >
-                      Add to Cart <FaCartPlus size={20} />
+                      Add to Cart <FaCartPlus />
                     </Card.Footer>
                   </Col>
                 </Row>
@@ -192,7 +193,7 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
 };
 
 ViewProduct.propTypes = {
-  categoryId: PropTypes.string.isRequired,
+  categoryId: PropTypes.object.isRequired,
 };
 
 export default ViewProduct;

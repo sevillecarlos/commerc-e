@@ -16,6 +16,7 @@ const CheckOutRecords = () => {
   const [receiptRecords, setReceiptRecords] = useState<string[]>([]);
   const [grandTotal, setGrandTotal] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [receiptCode, setReceiptCode] = useState("");
 
   const handleCloseModal = () => setShowModal(false);
 
@@ -46,7 +47,8 @@ const CheckOutRecords = () => {
     };
   }, [receiptRecords]);
 
-  const getArticles = (recieptId: any) => {
+  const getArticles = (recieptId: number, receiptCode: string) => {
+    setReceiptCode(receiptCode);
     dispatch(getReceiptArticles(recieptId));
   };
 
@@ -59,11 +61,7 @@ const CheckOutRecords = () => {
   const articlesTable = () => {
     const { receiptArticles } = userSession;
     return (
-      <Table
-        className="table-checkout-record"
-        borderless
-        size="sm"
-      >
+      <Table className="table-checkout-record" borderless size="sm">
         <thead>
           <tr>
             <th>Article Name</th>
@@ -87,6 +85,15 @@ const CheckOutRecords = () => {
   };
   return (
     <div className="checkout-record">
+      <MsgModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        title={`Receipt: ${receiptCode}`}
+        msg={articlesTable()}
+        color="black"
+        icon={<FaReceipt />}
+        error={false}
+      />
       {authUser.token ? (
         receiptRecords.length !== 0 ? (
           <Table className="table-checkout-record" borderless size="sm">
@@ -101,29 +108,18 @@ const CheckOutRecords = () => {
             <tbody>
               {receiptRecords.map((v: any) => {
                 return (
-                  <>
-                    <MsgModal
-                      show={showModal}
-                      handleClose={handleCloseModal}
-                      title={`Receipt: ${v.code}`}
-                      msg={articlesTable()}
-                      color="black"
-                      icon={<FaReceipt />}
-                      error={false}
-                    />
-                    <tr key={v.id}>
-                      <td>
-                        <div
-                          onClick={() => getArticles(v.id)}
-                          className="checkout-record-code"
-                        >
-                          <span>{v.code}</span>
-                        </div>
-                      </td>
-                      <td>{formatDate(v.created_at)}</td>
-                      <td>${v.total}</td>
-                    </tr>
-                  </>
+                  <tr key={v.id}>
+                    <td>
+                      <div
+                        onClick={() => getArticles(v.id, v.code)}
+                        className="checkout-record-code"
+                      >
+                        <span>{v.code}</span>
+                      </div>
+                    </td>
+                    <td>{formatDate(v.created_at)}</td>
+                    <td>${v.total}</td>
+                  </tr>
                 );
               })}
               <tr className="total-row-checkout-record">

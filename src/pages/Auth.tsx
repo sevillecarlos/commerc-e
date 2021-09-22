@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Tabs, Tab } from "react-bootstrap";
 import { Form, Button, Image } from "react-bootstrap";
 import { fetchSignIn, fetchSignUp } from "../store/slices/auth";
@@ -24,7 +23,7 @@ const Auth = () => {
     first_name: "",
     last_name: "",
     email: "",
-    password: "",
+    password_digest: "",
   });
 
   const [showPassword, setShowPassword] = useState(true);
@@ -175,7 +174,7 @@ const Auth = () => {
               <Form.Group className="mb-3" controlId="formBasicPasswordSignUp">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
-                  name="password"
+                  name="password_digest"
                   className="input-auth"
                   type={`${showPassword2 ? "password" : "text"}`}
                   required

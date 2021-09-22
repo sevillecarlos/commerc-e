@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Card, Button, Image } from "react-bootstrap";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 import { useHistory } from "react-router-dom";
@@ -15,7 +15,7 @@ const Home = () => {
   const productsDataStore = useSelector(
     (state: RootStateOrAny) => state.productsData
   );
-  
+
   useEffect(() => {
     dispatch(productsDataActions.getCategories(productsDataStore.data));
     return () => {
@@ -40,19 +40,14 @@ const Home = () => {
                   key={el.id}
                   style={{ width: "100%" }}
                 >
-                  <Card.Img
-                    style={{ width: "200px", margin: "auto" }}
-                    variant="top"
-                    src={el.image}
-                  />
+                  <Image fluid alt={`${el.name} Category`} src={el.image} className='category-image'/>
                   <Card.Body>
                     <Card.Title className="category-name">{el.name}</Card.Title>
-                    <Card.Text className="category-desc">Description</Card.Text>
                     <Button
                       className="button-categories"
                       onClick={() => goToCategory(el.name)}
                     >
-                      Take a watch <MdKeyboardArrowRight size={25} />
+                      Take a look <MdKeyboardArrowRight size={25} />
                     </Button>
                   </Card.Body>
                 </Card>

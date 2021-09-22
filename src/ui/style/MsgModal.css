@@ -5,17 +5,16 @@
   border: none !important;
   border-radius: 20px !important;
   color: white !important;
+  padding: 10px !important;
+
   font-size: 20px !important;
   text-align: center;
-  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
-  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
-  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
 }
 
 .without-msg {
-    background-color:transparent !important;
-  }
-  
+  background-color: transparent !important;
+}
+
 .backdrop-msg-modal {
   background-color: transparent !important;
 }
@@ -32,10 +31,9 @@
   margin: auto !important;
 }
 
-.error{
+.error {
   background-color: rgba(48, 6, 6, 0.95) !important;
 }
-.msg{
-  background-color: rgba(255, 255, 255, 0.699) !important;
-
+.msg {
+  background-color: transparent !important;
 }

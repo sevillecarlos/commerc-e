@@ -6,6 +6,7 @@
 .date-time h5 {
   font-family: "Nunito", sans-serif;
   border-radius: 20px;
+  font-size: 1vw !important;
   padding: 3px;
   text-align: center;
 }

@@ -11,7 +11,7 @@ const initialState = {
 export const getCredit = createAsyncThunk(
   "auth/getCredit",
   async (idUser: any) => {
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/credits/${idUser}`);
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/credits/${idUser}`);
     const data = await res.json();
     return data;
   }
@@ -20,7 +20,7 @@ export const getCredit = createAsyncThunk(
 export const postCreditUser = createAsyncThunk(
   "auth/postCredit",
   async (userCredits: any) => {
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/credits/`, {
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/credits/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const postCreditUser = createAsyncThunk(
 export const getReceipts = createAsyncThunk(
   "auth/getReceipts",
   async (userId: any) => {
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/receipts/${userId}`);
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/receipts/${userId}`);
     const data = await res.json();
     return data;
   }
@@ -45,7 +45,7 @@ export const getReceiptArticles = createAsyncThunk(
   "auth/getReceiptArticles",
   async (receiptId: any) => {
     const res = await fetch(
-      `http://127.0.0.1:5000/api/v1/articles/${receiptId}`
+      `${process.env.REACT_APP_SERVER_URL}/api/v1/articles/${receiptId}`
     );
     const data = await res.json();
     return data;
@@ -55,7 +55,7 @@ export const getReceiptArticles = createAsyncThunk(
 export const postUserReceipts = createAsyncThunk(
   "auth/fetchUserReceipts",
   async (receiptCred: any) => {
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/receipts/`, {
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/receipts/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

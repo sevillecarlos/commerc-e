@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Navbar,
-  NavDropdown,
-  Nav,
-  Modal,
-  Button,
-  Image,
-} from "react-bootstrap";
+import { Navbar, NavDropdown, Nav, Button, Image } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import SearchBar from "../components/SearchBar";
 import Watch from "../components/NavBarWatch";
@@ -64,7 +57,6 @@ const NavBar = () => {
     };
   }, [authUser.token, dispatch]);
 
-
   return (
     <>
       <Navbar sticky="top" className="nav-bar ml-auto" expand="lg">
@@ -93,40 +85,40 @@ const NavBar = () => {
           >
             <Watch />
             <SearchBar />
-
-            {authUser.token ? (
-              <NavDropdown
-                title={
-                  <h1 className="title-dropdown">
-                    Hi, {getFirstName(user?.first_name)}
-                  </h1>
-                }
-                id="navbarScrollingDropdown"
-                className="dropdown-user"
-              >
-                <NavDropdown.ItemText>
-                  {" "}
-                  Credit: ${authCredit?.userCredit?.amount}
-                </NavDropdown.ItemText>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="/checkout/records">
-                  Checkout Record
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.ItemText>
-                  <Button className="log-out-btn" onClick={logOut}>
-                    Log Out
-                  </Button>
-                </NavDropdown.ItemText>
-              </NavDropdown>
-            ) : (
-              <Nav.Link
-                className="sign-in-link"
-                href="http://localhost:3000/authentication"
-              >
-                Sign In
-              </Nav.Link>
-            )}
+            <div className='sign-in-container'>
+              {authUser.token ? (
+                <NavDropdown
+                  title={
+                    <span className="title-dropdown">
+                      Hi, {getFirstName(user?.first_name)}
+                    </span>
+                  }
+                  id="navbarScrollingDropdown"
+                  className="dropdown-user"
+                >
+                  <NavDropdown.ItemText>
+                    {" "}
+                    Credit: ${authCredit?.userCredit?.amount}
+                  </NavDropdown.ItemText>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="/checkout/records">
+                    Checkout Record
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.ItemText>
+                    <Button className="log-out-btn" onClick={logOut}>
+                      Log Out
+                    </Button>
+                  </NavDropdown.ItemText>
+                </NavDropdown>
+              ) : (
+                <Nav.Link
+                  href="http://localhost:3000/authentication"
+                >
+                  Sign In
+                </Nav.Link>
+              )}
+            </div>
           </Nav>
           <Nav.Link href="http://localhost:3000/cart">
             <div>

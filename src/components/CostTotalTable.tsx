@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import {
-  authActions,
   postCreditUser,
   postUserReceipts,
 } from "../store/slices/transaction";
-import { Table, Button, Modal } from "react-bootstrap";
+import { Table, Button} from "react-bootstrap";
 import { codeGenerator } from "../helper/codeGenerator";
 import "./style/CostTotalTable.css";
 import { MdAttachMoney } from "react-icons/md";
@@ -48,41 +47,44 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
     };
   }, [costTable]);
 
-
-
   const handleClose = () => setShow(false);
   const handleClose2 = () => setShow2(false);
 
   const checkOut = () => {
-    const debitCredit: any = userSession.userCredit.amount - totatCost;
-    if (debitCredit < 0) {
-      setShow(true);
-      setTimeout(() => {
-        setShow(false);
-      }, 2000);
-    } else {
-      setShow2(true);
-      dispatch(
-        postCreditUser({
-          user_id: userSession.userCredit.user_id,
-          amount: debitCredit,
-        })
-      );
-      const uniqueCode = codeGenerator(12);
-      dispatch(
-        postUserReceipts({
-          articles: costTable,
-          code: uniqueCode,
-          total: totatCost,
-          user_id: userSession.userCredit.user_id,
-        })
-      );
-      localStorage.removeItem("cart");
+    const { userCredit } = userSession;
+    const userCreditAmount = userCredit.amount;
+    if (userCreditAmount) {
+      const debitCredit: any = userCreditAmount - totatCost;
 
-      setTimeout(() => {
-        dispatch(cartActions.clearCart());
-        setShow2(false);
-      }, 2000);
+      if (debitCredit < 0) {
+        setShow(true);
+        setTimeout(() => {
+          setShow(false);
+        }, 2000);
+      } else {
+        setShow2(true);
+        dispatch(
+          postCreditUser({
+            user_id: userSession.userCredit.user_id,
+            amount: debitCredit,
+          })
+        );
+        const uniqueCode = codeGenerator(12);
+        dispatch(
+          postUserReceipts({
+            articles: costTable,
+            code: uniqueCode,
+            total: totatCost,
+            user_id: userSession.userCredit.user_id,
+          })
+        );
+        localStorage.removeItem("cart");
+
+        setTimeout(() => {
+          dispatch(cartActions.clearCart());
+          setShow2(false);
+        }, 2000);
+      }
     }
   };
 
