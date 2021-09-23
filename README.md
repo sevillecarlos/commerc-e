@@ -1,6 +1,6 @@
 # Commerc-e
 A demo of an online stickers store.
-When you register, you will be given $100 of credits so that you can buy your favorite stickers. <br>
+When you register, you will be given $100 of credits so that you can buy your favorite stickers. <br/>
 ![Commerc-e!](/assets/images/commerc-e-image.png "Commerc-e")
 ## Instructions
 * 
