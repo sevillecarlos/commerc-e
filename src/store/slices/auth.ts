@@ -72,12 +72,12 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchSignIn.fulfilled, (state, action) => {
       state.status = "success";
-      const { token, error } = action.payload;
-      if (token) {
-        localStorage.setItem("$@token", token);
-        state.token = action.payload;
+      if (action.payload.token) {
+        state.token = action.payload.token;
+
+        localStorage.setItem("$@token", state.token);
       } else {
-        state.errorSignIn = error;
+        state.errorSignIn = action.payload.error;
       }
     });
     builder.addCase(fetchSignIn.pending, (state) => {

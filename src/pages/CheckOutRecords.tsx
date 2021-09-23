@@ -88,7 +88,7 @@ const CheckOutRecords = () => {
       <MsgModal
         show={showModal}
         handleClose={handleCloseModal}
-        title={`Receipt: ${receiptCode}`}
+        title={`${receiptCode}`}
         msg={articlesTable()}
         color="black"
         icon={<FaReceipt />}
