@@ -44,7 +44,7 @@ npm start
 Navigate to [Commerc-e Server ](https://github.com/sevillecarlos/commerc-e-server) to found the server for the app.
 
 ## Commerc-e CMS
-Navigate to [Commerc-e CMS](https://github.com/sevillecarlos/commerc-e-cms) to found the CMS for the app, this contain products of the store.
+Navigate to [Commerc-e CMS](https://github.com/sevillecarlos/commerc-e-cms) to found the CMS for the app, that contain the products of the Commerc-e store.
 
 # Author
 ## Carlos Alberto Sevilla Fernandez
