@@ -64,7 +64,7 @@ ul {
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {
   .search-bar {
-    width: 35vw;
+    width: 45%;
   }
   .form-input-search {
     font-size: 2.5vw !important;

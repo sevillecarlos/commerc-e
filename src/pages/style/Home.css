@@ -78,56 +78,28 @@
 @media only screen and (max-width: 767px) {
   .category-name {
     letter-spacing: 1px !important;
-    font-size: 8vw !important;
+    font-size: 7vw !important;
   }
   .category-image {
     width: 30vw !important;
   }
   .button-categories {
-    font-size: 4vw !important;
+    font-size: 3.5vw !important;
   }
-  .ribbon {
-    left: -40px;
-    top: 15px;
-    -webkit-transform: rotate(-40deg);
-    -moz-transform: rotate(-40deg);
-    -ms-transform: rotate(-40deg);
-    -o-transform: rotate(-40deg);
-    transform: rotate(-40deg);
-  }
-  .ribbon a {
-    font: bold 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    margin: 2px 0;
-    padding: 5px 30px;
-  }
+  
 }
 
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
   .category-name {
     letter-spacing: 1px !important;
-    font-size: 10vw !important;
+    font-size: 7vw !important;
   }
   .category-image {
-    width: 40vw !important;
+    width: 30vw !important;
   }
   .button-categories {
-    font-size: 5vw !important;
+    font-size: 3.5vw !important;
   }
-  .ribbon {
-    left: -40px;
-    top: 15px;
-    -webkit-transform: rotate(-40deg);
-    -moz-transform: rotate(-40deg);
-    -ms-transform: rotate(-40deg);
-    -o-transform: rotate(-40deg);
-    transform: rotate(-40deg);
-  }
-  .ribbon a {
-    font: bold 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    margin: 2px 0;
-    padding: 5px 30px;
-  }
+
 }

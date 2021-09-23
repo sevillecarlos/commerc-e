@@ -60,7 +60,7 @@ const NavBar = () => {
   return (
     <>
       <Navbar sticky="top" className="nav-bar ml-auto" expand="lg">
-        <Navbar.Brand className="nav-bar-brand" href="http://localhost:3000/">
+        <Navbar.Brand className="nav-bar-brand" href="/">
           <div className="logo-container">
             <Image
               src={roullete}
@@ -117,12 +117,12 @@ const NavBar = () => {
                   </div>
                 </NavDropdown>
               ) : (
-                <Nav.Link href="http://localhost:3000/authentication">
+                <Nav.Link href="/authentication">
                   Sign In
                 </Nav.Link>
               )}
             </div>
-            <Nav.Link href="http://localhost:3000/cart">
+            <Nav.Link href="/cart">
               <div className="shop-cart-container">
                 <FaShoppingCart className="shop-cart" />
                 <span id="cart-counter" className="products-cart">

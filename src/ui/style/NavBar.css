@@ -9,7 +9,6 @@
 
 .nav-bar-brand {
   padding: 1%;
-  margin: auto;
 }
 .dropdown-user {
   color: black !important;
@@ -98,6 +97,9 @@ a {
 
 /* Small tablets to big tablets: from 768 to 1032*/
 @media only screen and (max-width: 1032px) {
+  .nav-bar {
+    border-radius: 50px;
+  }
   .dropdown-user span,
   a,
   button {
@@ -107,18 +109,18 @@ a {
     font-size: 3vw;
   }
   .logo-img {
-    width: 16vw !important;
+    width: 10vw !important;
   }
   .logo-img-lip {
-    width: 15vw !important;
+    width: 10vw !important;
   }
   #cart-counter {
-    font-size: 1.8vw;
+    font-size: 1vw;
     padding: 0 5px;
   }
   .shop-cart {
-    width: 6vw;
-    height: 6vw;
+    width: 5vw;
+    height: 5vw;
     padding: 1%;
   }
 
@@ -141,7 +143,7 @@ a {
 /* Small phones to small tablets: from 481 to 767*/
 @media only screen and (max-width: 767px) {
   .nav-bar {
-    border-radius: 50px;
+    border-radius: 50px !important;
     margin-top: 1%;
     position: relative !important;
   }
@@ -192,7 +194,7 @@ a {
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
   .nav-bar {
-    border-radius: 50px;
+    border-radius: 35px !important;
     margin-top: 1%;
     position: relative !important;
   }
