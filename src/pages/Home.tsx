@@ -42,9 +42,14 @@ const Home = () => {
           {productsDataStore.categories.map(
             (el: { id: number; name: string; image: string }) => {
               return (
-                <Card key={el.id} style={{ width: "50rem" }}>
+                <Card
+                  className="categories-card"
+                  key={el.id}
+                  style={{ width: "100%" }}
+                >
+                  
                   <Card.Img
-                    style={{ width: "100px" }}
+                    style={{ width: "200px", margin:"auto" }}
                     variant="top"
                     src={el.image}
                   />
@@ -52,6 +57,7 @@ const Home = () => {
                     <Card.Title>{el.name}</Card.Title>
                     <Card.Text>Description</Card.Text>
                     <Button
+                    className="button-categories"
                       // onClick={() =>
                       //   goProductListPage(el.name.toLocaleLowerCase())
                       // }

@@ -1,0 +1,8 @@
+.date-time {
+  color: #b3b3b3;
+  padding: 15px;
+}
+.date-time h5 {
+  font-weight: bold;
+  border-bottom:5px solid rgba(158, 48, 48, 0.397)
+}

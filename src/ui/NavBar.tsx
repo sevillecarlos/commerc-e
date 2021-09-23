@@ -6,6 +6,7 @@ import {
   FormControl,
   Form,
   Button,
+  Image,
 } from "react-bootstrap";
 import { MdShoppingCart } from "react-icons/md";
 import { useHistory } from "react-router-dom";
@@ -14,6 +15,8 @@ import Watch from "../components/NavBarWatch";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { authActions } from "../store/slices/auth";
 import jwt_decode from "jwt-decode";
+import logo from "../assets/img/commerc-e-logo.png";
+import "./style/NavBar.css";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -63,8 +66,10 @@ const NavBar = () => {
 
   const history = useHistory();
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="http://localhost:3000/">Navbar scroll</Navbar.Brand>
+    <Navbar className="nav-bar" expand="lg">
+      <Navbar.Brand href="http://localhost:3000/">
+        <Image src={logo} style={{ width: "200px" }} alt="Logo Commerc-e" />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse id="navbarScroll">
         <Nav
@@ -73,12 +78,6 @@ const NavBar = () => {
           navbarScroll
         >
           <Watch />
-          <Nav.Link href="http://localhost:3000/cart">
-            <div>
-              {/* <h1>{cartValues ? cartValues.length : ""}</h1> */}
-              <MdShoppingCart style={{ width: "50px", height: "150px" }} />
-            </div>
-          </Nav.Link>
           <SearchBar />
 
           {token ? (
@@ -93,11 +92,18 @@ const NavBar = () => {
               </NavDropdown.Item>
             </NavDropdown>
           ) : (
-            <Nav.Link href="http://localhost:3000/authentication">
+            <Nav.Link className='sign-in-link' href="http://localhost:3000/authentication">
               Sign In
             </Nav.Link>
           )}
         </Nav>
+        <Nav.Link href="http://localhost:3000/cart">
+          <div>
+            <MdShoppingCart className="shop-cart" />
+            <span id='lblCartCount' className="products-cart">{cartValues ? cartValues.length : ""}</span>
+
+          </div>
+        </Nav.Link>
       </Navbar.Collapse>
     </Navbar>
   );
