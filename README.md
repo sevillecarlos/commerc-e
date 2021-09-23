@@ -3,7 +3,11 @@ A demo of an online stickers store.
 When you register, you will be given $100 of credits so that you can buy your favorite stickers. <br/>
 ![Commerc-e!](/assets/images/commerc-e-image.png "Commerc-e")
 ## Instructions
-* 
+* When you Sign Up, you will be credited with $ 100.
+* You can add to the cart, and purchase the stickers.
+* To check your shopping history, go to you menu that say your name and navigate to Checkout Record.
+* To check your receipt detail, click on the Receipt Code that is in black.
+
 # Built
 ## Development Technologies
 - React.ts 
@@ -37,7 +41,7 @@ npm start
 Navigate to [Commerc-e Server ](https://github.com/sevillecarlos/commerc-e-server) to found the server for the app.
 
 ## Commerc-e CMS
-Navigate to [Commerc-e CMS](https://github.com/sevillecarlos/commerc-e-cms) to found the CMS for the app, this contain products for the store.
+Navigate to [Commerc-e CMS](https://github.com/sevillecarlos/commerc-e-cms) to found the CMS for the app, this contain products of the store.
 
 # Author
 ## Carlos Alberto Sevilla Fernandez
