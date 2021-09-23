@@ -25,10 +25,10 @@
   -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
 }
-.form-label{
+.form-label {
   font-size: 1vw !important;
 }
-.logo-auth{
+.logo-auth {
   width: 7vw !important;
 }
 .auth-btn {
@@ -50,36 +50,171 @@
 
 .auth-msg {
   padding: 1%;
-  width: 100%;  
+  width: 100%;
   text-align: center;
   border-radius: 20px !important;
   box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
 }
-.auth-msg h1{
-    font-size: 5vw;
-    text-align: center;
+.auth-msg h1 {
+  font-size: 5vw;
+  text-align: center;
 }
 
-.error-msg-container{
-
+.error-msg-container {
   margin-bottom: 5px !important;
 }
-.error-msg-container span{
+.error-msg-container span {
   color: red;
-  font-size: 1vw ;
+  font-size: 1vw;
 }
-.tab-title-auth{
+.tab-title-auth {
   color: black !important;
   border-radius: 50px !important;
+  font-size: 1vw !important;
 }
- .active{
+.active {
   background-color: rgba(221, 221, 221, 0.534) !important;
 }
-.spinner-auth{
+.spinner-auth {
   font-size: 1vw !important;
   width: 1.5vw !important;
   height: 1.5vw !important;
+}
+.auth-tab-header {
+  text-align: center;
+}
+.auth-tab-header h5 {
+  font-size: 2vw;
+}
+/***************************************************************************/
+/* Big tablets to 1200px*/
+/* @media only screen and (max-width: 1200px) {
+} */
 
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  .auth {
+    width: 40%;
+  }
+
+  .input-auth {
+    font-size: 2vw !important;
+  }
+  .form-label {
+    font-size: 2vw !important;
+  }
+  .logo-auth {
+    width: 10vw !important;
+  }
+  .auth-btn {
+    font-size: 2vw !important;
+  }
+
+  .auth-msg h1 {
+    font-size: 2vw;
+  }
+
+  .error-msg-container span {
+    font-size: 2vw;
+  }
+
+  .spinner-auth {
+    font-size: 3vw !important;
+    width: 3vw !important;
+    height: 3vw !important;
+  }
+  .auth-tab-header h5 {
+    font-size: 5vw;
+  }
+  .tab-title-auth {
+    font-size: 2vw !important;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .auth {
+    width: 80%;
+  }
+
+  .input-auth {
+    font-size: 5vw !important;
+  }
+  .form-label {
+    font-size: 5vw !important;
+  }
+  .logo-auth {
+    width: 15vw !important;
+  }
+  .auth-btn {
+    font-size: 5vw !important;
+  }
+
+  .auth-msg h1 {
+    font-size: 5vw;
+  }
+
+  .error-msg-container {
+    margin-bottom: 5px !important;
+  }
+  .error-msg-container span {
+    font-size: 5vw;
+  }
+
+  .spinner-auth {
+    font-size: 4vw !important;
+    width: 5vw !important;
+    height: 5vw !important;
+  }
+  .auth-tab-header h5 {
+    font-size: 7vw;
+  }
+  .tab-title-auth {
+    font-size: 5vw !important;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .auth {
+    width: 80%;
+  }
+
+  .input-auth {
+    font-size: 5vw !important;
+  }
+  .form-label {
+    font-size: 5vw !important;
+  }
+  .logo-auth {
+    width: 15vw !important;
+  }
+  .auth-btn {
+    font-size: 5vw !important;
+  }
+
+  .auth-msg h1 {
+    font-size: 5vw;
+  }
+
+  .error-msg-container {
+    margin-bottom: 5px !important;
+  }
+  .error-msg-container span {
+    font-size: 5vw;
+  }
+
+  .spinner-auth {
+    font-size: 4vw !important;
+    width: 5vw !important;
+    height: 5vw !important;
+  }
+  .auth-tab-header h5 {
+    font-size: 7vw;
+  }
+  .tab-title-auth {
+    font-size: 5vw !important;
+  }
 }

@@ -75,8 +75,8 @@ const Auth = () => {
 
   const authTabHeader = (title: string) => {
     return (
-      <div style={{ textAlign: "center" }}>
-        <h5 style={{ fontSize: "2vw" }}>{title}</h5>
+      <div className="auth-tab-header">
+        <h5>{title}</h5>
         <Image src={logo} className="logo-auth" alt="Logo Commerc-e" />
       </div>
     );
@@ -104,7 +104,7 @@ const Auth = () => {
             title="Sign In"
           >
             {authTabHeader("Log In")}
-            <Form onSubmit={signIn} autoComplete='off'>
+            <Form onSubmit={signIn} autoComplete="off">
               <Form.Group
                 className="mb-3"
                 controlId="formBasicEmailSignIn"
@@ -161,7 +161,7 @@ const Auth = () => {
             title="Sign Up"
           >
             {authTabHeader("Register")}
-            <Form onSubmit={signUp} autoComplete='off'>
+            <Form onSubmit={signUp} autoComplete="off">
               <Form.Group className="mb-3" controlId="formBasicFirstNameSignUp">
                 <Form.Label className="form-label">First Name</Form.Label>
                 <Form.Control

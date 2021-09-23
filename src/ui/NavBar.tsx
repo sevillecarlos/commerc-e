@@ -76,7 +76,9 @@ const NavBar = () => {
             />
           </div>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <SearchBar />
+        <Navbar.Toggle className='ss' aria-controls="navbarScroll" />
+
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="mr-auto my-2 my-lg-0"
@@ -84,8 +86,8 @@ const NavBar = () => {
             navbarScroll
           >
             <Watch />
-            <SearchBar />
-            <div className='sign-in-container'>
+
+            <div className="sign-in-container">
               {authUser.token ? (
                 <NavDropdown
                   title={
@@ -95,39 +97,40 @@ const NavBar = () => {
                   }
                   id="navbarScrollingDropdown"
                   className="dropdown-user"
+                
                 >
-                  <NavDropdown.ItemText>
-                    {" "}
-                    Credit: ${authCredit?.userCredit?.amount}
-                  </NavDropdown.ItemText>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="/checkout/records">
-                    Checkout Record
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.ItemText>
-                    <Button className="log-out-btn" onClick={logOut}>
-                      Log Out
-                    </Button>
-                  </NavDropdown.ItemText>
+                  <div className='dropdown-user-menu'>
+                    <NavDropdown.ItemText>
+                      {" "}
+                      Credit: ${authCredit?.userCredit?.amount}
+                    </NavDropdown.ItemText>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="/checkout/records">
+                      Checkout Record
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.ItemText>
+                      <Button className="log-out-btn" onClick={logOut}>
+                        Log Out
+                      </Button>
+                    </NavDropdown.ItemText>
+                  </div>
                 </NavDropdown>
               ) : (
-                <Nav.Link
-                  href="http://localhost:3000/authentication"
-                >
+                <Nav.Link href="http://localhost:3000/authentication">
                   Sign In
                 </Nav.Link>
               )}
             </div>
+            <Nav.Link href="http://localhost:3000/cart">
+              <div className="shop-cart-container">
+                <FaShoppingCart className="shop-cart" />
+                <span id="cart-counter" className="products-cart">
+                  {cartProducts.cart ? cartProducts.cart.length : 0}
+                </span>
+              </div>
+            </Nav.Link>
           </Nav>
-          <Nav.Link href="http://localhost:3000/cart">
-            <div>
-              <FaShoppingCart className="shop-cart" />
-              <span id="cart-counter" className="products-cart">
-                {cartProducts.cart ? cartProducts.cart.length : 0}
-              </span>
-            </div>
-          </Nav.Link>
         </Navbar.Collapse>
       </Navbar>
     </>

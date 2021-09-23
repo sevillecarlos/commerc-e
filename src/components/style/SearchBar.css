@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap");
-
 .search-bar {
   padding: 1%;
   width: 25vw;
@@ -52,9 +50,73 @@ ul {
 .item-autocomplete {
   padding: 2px;
   border-radius: 20px;
-  
 }
 
 .item-autocomplete:hover {
   background-color: rgba(128, 128, 128, 0.185);
+}
+
+/***************************************************************************/
+/* Big tablets to 1200px*/
+/* @media only screen and (max-width: 1200px) {
+} */
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  .search-bar {
+    width: 35vw;
+  }
+  .form-input-search {
+    font-size: 2.5vw !important;
+  }
+  .search-btn {
+    font-size: 2.5vw !important;
+  }
+
+  .autocomplete-lists {
+    font-size: 2.5vw !important;
+    width: 35vw;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .search-bar {
+    padding: 1%;
+    width: 52.5vw;
+  }
+  .form-input-search {
+    font-size: 4vw !important;
+  }
+  .search-btn {
+    font-size: 4vw !important;
+  }
+
+  .autocomplete-lists {
+    border-radius: 15px;
+    padding: 3%;
+    font-size: 3.5vw !important;
+    width: 40vw;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .search-bar {
+    padding: 1%;
+    width: 52.5vw;
+  }
+  .form-input-search {
+    font-size: 4vw !important;
+  }
+  .search-btn {
+    font-size: 4vw !important;
+  }
+
+  .autocomplete-lists {
+    border-radius: 15px;
+    padding: 3%;
+    font-size: 3.5vw !important;
+    width: 40vw;
+  }
 }

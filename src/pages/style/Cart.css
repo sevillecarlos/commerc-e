@@ -58,10 +58,44 @@
   font-size: 1vw !important;
 }
 /***************************************************************************/
-
+/* 
 @media only screen and (max-width: 1200px) {
-}
+} */
 @media only screen and (max-width: 1032px) {
+  .cart-product {
+    font-size: 3vw;
+  }
+  .cart-remove-btn {
+    width: 25vw;
+    font-size: 2vw !important;
+  }
+  .product-title {
+    font-size: 5vw !important;
+  }
+  .cart-image {
+    width: 16vw;
+    margin: auto;
+  }
+  .quantity-product-view {
+    font-size: 2vw !important;
+  }
+
+  .empty-cart-msg {
+    width: 80%;
+    padding: 10%;
+  }
+  .empty-cart-msg h1 {
+    font-size: 6vw !important;
+  }
+  .quantity-product {
+    width: 35vw !important;
+    margin: auto;
+  }
+
+  .input-quantity-text {
+    font-size: 1.5vw !important;
+    padding: 3px !important;
+  }
 }
 
 /* Small phones to small tablets: from 481 to 767*/
@@ -81,7 +115,7 @@
     font-size: 8vw !important;
   }
   .cart-image {
-    width: 30vw;
+    width: 27vw;
     margin: auto;
   }
   .quantity-product-view {
@@ -125,7 +159,7 @@
     font-size: 8vw !important;
   }
   .cart-image {
-    width: 30vw;
+    width: 27vw;
     margin: auto;
   }
   .quantity-product-view {

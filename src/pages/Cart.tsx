@@ -94,9 +94,6 @@ const Cart = () => {
                         </Card.Text>
                       </Card.Body>
                       <InputGroup className="quantity-product">
-                        <InputGroup.Text className='input-quantity-text'>
-                          Quantity
-                        </InputGroup.Text>
                         <FormControl
                           value={getQuatity(el)}
                           min="1"

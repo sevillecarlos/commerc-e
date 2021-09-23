@@ -15,12 +15,52 @@
   outline: none !important;
 }
 
-button{
+button {
   border: none !important;
 }
-input{
+input {
   border: none !important;
   outline: none !important;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none !important;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24 ) !important;
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24) !important;
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24) !important;
+}
+.ribbon {
+  background: #eeeeee !important;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  left: -50px;
+  top: 40px;
+
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -1px 11px -2px rgba(0, 0, 0, 0.75);
+}
+.ribbon a {
+  border: 1px solid rgb(255, 255, 255);
+  color: black;
+  display: block;
+  font: bold 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 1px 0;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 0 3px #444;
+}
+.ribbon a:hover {
+  color: rgb(255, 255, 255);
 }
 
 /***************************************************************************/
@@ -29,8 +69,23 @@ input{
 }
 @media only screen and (max-width: 1032px) {
   .app {
-    width: 70% !important;
+    width: 95% !important;
     margin: auto;
+  }
+  .ribbon {
+    left: -40px;
+    top: 15px;
+    -webkit-transform: rotate(-40deg);
+    -moz-transform: rotate(-40deg);
+    -ms-transform: rotate(-40deg);
+    -o-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+  }
+  .ribbon a {
+    font: bold 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    margin: 2px 0;
+    padding: 5px 30px;
   }
 }
 

@@ -1,5 +1,5 @@
 .view-products {
-  padding: 2% !important;
+  padding: 5% !important;
 }
 .card-body-product span {
   font-size: 1vw !important;
@@ -69,10 +69,36 @@
 }
 
 /***************************************************************************/
-
+/* 
 @media only screen and (max-width: 1200px) {
-}
+} */
 @media only screen and (max-width: 1032px) {
+  .view-products {
+    margin-top: 2% !important;
+  }
+  .card-body-product span {
+    font-size: 1.2vw !important;
+    padding: 2% !important;
+  }
+  .card-body-product p {
+    font-size: 2vw !important;
+  }
+  .view-product-card-footer {
+    font-size: 2vw;
+  }
+  .view-product-name {
+    font-size: 5vw !important;
+  }
+  .quantity-product-view {
+    font-size: 2vw !important;
+    width: 8vw !important;
+  }
+  .form-input-quantity {
+    padding: 1% !important;
+  }
+  .card-image-product {
+    width: 50vw !important;
+  }
 }
 
 /* Small phones to small tablets: from 481 to 767*/
@@ -97,7 +123,6 @@
   }
   .card-body-product {
     margin: 5% auto;
-    
   }
   .view-product-name {
     font-size: 8vw !important;
@@ -114,7 +139,6 @@
   .card-image-product {
     width: 51vw !important;
     margin: 5% auto;
-    
   }
 }
 
@@ -140,7 +164,6 @@
   }
   .card-body-product {
     margin: 5% auto;
-    
   }
   .view-product-name {
     font-size: 8vw !important;
@@ -157,7 +180,5 @@
   .card-image-product {
     width: 51vw !important;
     margin: 5% auto;
-    
   }
-  
 }

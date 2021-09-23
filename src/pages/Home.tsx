@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Button, Image } from "react-bootstrap";
+import { Card, Button, Image, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
 import { useHistory } from "react-router-dom";
@@ -29,7 +29,12 @@ const Home = () => {
   return (
     <div className="home">
       {productsDataStore.status === "reject" && <>Fetch Reject</>}
-      {productsDataStore.status === "loading" && <div>...Loading </div>}
+      {productsDataStore.status === "loading" && (
+        <div className="home-loader">
+          <span>...Loading Articles </span>
+          <Spinner className="spinner-home" animation="border" />
+        </div>
+      )}
       {productsDataStore.status === "success" && (
         <>
           {productsDataStore.categories.map(
@@ -40,7 +45,12 @@ const Home = () => {
                   key={el.id}
                   style={{ width: "100%" }}
                 >
-                  <Image fluid alt={`${el.name} Category`} src={el.image} className='category-image'/>
+                  <Image
+                    fluid
+                    alt={`${el.name} Category`}
+                    src={el.image}
+                    className="category-image"
+                  />
                   <Card.Body>
                     <Card.Title className="category-name">{el.name}</Card.Title>
                     <Button

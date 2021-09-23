@@ -49,13 +49,33 @@
 
 /***************************************************************************/
 
-@media only screen and (max-width: 1200px) {
-}
+/* @media only screen and (max-width: 1200px) {
+} */
 @media only screen and (max-width: 1032px) {
-  .app {
-    width: 70% !important;
+  .products-card {
+    font-size: 3vw !important;
+    width: 50vw !important;
     margin: auto;
   }
+  .products-card img {
+    width: 18vw !important;
+    padding: 2px;
+  }
+
+  .product-name {
+    font-size: 5vw !important;
+  }
+  .product-card-btn {
+    font-size: 3vw !important;
+  }
+  .product-card-footer {
+    font-size: 3vw;
+  }
+
+  .search-not-found-msg {
+    font-size: 5vw !important;
+  }
+
 }
 
 /* Small phones to small tablets: from 481 to 767*/
@@ -74,7 +94,6 @@
 
   .product-name {
     font-size: 5vw !important;
-
   }
   .product-card-footer {
     font-size: 5vw;
@@ -86,7 +105,6 @@
 
   .search-not-found-msg {
     font-size: 6vw;
-   
   }
 }
 
@@ -106,7 +124,6 @@
 
   .product-name {
     font-size: 5vw !important;
-
   }
   .product-card-footer {
     font-size: 5vw;
@@ -118,6 +135,5 @@
 
   .search-not-found-msg {
     font-size: 6vw;
-   
   }
 }
