@@ -140,7 +140,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
         </Button>
       ) : (
         <Button className="checkout-btn" href="/authentication">
-          Sign In first to checkout <MdPersonPin size={20} />
+          Sign In first to checkout<MdPersonPin  />
         </Button>
       )}
     </div>

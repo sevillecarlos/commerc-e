@@ -107,7 +107,7 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
         show={showMsgModal}
         handleClose={() => setShowMsgModal(false)}
         msg=""
-        title={"The product was added to the cart "}
+        title={"Product added to the cart "}
         icon={<FaCartPlus />}
         color="rgba(0, 0, 0, 0.911)"
         error={false}

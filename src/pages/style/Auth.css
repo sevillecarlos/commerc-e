@@ -1,29 +1,39 @@
 .auth {
   width: 30%;
-  margin: 20px auto;
+  margin: 3% auto;
 }
 .tabs-auth {
   box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   border-radius: 30px !important;
+  font-size: 1.2vw !important;
 }
 .tab-auth {
   box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   border-radius: 30px !important;
-  padding: 20px;
+  padding: 5%;
 }
 
 .input-auth {
   border-radius: 20px !important;
+  font-size: 1vw !important;
+  border: none !important;
   box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
 }
+.form-label{
+  font-size: 1vw !important;
+}
+.logo-auth{
+  width: 7vw !important;
+}
 .auth-btn {
   width: 100% !important;
+  font-size: 1vw !important;
   border-radius: 20px !important;
   border-color: transparent !important;
   background-color: black !important;
@@ -39,7 +49,7 @@
 }
 
 .auth-msg {
-  padding: 15px;
+  padding: 1%;
   width: 100%;  
   text-align: center;
   border-radius: 20px !important;
@@ -48,14 +58,17 @@
   -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
 }
 .auth-msg h1{
-    font-size: 50px;
+    font-size: 5vw;
     text-align: center;
 }
-.error-msg{
-  color: red;
-}
+
 .error-msg-container{
-  padding: 5px;
+
+  margin-bottom: 5px !important;
+}
+.error-msg-container span{
+  color: red;
+  font-size: 1vw ;
 }
 .tab-title-auth{
   color: black !important;
@@ -63,4 +76,10 @@
 }
  .active{
   background-color: rgba(221, 221, 221, 0.534) !important;
+}
+.spinner-auth{
+  font-size: 1vw !important;
+  width: 1.5vw !important;
+  height: 1.5vw !important;
+
 }

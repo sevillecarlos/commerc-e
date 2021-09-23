@@ -5,9 +5,10 @@
   border: none !important;
   border-radius: 20px !important;
   color: white !important;
-  padding: 10px !important;
-
-  font-size: 20px !important;
+  padding: 1% !important;
+  width: 25vw !important;
+  margin: auto;
+  font-size: 1vw !important;
   text-align: center;
 }
 
@@ -20,14 +21,17 @@
 }
 
 .modal-header-msg-modal {
-  font-size: 20px !important;
+  font-size: 1vw !important;
+  width: 20vw !important;
   border-radius: 50px !important;
   color: white !important;
   border: none !important;
+  margin: auto;
+
 }
 
 .title-header-msg-modal {
-  font-size: 20px !important;
+  font-size: 1vw !important;
   margin: auto !important;
 }
 

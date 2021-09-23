@@ -26,7 +26,7 @@
   cursor: pointer;
   transition: background-color 0.2s;
   background-color: black !important;
-  /* margin-bottom: 10% !important; */
+  margin-bottom: 5% !important;
   color: rgb(240, 240, 240) !important;
   font-size: 1vw;
 }
@@ -66,4 +66,98 @@
 }
 .view-product-image-container {
   text-align: center;
+}
+
+/***************************************************************************/
+
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 1032px) {
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .card-body-product span {
+    font-size: 3vw !important;
+  }
+  .card-body-product p {
+    font-size: 3vw !important;
+  }
+
+  .view-product-card-footer {
+    font-size: 4vw;
+  }
+  .view-product-card-footer:hover {
+    background-color: rgb(26, 24, 24) !important;
+  }
+  .add-cart-btn {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    color: black !important;
+  }
+  .card-body-product {
+    margin: 5% auto;
+    
+  }
+  .view-product-name {
+    font-size: 8vw !important;
+  }
+  .quantity-product-view {
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 4vw !important;
+  }
+  .form-input-quantity {
+    width: 55vw !important;
+    padding: 1% !important;
+  }
+  .card-image-product {
+    width: 51vw !important;
+    margin: 5% auto;
+    
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .card-body-product span {
+    font-size: 3vw !important;
+  }
+  .card-body-product p {
+    font-size: 3vw !important;
+  }
+
+  .view-product-card-footer {
+    font-size: 4vw;
+  }
+  .view-product-card-footer:hover {
+    background-color: rgb(26, 24, 24) !important;
+  }
+  .add-cart-btn {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    color: black !important;
+  }
+  .card-body-product {
+    margin: 5% auto;
+    
+  }
+  .view-product-name {
+    font-size: 8vw !important;
+  }
+  .quantity-product-view {
+    border-radius: 20px !important;
+    text-align: center;
+    font-size: 4vw !important;
+  }
+  .form-input-quantity {
+    width: 55vw !important;
+    padding: 1% !important;
+  }
+  .card-image-product {
+    width: 51vw !important;
+    margin: 5% auto;
+    
+  }
+  
 }

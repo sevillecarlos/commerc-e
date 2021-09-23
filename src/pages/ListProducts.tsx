@@ -104,7 +104,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
                       <Card.Footer className="product-card-footer">
                         <Card.Text>${el.price}</Card.Text>
                         <Button
-                          className="view-product"
+                          className="product-card-btn"
                           onClick={() => getCategorieOfProduct(el.title)}
                         >
                           View Product <MdKeyboardArrowRight className="arrow-icon" />

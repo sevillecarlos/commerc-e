@@ -90,7 +90,7 @@ const NavBar = () => {
                 <NavDropdown
                   title={
                     <span className="title-dropdown">
-                      Hi, {getFirstName(user?.first_name)}
+                      Hi {getFirstName(user?.first_name)}
                     </span>
                   }
                   id="navbarScrollingDropdown"

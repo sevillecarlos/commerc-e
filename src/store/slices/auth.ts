@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  token: '',
+  token: "",
   errorSignIn: "",
   errorSignUp: "",
   status: "idle",
@@ -13,13 +13,16 @@ export const fetchSignIn = createAsyncThunk(
   "auth/fetchSignIn",
   async (signInForm: any) => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/session`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signInForm),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/session`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(signInForm),
+        }
+      );
       const data = await res.json();
       return data;
     } catch (error) {
@@ -32,13 +35,16 @@ export const fetchSignUp = createAsyncThunk(
   "auth/fetchSignUp",
   async (signUpForm: any) => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpForm),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/users`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(signUpForm),
+        }
+      );
       const data = await res.json();
       return data;
     } catch (error) {
@@ -52,10 +58,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     removeUser(state) {
-      state.token = '';
+      state.token = "";
+    },
+    clearError(state) {
+      state.errorSignUp = "";
+      state.errorSignIn = "";
     },
     getToken(state) {
-      const authToken:any = localStorage.getItem("$@token");
+      const authToken: any = localStorage.getItem("$@token");
       state.token = authToken;
     },
   },
@@ -65,8 +75,6 @@ const authSlice = createSlice({
       const { token, error } = action.payload;
       if (token) {
         localStorage.setItem("$@token", token);
-        state.errorSignIn = error;
-
         state.token = action.payload;
       } else {
         state.errorSignIn = error;

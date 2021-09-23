@@ -100,7 +100,6 @@ const CheckOutRecords = () => {
             <thead>
               <tr>
                 <th>Receipt Code</th>
-
                 <th>Purchase Date</th>
                 <th>Spend</th>
               </tr>
@@ -146,7 +145,5 @@ const CheckOutRecords = () => {
     </div>
   );
 };
-
-CheckOutRecords.propTypes = {};
 
 export default CheckOutRecords;

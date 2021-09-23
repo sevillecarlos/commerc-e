@@ -8,6 +8,7 @@ import {
   Container,
   Row,
   Col,
+  Image
 } from "react-bootstrap";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { MdShoppingCart } from "react-icons/md";
@@ -79,9 +80,8 @@ const Cart = () => {
                       className="cart-product"
                       key={i}
                     >
-                      <Card.Img
-                        style={{ width: "120px", margin: "auto" }}
-                        variant="top"
+                      <Image
+                        className='cart-image'
                         src={el.image}
                       />
                       <Card.Body>
@@ -89,11 +89,12 @@ const Cart = () => {
                           {el.name}
                         </Card.Title>
                         <Card.Text>
+                          
                           ${getPrice(el.price, getQuatity(el), el.name)}
                         </Card.Text>
                       </Card.Body>
                       <InputGroup className="quantity-product">
-                        <InputGroup.Text style={{ borderRadius: "20px" }}>
+                        <InputGroup.Text className='input-quantity-text'>
                           Quantity
                         </InputGroup.Text>
                         <FormControl
@@ -111,7 +112,7 @@ const Cart = () => {
                         onClick={() => removeProductCart(el.id)}
                         className="cart-remove-btn"
                       >
-                        Remove from cart <MdRemoveShoppingCart />
+                        Remove <MdRemoveShoppingCart />
                       </Button>
                     </Card>
                   );
