@@ -6,14 +6,16 @@ import "./App.css";
 
 function App() {
   return (
-    <div
-      style={{
-        width: "90%",
-        margin: "auto",
-        boxShadow: "1px 4px 13px 2px #000000",
-        borderRadius:'20px'
-      }}
-    >
+    <div className="app">
+      <div className="ribbon">
+        <a
+          href="https://github.com/sevillecarlos/commerc-e"
+          rel="noreferrer"
+          target="_blank"
+        >
+          @sevillecarlos🍒
+        </a>
+      </div>
       <Provider store={store}>
         <Routes />
       </Provider>

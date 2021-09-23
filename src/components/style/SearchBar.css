@@ -1,5 +1,122 @@
-.search-bar{
-    padding: 10px;
-    width: 500px;
-    margin: auto;
+.search-bar {
+  padding: 1%;
+  width: 25vw;
+  margin: auto;
+}
+.form-input-search {
+  font-family: "Nunito", sans-serif !important;
+  border-radius: 50px !important;
+  border-color: transparent !important;
+  color: #000000 !important;
+  letter-spacing: 1px;
+  font-size: 1.1vw !important;
+  text-align: center;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+}
+.search-btn {
+  border-radius: 20px !important;
+  background-color: rgb(0, 0, 0) !important;
+  border-color: rgb(0, 0, 0) !important;
+  font-size: 1vw !important;
+}
+
+.autocomplete-lists {
+  border-radius: 20px;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+  margin: auto;
+  font-size: 1.1vw !important;
+  position: absolute;
+  width: 20vw;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.autocomplete-item {
+  margin: auto;
+  cursor: pointer;
+  max-height: 143px;
+  overflow-y: auto;
+}
+
+.item-autocomplete {
+  padding: 2px;
+  border-radius: 20px;
+}
+
+.item-autocomplete:hover {
+  background-color: rgba(128, 128, 128, 0.185);
+}
+
+/***************************************************************************/
+/* Big tablets to 1200px*/
+/* @media only screen and (max-width: 1200px) {
+} */
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  .search-bar {
+    width: 45%;
+  }
+  .form-input-search {
+    font-size: 2.5vw !important;
+  }
+  .search-btn {
+    font-size: 2.5vw !important;
+  }
+
+  .autocomplete-lists {
+    font-size: 2.5vw !important;
+    width: 35vw;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .search-bar {
+    padding: 1%;
+    width: 52.5vw;
+  }
+  .form-input-search {
+    font-size: 4vw !important;
+  }
+  .search-btn {
+    font-size: 4vw !important;
+  }
+
+  .autocomplete-lists {
+    border-radius: 15px;
+    padding: 3%;
+    font-size: 3.5vw !important;
+    width: 40vw;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .search-bar {
+    padding: 1%;
+    width: 52.5vw;
+  }
+  .form-input-search {
+    font-size: 4vw !important;
+  }
+  .search-btn {
+    font-size: 4vw !important;
+  }
+
+  .autocomplete-lists {
+    border-radius: 15px;
+    padding: 3%;
+    font-size: 3.5vw !important;
+    width: 40vw;
+  }
 }

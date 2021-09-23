@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Card, Button, Image, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { fetchProducts } from "../store/slices/productsData";
 
 import { useHistory } from "react-router-dom";
 import { productsDataActions } from "../store/slices/productsData";
+import { MdKeyboardArrowRight } from "react-icons/md";
+
 import "./style/Home.css";
 
 const Home = () => {
@@ -16,25 +17,24 @@ const Home = () => {
   );
 
   useEffect(() => {
-    if (productsDataStore.status === "idle") {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, productsDataStore.status]);
-
-  useEffect(() => {
     dispatch(productsDataActions.getCategories(productsDataStore.data));
     return () => {
       // cleanup
     };
   }, [productsDataStore.data, dispatch]);
 
-  const goProductListPage = (productsDataName: string) =>
-    history.push(`/products/${productsDataName}`);
+  const goToCategory = (categoryName: string) =>
+    history.push(`/products/${categoryName.toLocaleLowerCase()}`);
 
   return (
     <div className="home">
       {productsDataStore.status === "reject" && <>Fetch Reject</>}
-      {productsDataStore.status === "loading" && <div>...Loading </div>}
+      {productsDataStore.status === "loading" && (
+        <div className="home-loader">
+          <span>...Loading Articles </span>
+          <Spinner className="spinner-home" animation="border" />
+        </div>
+      )}
       {productsDataStore.status === "success" && (
         <>
           {productsDataStore.categories.map(
@@ -45,24 +45,19 @@ const Home = () => {
                   key={el.id}
                   style={{ width: "100%" }}
                 >
-                  
-                  <Card.Img
-                    style={{ width: "200px", margin:"auto" }}
-                    variant="top"
+                  <Image
+                    fluid
+                    alt={`${el.name} Category`}
                     src={el.image}
+                    className="category-image"
                   />
                   <Card.Body>
-                    <Card.Title>{el.name}</Card.Title>
-                    <Card.Text>Description</Card.Text>
+                    <Card.Title className="category-name">{el.name}</Card.Title>
                     <Button
-                    className="button-categories"
-                      // onClick={() =>
-                      //   goProductListPage(el.name.toLocaleLowerCase())
-                      // }
-                      href={`http://localhost:3000/products/${el.name.toLocaleLowerCase()}`}
-                      variant="primary"
+                      className="button-categories"
+                      onClick={() => goToCategory(el.name)}
                     >
-                      Check
+                      Take a look <MdKeyboardArrowRight size={25} />
                     </Button>
                   </Card.Body>
                 </Card>

@@ -1,0 +1,220 @@
+.auth {
+  width: 30%;
+  margin: 3% auto;
+}
+.tabs-auth {
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  border-radius: 30px !important;
+  font-size: 1.2vw !important;
+}
+.tab-auth {
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  border-radius: 30px !important;
+  padding: 5%;
+}
+
+.input-auth {
+  border-radius: 20px !important;
+  font-size: 1vw !important;
+  border: none !important;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+}
+.form-label {
+  font-size: 1vw !important;
+}
+.logo-auth {
+  width: 7vw !important;
+}
+.auth-btn {
+  width: 100% !important;
+  font-size: 1vw !important;
+  border-radius: 20px !important;
+  border-color: transparent !important;
+  background-color: black !important;
+  color: rgb(240, 240, 240) !important;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+  background-color: rgb(20, 19, 19) !important;
+}
+
+.auth-msg {
+  padding: 1%;
+  width: 100%;
+  text-align: center;
+  border-radius: 20px !important;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+}
+.auth-msg h1 {
+  font-size: 5vw;
+  text-align: center;
+}
+
+.error-msg-container {
+  margin-bottom: 5px !important;
+}
+.error-msg-container span {
+  color: red;
+  font-size: 1vw;
+}
+.tab-title-auth {
+  color: black !important;
+  border-radius: 50px !important;
+  font-size: 1vw !important;
+}
+.active {
+  background-color: rgba(221, 221, 221, 0.534) !important;
+}
+.spinner-auth {
+  font-size: 1vw !important;
+  width: 1.5vw !important;
+  height: 1.5vw !important;
+}
+.auth-tab-header {
+  text-align: center;
+}
+.auth-tab-header h5 {
+  font-size: 2vw;
+}
+/***************************************************************************/
+/* Big tablets to 1200px*/
+/* @media only screen and (max-width: 1200px) {
+} */
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  .auth {
+    width: 40%;
+  }
+
+  .input-auth {
+    font-size: 2vw !important;
+  }
+  .form-label {
+    font-size: 2vw !important;
+  }
+  .logo-auth {
+    width: 10vw !important;
+  }
+  .auth-btn {
+    font-size: 2vw !important;
+  }
+
+  .auth-msg h1 {
+    font-size: 2vw;
+  }
+
+  .error-msg-container span {
+    font-size: 2vw;
+  }
+
+  .spinner-auth {
+    font-size: 3vw !important;
+    width: 3vw !important;
+    height: 3vw !important;
+  }
+  .auth-tab-header h5 {
+    font-size: 5vw;
+  }
+  .tab-title-auth {
+    font-size: 2vw !important;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .auth {
+    width: 80%;
+  }
+
+  .input-auth {
+    font-size: 5vw !important;
+  }
+  .form-label {
+    font-size: 5vw !important;
+  }
+  .logo-auth {
+    width: 15vw !important;
+  }
+  .auth-btn {
+    font-size: 5vw !important;
+  }
+
+  .auth-msg h1 {
+    font-size: 5vw;
+  }
+
+  .error-msg-container {
+    margin-bottom: 5px !important;
+  }
+  .error-msg-container span {
+    font-size: 5vw;
+  }
+
+  .spinner-auth {
+    font-size: 4vw !important;
+    width: 5vw !important;
+    height: 5vw !important;
+  }
+  .auth-tab-header h5 {
+    font-size: 7vw;
+  }
+  .tab-title-auth {
+    font-size: 5vw !important;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .auth {
+    width: 80%;
+  }
+
+  .input-auth {
+    font-size: 5vw !important;
+  }
+  .form-label {
+    font-size: 5vw !important;
+  }
+  .logo-auth {
+    width: 15vw !important;
+  }
+  .auth-btn {
+    font-size: 5vw !important;
+  }
+
+  .auth-msg h1 {
+    font-size: 5vw;
+  }
+
+  .error-msg-container {
+    margin-bottom: 5px !important;
+  }
+  .error-msg-container span {
+    font-size: 5vw;
+  }
+
+  .spinner-auth {
+    font-size: 4vw !important;
+    width: 5vw !important;
+    height: 5vw !important;
+  }
+  .auth-tab-header h5 {
+    font-size: 7vw;
+  }
+  .tab-title-auth {
+    font-size: 5vw !important;
+  }
+}

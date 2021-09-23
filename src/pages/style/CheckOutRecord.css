@@ -1,0 +1,123 @@
+.checkout-record {
+  margin-top: 1%;
+  padding: 2%;
+  width: 60%;
+  margin: auto;
+}
+.table-checkout-record {
+  background-color: white !important;
+}
+.table-checkout-record td,
+th {
+  padding: 3% !important;
+  font-size: 1vw !important;
+}
+.total-row-checkout-record {
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  border-radius: 20px !important;
+  font-weight: bold;
+}
+.empty-checkout-record {
+  padding: 10%;
+  width: 100%;
+  text-align: center;
+  border-radius: 20px !important;
+  box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 5px 16px -1px rgba(0, 0, 0, 0.24);
+}
+.empty-checkout-record h1 {
+  font-size: 3vw !important;
+  text-align: center;
+}
+.checkout-record-code {
+  cursor: pointer;
+  border-radius: 50px;
+  background-color: black;
+  text-align: center;
+  padding: 2%;
+  width: 100%;
+  font-size: 1vw !important;
+  color: white;
+}
+/***************************************************************************/
+/* Big tablets to 1200px*/
+/* @media only screen and (max-width: 1200px) {
+} */
+
+/* Small tablets to big tablets: from 768 to 1032*/
+@media only screen and (max-width: 1032px) {
+  .checkout-record {
+    margin-top: 5% !important;
+    padding: 1%;
+    width: 100%;
+    margin: auto;
+  }
+  .table-checkout-record td,
+  th {
+    padding: 2% !important;
+    font-size: 3.5vw !important;
+  }
+  .empty-checkout-record {
+    padding: 10%;
+  }
+  .empty-checkout-record h1 {
+    font-size: 6vw !important;
+    text-align: center;
+  }
+  .checkout-record-code {
+    font-size: 3vw !important;
+  }
+}
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+  .checkout-record {
+    margin-top: 5% !important;
+    padding: 1%;
+    width: 100%;
+    margin: auto;
+  }
+  .table-checkout-record td,
+  th {
+    padding: 2% !important;
+    font-size: 3.5vw !important;
+  }
+  .empty-checkout-record {
+    padding: 10%;
+  }
+  .empty-checkout-record h1 {
+    font-size: 6vw !important;
+    text-align: center;
+  }
+  .checkout-record-code {
+    font-size: 3vw !important;
+  }
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .checkout-record {
+    margin-top: 5% !important;
+    padding: 1%;
+    width: 100%;
+    margin: auto;
+  }
+  .table-checkout-record td,
+  th {
+    padding: 2% !important;
+    font-size: 3.5vw !important;
+  }
+  .empty-checkout-record {
+    padding: 10%;
+  }
+  .empty-checkout-record h1 {
+    font-size: 6vw !important;
+    text-align: center;
+  }
+  .checkout-record-code {
+    font-size: 3vw !important;
+  }
+}

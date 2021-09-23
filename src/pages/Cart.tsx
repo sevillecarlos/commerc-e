@@ -1,50 +1,47 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  InputGroup,
+  FormControl,
+  Container,
+  Row,
+  Col,
+  Image
+} from "react-bootstrap";
+import { MdRemoveShoppingCart } from "react-icons/md";
+import { MdShoppingCart } from "react-icons/md";
 import { cartActions } from "../store/slices/cart";
-
 import CostTotalTable from "../components/CostTotalTable";
+import "./style/Cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const [token, setToken] = useState("");
+
+  const cartProducts = useSelector((state: RootStateOrAny) => state.cart);
   const [productsQuantity, setProductsQuantity] = useState<any | undefined>({});
-  const [cartProducts, setCartProducts] = useState<any>([]);
   const costTable = [] as any;
 
   useEffect(() => {
-    const token: any = localStorage.getItem("$@token");
-    if (token) setToken(token);
+    dispatch(cartActions.getCartProducts());
     return () => {
       // cleanup
     };
-  }, []);
-
-  useEffect(() => {
-    const cartValues: any = localStorage.getItem("cart");
-    setCartProducts(JSON.parse(cartValues));
-    return () => {
-      // cleanup
-    };
-  }, []);
+  }, [dispatch]);
 
   const onChangeQuantity = (e: any) => {
     const { value, name } = e.target;
     setProductsQuantity((prevState: any) => {
       if (prevState) {
-        return { ...prevState, [name]: value };
+        return { ...prevState, [name]: Math.max(1, value) };
       }
     });
   };
 
   const removeProductCart = (id: number) => {
-    const itemCart: any = localStorage.getItem("cart");
-    const parseItemCart = JSON.parse(itemCart);
-    const newCart = parseItemCart.filter((v: any) => v.id !== id);
-    dispatch(cartActions.addCart(newCart));
-    setCartProducts(newCart);
-    localStorage.setItem("cart", JSON.stringify(newCart));
+    const newCart = cartProducts.cart.filter((v: any) => v.id !== id);
+    dispatch(cartActions.addCartProducts(newCart));
   };
 
   const getQuatity = (el: any) => {
@@ -61,68 +58,76 @@ const Cart = () => {
     return pricePerQuantity;
   };
   return (
-    <div>
-      {" "}
-      {cartProducts.length !== 0 ? (
-        <div>
-          {cartProducts.map(
-            (
-              el: {
-                id: number;
-                name: any;
-                image: string;
-                price: number;
-                quantity: number;
-              },
-              i: number
-            ) => {
-              return (
-                <Card key={i} style={{ width: "50rem" }}>
-                  <Card.Img
-                    style={{ width: "100px" }}
-                    variant="top"
-                    src={el.image}
-                  />
-                  <Card.Body>
-                    <Card.Title>{el.name}</Card.Title>
-                    <Card.Text>
-                      ${getPrice(el.price, getQuatity(el), el.name)}
-                    </Card.Text>
-                  </Card.Body>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>Quantity</InputGroup.Text>
-                    <FormControl
-                      value={getQuatity(el)}
-                      min="1"
-                      max="5"
-                      name={el.name}
-                      onChange={onChangeQuantity}
-                      type="number"
-                      aria-label="quantity"
-                    />
-                  </InputGroup>
-                  <Button
-                    onClick={() => removeProductCart(el.id)}
-                    variant="danger"
-                  >
-                    Remove from cart
-                  </Button>
-                </Card>
-              );
-            }
-          )}{" "}
-          {token ? (
-            <Button href="">Checkout</Button>
-          ) : (
-            <Button href="http://localhost:3000/authentication">
-              Sign In first for checkout
-            </Button>
-          )}
-          <CostTotalTable productsQuantity={costTable} />
-        </div>
-      ) : (
-        <h1>Nothing the cart</h1>
-      )}
+    <div className="cart">
+      <Container>
+        {" "}
+        {cartProducts.cart?.length !== 0 ? (
+          <Row>
+            <Col>
+              {cartProducts.cart?.map(
+                (
+                  el: {
+                    id: number;
+                    name: any;
+                    image: string;
+                    price: number;
+                    quantity: number;
+                  },
+                  i: number
+                ) => {
+                  return (
+                    <Card
+                      className="cart-product"
+                      key={i}
+                    >
+                      <Image
+                        className='cart-image'
+                        src={el.image}
+                      />
+                      <Card.Body>
+                        <Card.Title className="product-title">
+                          {el.name}
+                        </Card.Title>
+                        <Card.Text>
+                          
+                          ${getPrice(el.price, getQuatity(el), el.name)}
+                        </Card.Text>
+                      </Card.Body>
+                      <InputGroup className="quantity-product">
+                        <FormControl
+                          value={getQuatity(el)}
+                          min="1"
+                          step="1"
+                          name={el.name}
+                          onChange={onChangeQuantity}
+                          type="number"
+                          aria-label="quantity"
+                          className="quantity-product-view"
+                        />
+                      </InputGroup>
+                      <Button
+                        onClick={() => removeProductCart(el.id)}
+                        className="cart-remove-btn"
+                      >
+                        Remove <MdRemoveShoppingCart />
+                      </Button>
+                    </Card>
+                  );
+                }
+              )}
+            </Col>
+            <Col>
+              <CostTotalTable productsQuantity={costTable} />
+            </Col>
+          </Row>
+        ) : (
+          <div className="empty-cart-msg">
+            <h1>
+              The cart is empty <MdShoppingCart />
+            </h1>
+          </div>
+        )}
+      </Container>
     </div>
   );
 };

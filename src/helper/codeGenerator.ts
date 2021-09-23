@@ -4,7 +4,7 @@ const range = (start: number, stop: number, step: number) =>
 export const codeGenerator = (length: number) => {
   let code = "";
   const numbers = range(0, 9, 1);
-  const letters = range("a".charCodeAt(0), "z".charCodeAt(0), 1).map((x) =>
+  const letters = range("A".charCodeAt(0), "Z".charCodeAt(0), 1).map((x) =>
     String.fromCharCode(x)
   );
   const bigArr = [...numbers, ...letters];

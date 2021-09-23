@@ -14,7 +14,7 @@ const initialState = {
 export const fetchProducts = createAsyncThunk(
   "categories/fetchCategories",
   async () => {
-    const res = await fetch("http://localhost:1337/categories");
+    const res = await fetch(`${process.env.REACT_APP_CMS_URL}/categories`);
     const data = await res.json();
     return data;
   }
@@ -34,7 +34,7 @@ const productsDataSlice = createSlice({
           return {
             id: category.id,
             name: category.name,
-            image: `http://localhost:1337${category.products[0].image.url}`,
+            image: `${process.env.REACT_APP_CMS_URL}${category.products[0].image.url}`,
           };
         }
       );
@@ -66,7 +66,6 @@ const productsDataSlice = createSlice({
         })
         .sort((a: { id: number }, b: { id: number }) => a.id - b.id);
 
-      console.log(removeRepeatElements(searchQuery));
       state.queryProducts = removeRepeatElements(searchQuery);
     },
     getProduct(state, action) {

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import { Card, Button, Container, Row, Image } from "react-bootstrap";
+import { MdCancel } from "react-icons/md";
 
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import {
@@ -10,6 +11,7 @@ import {
 
 import { useHistory } from "react-router-dom";
 import "./style/ListProducts.css";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
   const history = useHistory();
@@ -73,39 +75,51 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
       {requestProducts.status === "loading" && <>Loading...</>}
       {requestProducts.status === "success" && (
         <Container>
-          <Row>
+          <Row className='view-product-row'>
             {requestProducts[
               categoryId.type ? "queryProducts" : "productsCategories"
-            ]?.map(
-              (el: {
-                id: number;
-                title: string;
-                description: string;
-                image: { id: number; url: string };
-                price: number;
-              }) => {
-                return (
-                  <Card
-                    className="products-card"
-                    key={el.id}
-                    style={{ width: "25%" }}
-                  >
-                    <Card.Img
-                      style={{ width: "100px", margin: "auto" }}
-                      variant="top"
-                      src={`http://localhost:1337${el.image.url}`}
-                    />
-                    <Card.Body>
-                      <Card.Title>{el.title}</Card.Title>
-                      <Card.Text>{el.description}</Card.Text>
-                      <Card.Text>${el.price}</Card.Text>
-                      <Button onClick={() => getCategorieOfProduct(el.title)}>
-                        Select
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                );
-              }
+            ]?.length !== 0 ? (
+              requestProducts[
+                categoryId.type ? "queryProducts" : "productsCategories"
+              ]?.map(
+                (el: {
+                  id: number;
+                  title: string;
+                  description: string;
+                  image: { id: number; url: string };
+                  price: number;
+                }) => {
+                  return (
+                    <Card className="products-card" key={el.id}>
+                      <Image
+                        className="product-image"
+                        src={`${process.env.REACT_APP_CMS_URL}${el.image.url}`}
+                      />
+                      <Card.Body>
+                        <Card.Title className="product-name">
+                          {el.title}
+                        </Card.Title>
+                        <Card.Text>{el.description}</Card.Text>
+                      </Card.Body>
+                      <Card.Footer className="product-card-footer">
+                        <Card.Text>${el.price}</Card.Text>
+                        <Button
+                          className="product-card-btn"
+                          onClick={() => getCategorieOfProduct(el.title)}
+                        >
+                          View Product <MdKeyboardArrowRight className="arrow-icon" />
+                        </Button>
+                      </Card.Footer>
+                    </Card>
+                  );
+                }
+              )
+            ) : (
+              <div className="search-not-found-msg">
+                <span>
+                  Sorry, nothing match your search <MdCancel />
+                </span>
+              </div>
             )}
           </Row>
         </Container>
@@ -115,7 +129,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
 };
 
 ListProducts.propTypes = {
-  categoryId: PropTypes.string.isRequired,
+  categoryId: PropTypes.object.isRequired,
 };
 
 export default ListProducts;
