@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# Commerc-e
+A demo of an online stickers store.
+When you register, you will be given $100 of credits so that you can buy your favorite stickers.
+![Commerc-e!](/assets/images/commerc-e-image.png "Commerc-e")
+## Instructions
+* 
+# Built
+## Development Technologies
+- React.ts 
+## Libraries
+- BootstrapReact
+# Live Demo
+Try it! [Commerc-e ](https://commerc-e.netlify.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Getting Start
+```
+git clone https://github.com/sevillecarlos/commerc-e.git
+```
+### or Download the zip.
+## Project setup
+```
+npm install
+```
+### Compiles and hot-reloads for development
+```
+npm start
+```
+### Create your .env file for the environment variables
+#### CMS URL of the app
+* *REACT_APP_CMS_URL*
+#### Server URL of the app
+* *REACT_APP_SERVER_URL*
 
-## Available Scripts
+## Commerc-e Server
+Navigate to [Commerc-e Server ](https://github.com/sevillecarlos/commerc-e-server) to found the server for the app.
 
-In the project directory, you can run:
+## Commerc-e CMS
+Navigate to [Commerc-e CMS](https://github.com/sevillecarlos/commerc-e-cms) to found the CMS for the app, this contain products for the store.
 
-### `yarn start`
+# Author
+## Carlos Alberto Sevilla Fernandez
+* Github: [@sevillecarlos](https://github.com/sevillecarlos)
+* LinkedIn: [Carlos Alberto Sevilla Fernandez](https://github.com/sevillecarlos)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Contributing
+Contributions, issues and feature requests are welcome!
+Feel free to check the [Issues Page](https://github.com/sevillecarlos/commerc-e/issues).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# License
+This project is [MIT](https://opensource.org/licenses/MIT) licensed.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
