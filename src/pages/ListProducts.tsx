@@ -7,10 +7,13 @@ import {
   fetchProducts,
   productsDataActions,
 } from "../store/slices/productsData";
+
+import { useHistory } from "react-router-dom";
 import "./style/ListProducts.css";
 
-const ListProducts = (props: { categoryId: string | number }) => {
-  console.log(props.categoryId);
+const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const productsDataStore = useSelector(
@@ -29,24 +32,41 @@ const ListProducts = (props: { categoryId: string | number }) => {
   }, [dispatch, productsDataStore.status]);
 
   useEffect(() => {
-    dispatch(
-      productsDataActions.getCategoriesProducts({
-        data: productsDataStore.data,
-        id: categoryId,
-      })
-    );
+    if (categoryId.type) {
+      dispatch(
+        productsDataActions.getProductsByQuery({
+          data: productsDataStore.data,
+          id: categoryId.id,
+        })
+      );
+    } else {
+      dispatch(
+        productsDataActions.getCategoriesProducts({
+          data: productsDataStore.data,
+          id: categoryId.id,
+        })
+      );
+    }
     return () => {
       // cleanup
     };
   }, [productsDataStore.data, dispatch, categoryId]);
 
-  // const products: any = () => (isQuery ? queryStore : productsStore);
+  const getCategorieOfProduct = (productName: string) => {
+    const productsData: string[] = productsDataStore.data;
+    const refName = productName?.toLowerCase();
+    const categoryName: any = productsData.filter((v: any) => {
+      const checkProductName = v.products.some(
+        (v: any) => v.title.toLowerCase() === refName
+      );
+      return checkProductName && v;
+    });
+    const [category] = categoryName;
+    const { slug } = category;
+    history.push(`/${slug}/${refName}`);
+  };
+
   const requestProducts = productsDataStore;
-
-  // const goProductListPage = (productName: string) =>
-  //   history.push(`/${categoryId}/${productName}`);
-
-  console.log(requestProducts.productsCategories);
 
   return (
     <div className="products-list">
@@ -54,7 +74,9 @@ const ListProducts = (props: { categoryId: string | number }) => {
       {requestProducts.status === "success" && (
         <Container>
           <Row>
-            {requestProducts.productsCategories?.map(
+            {requestProducts[
+              categoryId.type ? "queryProducts" : "productsCategories"
+            ]?.map(
               (el: {
                 id: number;
                 title: string;
@@ -63,30 +85,25 @@ const ListProducts = (props: { categoryId: string | number }) => {
                 price: number;
               }) => {
                 return (
-                    <Card
-                      className="products-card"
-                      key={el.id}
-                      style={{ width: "25%" }}
-                    >
-                      <Card.Img
-                        style={{ width: "100px", margin: "auto" }}
-                        variant="top"
-                        src={`http://localhost:1337${el.image.url}`}
-                      />
-                      <Card.Body>
-                        <Card.Title>{el.title}</Card.Title>
-                        <Card.Text>{el.description}</Card.Text>
-                        <Card.Text>{el.price}</Card.Text>
-                        <Button
-                        // onClick={() =>
-                        //   goProductListPage(el.title.toLocaleLowerCase())
-                        // }
-                        // variant="primary"
-                        >
-                          Check
-                        </Button>
-                      </Card.Body>
-                    </Card>
+                  <Card
+                    className="products-card"
+                    key={el.id}
+                    style={{ width: "25%" }}
+                  >
+                    <Card.Img
+                      style={{ width: "100px", margin: "auto" }}
+                      variant="top"
+                      src={`http://localhost:1337${el.image.url}`}
+                    />
+                    <Card.Body>
+                      <Card.Title>{el.title}</Card.Title>
+                      <Card.Text>{el.description}</Card.Text>
+                      <Card.Text>${el.price}</Card.Text>
+                      <Button onClick={() => getCategorieOfProduct(el.title)}>
+                        Select
+                      </Button>
+                    </Card.Body>
+                  </Card>
                 );
               }
             )}

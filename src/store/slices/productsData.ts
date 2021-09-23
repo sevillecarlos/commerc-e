@@ -8,6 +8,7 @@ const initialState = {
   status: "idle",
   productsCategories: new Array<string[]>(),
   queryProducts: new Array<string[]>(),
+  product: new Array<string[]>(),
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -37,8 +38,9 @@ const productsDataSlice = createSlice({
           };
         }
       );
-      state.categories.push(...categories);
+      state.categories = categories;
     },
+
     getCategoriesProducts(state, action) {
       const productsData = action.payload;
       const productsCategories = productsData.data.filter(
@@ -47,6 +49,7 @@ const productsDataSlice = createSlice({
       const products = productsCategories[0]?.products;
       state.productsCategories = products;
     },
+
     getProductsByQuery(state, action) {
       const productsData = action.payload;
       const categories = productsData.data.flatMap(
@@ -54,17 +57,27 @@ const productsDataSlice = createSlice({
           return category.products;
         }
       );
-
       const searchQuery = categories
         .filter((product: { title: string; description: string }) => {
           return (
-            product.title.toLowerCase().indexOf(productsData.query) > -1 ||
-            product.description.toLowerCase().indexOf(productsData.query) > -1
+            product.title.toLowerCase().indexOf(productsData.id) > -1 ||
+            product.description.toLowerCase().indexOf(productsData.id) > -1
           );
         })
         .sort((a: { id: number }, b: { id: number }) => a.id - b.id);
 
+      console.log(removeRepeatElements(searchQuery));
       state.queryProducts = removeRepeatElements(searchQuery);
+    },
+    getProduct(state, action) {
+      const productsData = action.payload;
+      const findCategory = productsData.data.filter(
+        (v: any) => v.slug === productsData.type
+      );
+      const findProducts = findCategory[0]?.products.filter(
+        (v: any) => v.title.toLowerCase() === productsData.id
+      );
+      state.product = findProducts;
     },
   },
   extraReducers: (builder) => {

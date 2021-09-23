@@ -21,8 +21,6 @@ const Home = () => {
     }
   }, [dispatch, productsDataStore.status]);
 
-  console.log(productsDataStore.data);
-
   useEffect(() => {
     dispatch(productsDataActions.getCategories(productsDataStore.data));
     return () => {

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
+import { cartActions } from "../store/slices/cart";
+
+import CostTotalTable from "../components/CostTotalTable";
 
 const Cart = () => {
-  // const cartProducts = useSelector(
-  //   (state: RootStateOrAny) => state.cart.cartProducts
-  // );
-
+  const dispatch = useDispatch();
   const [token, setToken] = useState("");
-  const cartValues: any = localStorage.getItem("cart");
-  const cartProducts: any = JSON.parse(cartValues);
+  const [productsQuantity, setProductsQuantity] = useState<any | undefined>({});
+  const [cartProducts, setCartProducts] = useState<any>([]);
+  const costTable = [] as any;
 
   useEffect(() => {
     const token: any = localStorage.getItem("$@token");
@@ -20,14 +21,59 @@ const Cart = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const cartValues: any = localStorage.getItem("cart");
+    setCartProducts(JSON.parse(cartValues));
+    return () => {
+      // cleanup
+    };
+  }, []);
+
+  const onChangeQuantity = (e: any) => {
+    const { value, name } = e.target;
+    setProductsQuantity((prevState: any) => {
+      if (prevState) {
+        return { ...prevState, [name]: value };
+      }
+    });
+  };
+
+  const removeProductCart = (id: number) => {
+    const itemCart: any = localStorage.getItem("cart");
+    const parseItemCart = JSON.parse(itemCart);
+    const newCart = parseItemCart.filter((v: any) => v.id !== id);
+    dispatch(cartActions.addCart(newCart));
+    setCartProducts(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  };
+
+  const getQuatity = (el: any) => {
+    return productsQuantity[el.name] ?? el.quantity;
+  };
+
+  const getPrice = (price: number, quantity: number, name: string) => {
+    const pricePerQuantity = (price * quantity).toFixed(2);
+    costTable.push({
+      name: name,
+      price: Number(pricePerQuantity),
+      quantity: Number(quantity),
+    });
+    return pricePerQuantity;
+  };
   return (
     <div>
       {" "}
-      {cartProducts !== null ? (
+      {cartProducts.length !== 0 ? (
         <div>
           {cartProducts.map(
             (
-              el: { id: number; name: string; image: string; price: number },
+              el: {
+                id: number;
+                name: any;
+                image: string;
+                price: number;
+                quantity: number;
+              },
               i: number
             ) => {
               return (
@@ -39,8 +85,28 @@ const Cart = () => {
                   />
                   <Card.Body>
                     <Card.Title>{el.name}</Card.Title>
-                    <Card.Text>{el.price}</Card.Text>
+                    <Card.Text>
+                      ${getPrice(el.price, getQuatity(el), el.name)}
+                    </Card.Text>
                   </Card.Body>
+                  <InputGroup className="mb-3">
+                    <InputGroup.Text>Quantity</InputGroup.Text>
+                    <FormControl
+                      value={getQuatity(el)}
+                      min="1"
+                      max="5"
+                      name={el.name}
+                      onChange={onChangeQuantity}
+                      type="number"
+                      aria-label="quantity"
+                    />
+                  </InputGroup>
+                  <Button
+                    onClick={() => removeProductCart(el.id)}
+                    variant="danger"
+                  >
+                    Remove from cart
+                  </Button>
                 </Card>
               );
             }
@@ -52,6 +118,7 @@ const Cart = () => {
               Sign In first for checkout
             </Button>
           )}
+          <CostTotalTable productsQuantity={costTable} />
         </div>
       ) : (
         <h1>Nothing the cart</h1>

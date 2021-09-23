@@ -1,16 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import jwt_decode from "jwt-decode";
 
 const initialState = {
   user: "",
   error: null,
   status: "idle",
+  firstTime: false,
+  userCredentials: undefined,
+  userCredit: undefined,
 };
 
 export const fetchSignIn = createAsyncThunk(
   "auth/fetchSignIn",
   async (signInForm: any) => {
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/session/create`, {
+    const res = await fetch(`http://127.0.0.1:5000/api/v1/session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,6 +40,15 @@ export const fetchSignUp = createAsyncThunk(
   }
 );
 
+export const fetchCredit = createAsyncThunk(
+  "auth/fetchCredit",
+  async (idUser: any) => {
+    const res = await fetch(`http://127.0.0.1:5000/api/v1/credits/${idUser}`);
+    const data = await res.json();
+    return data;
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -49,7 +60,6 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchSignIn.fulfilled, (state, action) => {
       state.status = "success";
-      console.log(action.payload);
       state.user = action.payload;
     });
     builder.addCase(fetchSignIn.pending, (state) => {
@@ -60,12 +70,22 @@ const authSlice = createSlice({
     });
     builder.addCase(fetchSignUp.fulfilled, (state, action) => {
       state.status = "success";
-      state.user = action.payload;
+      state.userCredentials = action.payload;
     });
     builder.addCase(fetchSignUp.pending, (state) => {
       state.status = "loading";
     });
     builder.addCase(fetchSignUp.rejected, (state) => {
+      state.status = "reject";
+    });
+    builder.addCase(fetchCredit.fulfilled, (state, action) => {
+      state.status = "success";
+      state.userCredit = action.payload;
+    });
+    builder.addCase(fetchCredit.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(fetchCredit.rejected, (state) => {
       state.status = "reject";
     });
   },
