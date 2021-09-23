@@ -1,7 +1,6 @@
 # Commerc-e
-A demo of an online stickers store.
-
-When you register, you will be given $100 of credits so that you can buy your favorite stickers. <br/>
+A demo of an online stickers store. <br/>
+When you register, you will be given $100 of credits so that you can buy your favorite stickers.
 
 ![Commerc-e!](/assets/images/commerc-e-image.png "Commerc-e")
 
@@ -40,11 +39,12 @@ npm start
 #### Server URL of the app
 * *REACT_APP_SERVER_URL*
 
+## Commerc-e CMS
+Navigate to [Commerc-e CMS](https://github.com/sevillecarlos/commerc-e-cms) to found the CMS for the app, that contain the products of the Commerc-e store.
+
 ## Commerc-e Server
 Navigate to [Commerc-e Server ](https://github.com/sevillecarlos/commerc-e-server) to found the server for the app.
 
-## Commerc-e CMS
-Navigate to [Commerc-e CMS](https://github.com/sevillecarlos/commerc-e-cms) to found the CMS for the app, that contain the products of the Commerc-e store.
 
 # Author
 ## Carlos Alberto Sevilla Fernandez
