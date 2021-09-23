@@ -7,6 +7,8 @@ When you register, you will be given $100 of credits so that you can buy your fa
 # Built
 ## Development Technologies
 - React.ts 
+- Redux
+- Redux Toolkit
 ## Libraries
 - BootstrapReact
 # Live Demo
