@@ -6,9 +6,9 @@ When you register, you will be given $100 of credits so that you can buy your fa
 
 ## Instructions
 * When you Sign Up, you will be credited with **$100**.
-* You can add to the cart, and purchase the stickers.
-* To check your shopping history, go to you menu that say your name and navigate to Checkout Record.
-* To check your receipt detail, click on the Receipt Code that is in black.
+* You can add to the **Cart**, and purchase the stickers.
+* To check your shopping history, go to you menu that say your name and navigate to **Checkout Record**.
+* To check your receipt detail, click on the **Receipt Code** that is in black.
 
 # Built
 ## Development Technologies
