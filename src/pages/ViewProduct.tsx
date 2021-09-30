@@ -27,7 +27,11 @@ import {
 
 import "./style/ViewProduct.css";
 
-const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
+interface ViewProductI {
+  categoryId: { id: string; type: string };
+}
+
+const ViewProduct = (props: ViewProductI) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { categoryId } = props;
@@ -43,9 +47,7 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
     if (productsDataStore.status === "idle") {
       dispatch(fetchProducts());
     }
-    return () => {
-      //   cleanup;
-    };
+    
   }, [dispatch, productsDataStore.status]);
 
   useEffect(() => {
@@ -56,12 +58,17 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
         type: categoryId.type,
       })
     );
-    return () => {
-      // cleanup
-    };
+   
   }, [productsDataStore.data, dispatch, categoryId]);
 
-  const addCart = (product: any) => {
+  interface CartProducts {
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+    quantity: number;
+  }
+  const addCart = (product: CartProducts) => {
     setShowMsgModal(true);
     let localCart: any = product;
     const products: any = localStorage.getItem("cart");
@@ -112,7 +119,6 @@ const ViewProduct = (props: { categoryId: { id: string; type: string } }) => {
         color="rgba(0, 0, 0, 0.911)"
         error={false}
       />
-      {/* need to fix the strict mode */}
       {productsDataStore.status === "loading" && <>Loading...</>}
       {productsDataStore.product?.map(
         (el: {

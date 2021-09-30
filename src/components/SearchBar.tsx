@@ -28,7 +28,7 @@ const SearchBar = () => {
     setCloseSuggestions(true);
   };
 
-  const onChangeQuery = (e: { target: { value: string } }) => {
+  const onChangeQuery = (e: any) => {
     const { value } = e.target;
     setCloseSuggestions(false);
     setQuery(value.toLowerCase());
@@ -76,7 +76,7 @@ const SearchBar = () => {
             value={query}
           />
           <Button className="search-btn" type="submit">
-            <MdSearch  />
+            <MdSearch />
           </Button>
         </Form>
 
@@ -84,7 +84,7 @@ const SearchBar = () => {
           <div className="autocomplete-lists">
             <ul className="autocomplete-item">
               {querySearch.length !== 0 ? (
-                querySearch.map((v: any, i: number) => (
+                querySearch.map((v: string, i: number) => (
                   <li
                     className="item-autocomplete"
                     onClick={setSuggestionQuery}

@@ -45,6 +45,9 @@
   height: 3vw !important;
   font-size: 2vw;
 }
+.server-sleep-msg {
+  font-size: 1.8vw;
+}
 /***************************************************************************/
 /* Big tablets to 1200px*/
 /* @media only screen and (max-width: 1200px) {
@@ -86,7 +89,6 @@
   .button-categories {
     font-size: 3.5vw !important;
   }
-  
 }
 
 /*Small Phone from 0 to 480px*/
@@ -101,5 +103,4 @@
   .button-categories {
     font-size: 3.5vw !important;
   }
-
 }

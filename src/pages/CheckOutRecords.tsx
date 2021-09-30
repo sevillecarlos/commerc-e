@@ -24,15 +24,14 @@ const CheckOutRecords = () => {
     if (userSession.userCredit) {
       dispatch(getReceipts(userSession.userCredit.user_id));
     }
+   
   }, [dispatch, userSession.userCredit]);
 
   useEffect(() => {
     if (userSession.userReceipt) {
       setReceiptRecords(userSession.userReceipt);
     }
-    return () => {
-      //   cleanup
-    };
+   
   }, [userSession.userReceipt]);
 
   useEffect(() => {
@@ -42,9 +41,7 @@ const CheckOutRecords = () => {
       return 0;
     });
     setGrandTotal(Number(grantTotal.toFixed(2)));
-    return () => {
-      //   cleanup
-    };
+    
   }, [receiptRecords]);
 
   const getArticles = (recieptId: number, receiptCode: string) => {
@@ -70,15 +67,22 @@ const CheckOutRecords = () => {
           </tr>
         </thead>
         <tbody>
-          {receiptArticles?.map((v: any) => {
-            return (
-              <tr key={v.id}>
-                <td>{v.name}</td>
-                <td>{v.quantity}</td>
-                <td>${v.total_price}</td>
-              </tr>
-            );
-          })}
+          {receiptArticles?.map(
+            (v: {
+              id: number;
+              name: string;
+              quantity: number;
+              total_price: number;
+            }) => {
+              return (
+                <tr key={v.id}>
+                  <td>{v.name}</td>
+                  <td>{v.quantity}</td>
+                  <td>${v.total_price}</td>
+                </tr>
+              );
+            }
+          )}
         </tbody>
       </Table>
     );

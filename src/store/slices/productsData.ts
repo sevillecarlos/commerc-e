@@ -14,9 +14,13 @@ const initialState = {
 export const fetchProducts = createAsyncThunk(
   "categories/fetchCategories",
   async () => {
-    const res = await fetch(`${process.env.REACT_APP_CMS_URL}/categories`);
-    const data = await res.json();
-    return data;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_CMS_URL}/categories`);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 const productsDataSlice = createSlice({

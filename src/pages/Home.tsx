@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Button, Image, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 
@@ -16,12 +16,18 @@ const Home = () => {
     (state: RootStateOrAny) => state.productsData
   );
 
+  const [showSleepMsg, setShowSleepMsg] = useState(false);
+
   useEffect(() => {
     dispatch(productsDataActions.getCategories(productsDataStore.data));
-    return () => {
-      // cleanup
-    };
   }, [productsDataStore.data, dispatch]);
+
+  useEffect(() => {
+    if (productsDataStore.status === "loading") {
+      setTimeout(() => setShowSleepMsg(true), 5000);
+    }
+    return () => clearTimeout();
+  }, [productsDataStore.status]);
 
   const goToCategory = (categoryName: string) =>
     history.push(`/products/${categoryName.toLocaleLowerCase()}`);
@@ -33,6 +39,12 @@ const Home = () => {
         <div className="home-loader">
           <span>...Loading Articles </span>
           <Spinner className="spinner-home" animation="border" />
+          <br />
+          {showSleepMsg && (
+            <span className="server-sleep-msg">
+              Sorry for the waiting, the server is waken up{" "}
+            </span>
+          )}
         </div>
       )}
       {productsDataStore.status === "success" && (

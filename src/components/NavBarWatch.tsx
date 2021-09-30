@@ -7,19 +7,18 @@ const Watch = () => {
   const [dateInfo, setDateInfo] = useState("");
 
   useEffect(() => {
-    updateTimeDate();
-  }, []);
-  const updateTimeDate = () => {
-    setInterval(() => {
-      const now = new Date();
-      const hour = now.getHours();
-      const min = now.getMinutes();
-      const second = now.getSeconds();
-      setTimeInfo(
-        `${formatTime(hour)}:${formatTime(min)}:${formatTime(second)}`
-      );
-      setDateInfo(now.toDateString());
-    }, 1000);
+    const timeInterval = setInterval(clock, 1000);
+    return () => {
+      clearInterval(timeInterval);
+    };
+  });
+  const clock = () => {
+    const now = new Date();
+    const hour = now.getHours();
+    const min = now.getMinutes();
+    const second = now.getSeconds();
+    setTimeInfo(`${formatTime(hour)}:${formatTime(min)}:${formatTime(second)}`);
+    setDateInfo(now.toDateString());
   };
 
   return (

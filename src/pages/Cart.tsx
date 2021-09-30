@@ -25,9 +25,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(cartActions.getCartProducts());
-    return () => {
-      // cleanup
-    };
+   
   }, [dispatch]);
 
   const onChangeQuantity = (e: any) => {
