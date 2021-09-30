@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
-import {
-  postCreditUser,
-  postUserReceipts,
-} from "../store/slices/transaction";
-import { Table, Button} from "react-bootstrap";
+import { postCreditUser, postUserReceipts } from "../store/slices/transaction";
+import { Table, Button } from "react-bootstrap";
 import { codeGenerator } from "../helper/codeGenerator";
-import "./style/CostTotalTable.css";
+
 import { MdAttachMoney } from "react-icons/md";
 import { MdPersonPin } from "react-icons/md";
 import { BiErrorAlt } from "react-icons/bi";
@@ -16,7 +13,13 @@ import { cartActions } from "../store/slices/cart";
 
 import MsgModal from "../ui/MsgModal";
 
-const CostTotalTable = (props: { productsQuantity: any }) => {
+import "./style/CostTotalTable.css";
+
+interface CostTotalTableI {
+  productsQuantity: Array<string>;
+}
+
+const CostTotalTable = (props: CostTotalTableI) => {
   const dispatch = useDispatch();
   const userSession = useSelector((state: RootStateOrAny) => state.transaction);
   const authUser = useSelector((state: RootStateOrAny) => state.auth);
@@ -29,9 +32,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
 
   useEffect(() => {
     setCostTable(productsQuantity);
-    return () => {
-      //   cleanup
-    };
+    
   }, [productsQuantity]);
 
   useEffect(() => {
@@ -42,9 +43,7 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
     });
     const totalCost = Number(total?.toFixed(2));
     setTotatCost(totalCost);
-    return () => {
-      //   cleanup
-    };
+    
   }, [costTable]);
 
   const handleClose = () => setShow(false);
@@ -118,15 +117,17 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
           </tr>
         </thead>
         <tbody>
-          {costTable.map((v: any) => {
-            return (
-              <tr key={v.name}>
-                <td>{v.name}</td>
-                <td>{v.quantity}</td>
-                <td>${v.price}</td>
-              </tr>
-            );
-          })}
+          {costTable.map(
+            (v: { name: string; quantity: number; price: number }) => {
+              return (
+                <tr key={v.name}>
+                  <td>{v.name}</td>
+                  <td>{v.quantity}</td>
+                  <td>${v.price}</td>
+                </tr>
+              );
+            }
+          )}
           <tr className="total-row">
             <td>Total</td>
             <td></td>
@@ -140,7 +141,8 @@ const CostTotalTable = (props: { productsQuantity: any }) => {
         </Button>
       ) : (
         <Button className="checkout-btn" href="/authentication">
-          Sign In first to checkout<MdPersonPin  />
+          Sign In first to checkout
+          <MdPersonPin />
         </Button>
       )}
     </div>

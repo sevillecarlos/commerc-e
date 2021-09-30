@@ -28,9 +28,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
     if (productsDataStore.status === "idle") {
       dispatch(fetchProducts());
     }
-    return () => {
-      //   cleanup;
-    };
+    
   }, [dispatch, productsDataStore.status]);
 
   useEffect(() => {
@@ -49,9 +47,7 @@ const ListProducts = (props: { categoryId: { id: string; type: string } }) => {
         })
       );
     }
-    return () => {
-      // cleanup
-    };
+    
   }, [productsDataStore.data, dispatch, categoryId]);
 
   const getCategorieOfProduct = (productName: string) => {

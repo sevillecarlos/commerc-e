@@ -5,65 +5,95 @@ const initialState = {
   status: "idle",
   userCredit: undefined,
   userReceipt: undefined,
-  receiptArticles:  Array<string[]>()
+  receiptArticles: Array<string[]>(),
 };
 
 export const getCredit = createAsyncThunk(
   "auth/getCredit",
   async (idUser: any) => {
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/credits/${idUser}`);
-    const data = await res.json();
-    return data;
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/credits/${idUser}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const postCreditUser = createAsyncThunk(
   "auth/postCredit",
   async (userCredits: any) => {
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/credits/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userCredits),
-    });
-    const data = await res.json();
-    return data;
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/credits/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userCredits),
+        }
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const getReceipts = createAsyncThunk(
   "auth/getReceipts",
   async (userId: any) => {
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/receipts/${userId}`);
-    const data = await res.json();
-    return data;
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/receipts/${userId}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const getReceiptArticles = createAsyncThunk(
   "auth/getReceiptArticles",
   async (receiptId: any) => {
-    const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/api/v1/articles/${receiptId}`
-    );
-    const data = await res.json();
-    return data;
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/articles/${receiptId}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const postUserReceipts = createAsyncThunk(
   "auth/fetchUserReceipts",
   async (receiptCred: any) => {
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/v1/receipts/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(receiptCred),
-    });
-    const data = await res.json();
-    return data;
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/receipts/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(receiptCred),
+        }
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -93,7 +123,6 @@ const transactionSlice = createSlice({
       state.status = "reject";
     });
 
-    
     builder.addCase(getReceipts.fulfilled, (state, action) => {
       state.status = "success";
       state.userReceipt = action.payload;
