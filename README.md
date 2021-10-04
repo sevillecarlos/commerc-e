@@ -11,9 +11,8 @@
 
 # Built
 ## Development Technologies
-- React.ts 
-- Redux
-- Redux Toolkit
+- ![](https://img.shields.io/badge/Front--End-React-blue)
+- ![](https://img.shields.io/badge/Front--End-Redux-purple)
 ## Libraries
 - BootstrapReact
 # Live Demo
