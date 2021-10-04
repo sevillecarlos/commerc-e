@@ -1,10 +1,10 @@
 # Commerc-e
-A DEMO of an online Development Technology Stickers store. <br/>
+A demo of an online Development Technology Stickers store. <br/>
 It is a demo of a online stickers store, you can search by category or name of a specific development technology sticker, add your favorite stickers to the cart so that you can buy them and you can look at your purchases.
 
 ![Commerc-e!](/assets/images/commerc-e-image.png "Commerc-e")
 
-## Instructions
+## Steps
 * When you Sign Up, you will be credited with **$100**.
 * You can add to the **Cart**, and purchase the stickers.
 * To check your shopping history, go to you menu that say your name and navigate to **Checkout Record**.
