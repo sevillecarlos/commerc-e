@@ -1,6 +1,6 @@
 # Commerc-e
-A demo of an online stickers store. <br/>
-When you register, you will be given $100 of credits so that you can buy your favorite stickers.
+A DEMO of an online Development Technology Stickers store. <br/>
+It is a demo of a online stickers store, you can search by category or name of a specific development technology sticker, add your favorite stickers to the cart so that you can buy them and you can look at your purchases.
 
 ![Commerc-e!](/assets/images/commerc-e-image.png "Commerc-e")
 
