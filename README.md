@@ -12,7 +12,8 @@
 # Built
 ## Development Technologies
 ![](https://img.shields.io/badge/Front--End-React-blue)
-![](https://img.shields.io/badge/Front--End-Redux-purple)
+![](https://img.shields.io/badge/Programming--Language-TypeScript-blue)
+![](https://img.shields.io/badge/Library-Redux-purple)
 ## Libraries
 - BootstrapReact
 # Live Demo
