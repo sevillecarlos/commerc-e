@@ -15,7 +15,7 @@
 ![](https://img.shields.io/badge/Programming--Language-TypeScript-blue)
 ![](https://img.shields.io/badge/Library-Redux-purple)
 ## Libraries
-- BootstrapReact
+![](https://img.shields.io/badge/Library-Bootstrap--React-purple)
 # Live Demo
 Try it! [Commerc-e ](https://commerc-e.netlify.app/)
 
